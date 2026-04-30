@@ -10,3 +10,22 @@ __pycache__/
 
 # Claude Code internal
 .claude/
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.synctex.gz
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.toc
+paper/*.lot
+paper/*.lof
+paper/*.nav
+paper/*.snm
+paper/*.vrb
+paper/*.dvi
+paper/*.bcf
+paper/*.run.xml

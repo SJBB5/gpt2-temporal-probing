@@ -1,0 +1,374 @@
+\documentclass[11pt]{article}
+
+\usepackage[letterpaper, top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{../outputs/}}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+
+% -------------------------------------------------------
+% TITLE
+% -------------------------------------------------------
+\title{\textbf{Temporal Superposition in GPT-2: \\
+How Historical Time is Encoded and \\
+Distributed Across Layers}}
+
+\author{
+  Sam Brown \quad Peyton Calvert \\[0.5em]
+  \textit{Your Institution} \\
+  \texttt{\{sbrown, pcalvert\}@yourinstitution.edu}
+}
+
+\date{}
+
+% -------------------------------------------------------
+\begin{document}
+% -------------------------------------------------------
+
+\maketitle
+
+% -------------------------------------------------------
+\begin{abstract}
+% -------------------------------------------------------
+% 150-250 words.
+% Cover: (1) what you did, (2) how you did it, 
+% (3) what you found, (4) why it matters.
+% Write this last once the paper is finished.
+
+We investigate how GPT-2-small encodes historical time in its residual 
+stream using sparse autoencoders (SAEs). TODO: fill in findings summary.
+
+\end{abstract}
+
+% -------------------------------------------------------
+\section{Introduction}
+% -------------------------------------------------------
+% ~1 page.
+% - Motivate the question: why does it matter how LLMs encode time?
+% - Brief summary of what you did and what you found
+% - Roadmap of the paper ("The rest of this paper is structured as follows...")
+
+Large language models have demonstrated their ability to "know" historical facts, but we have limited understanding of how that
+knowledge is stored internally. Understanding the geometric structure of factual knowledge in LLMs is a foundational
+question for mechanistic interpretability. 
+
+% -------------------------------------------------------
+\section{Related Work}
+% -------------------------------------------------------
+% ~1 page.
+% Cover these papers and how your work relates to each:
+% - Gurnee & Tegmark 2023 (linear temporal axis)
+% - Engels et al. 2024 (circular features, days/months)
+% - Elhage et al. 2022 (superposition hypothesis)
+% - Cunningham et al. / Bloom SAEs (SAE methodology)
+% - Lei & Cooper 2025 (layerwise knowledge geometry)
+% - Calendar feature geometry post (Leask et al.)
+
+TODO
+
+% -------------------------------------------------------
+\section{Background}
+% -------------------------------------------------------
+% ~0.5 page.
+% Brief technical background a reader needs before the methods:
+% - What is the residual stream in a transformer?
+% - What are sparse autoencoders and what do they decompose?
+% - What is superposition?
+% Keep this concise — assume ML-literate reader.
+
+\subsection{Residual Stream}
+Transformer models process tokens by passing representations through a sequence of attention and MLP layers. 
+These layers write incremental updates into a shared vector called the residual stream. Formally if $\mathbf{x}^{(\ell)} \in \mathbb{R}^d$
+denotes the residual stream at layer $\ell$, each layer computes $\mathbf{x}^{(\ell+1)} = \mathbf{x}^{(\ell)} + f^{(\ell)}$, where 
+$f^{(\ell)}$ is the combined attention and MLP transformation. This additive structure means the residual stream accumulates information 
+across depth, and that respresentations at any layer can be read as a type of superposition of all contributions made so far.
+In this work we probe the residual stream of GPT-2 Small \cite{radford2019}, a 117 million parameter transformer with 12 layers, 
+12 attention heads, and a hidden dimension of d = 768. 
+\subsection{Superposition}
+A naive expectation is that each dimension of the residual stream encodes one interpretable feature. In practice, the number of concepts
+a model must represent exceeds its hidden dimension $d$ ($\mathbb{R}^{768}$ in this paper). As a result, models exploit the fact that high 
+dimensional spaces can accommodate many nearly-orthogonal directions. This phenomenon is called superposition and it allows a model to 
+store a large amount of features at the same time. Features in superposition are distributed across many neurons. 
+
+\subsection{Sparse Autoencoders}
+Sparse autoencoders (SAEs) offer a way to recover the underlying precise features from an ambiguous residual stream \cite{cunningham2024}.
+An SAE consists of an encoder that projects the d-dimensional activation into a much large latent space $\mathbb{R}^{d_{\text{SAE}}}$
+with $d_{\text{SAE}} \gg d$, followed by a ReLU that enforces sparsity and a linear decoder that reconstructs the original activation. 
+Training minimises reconstruction error subject to an $L_1$ penalty on the latent activations, encouraging each input to be explained by 
+only a small number of active features at a time. The resulting latent dimensions have been shown to correspond to interpretable, monosemantic concepts
+\cite{cunningham2024, bloom2024}. In this work we use the SAE of \citet{bloom2024} trained on GPT-2 Small's residual stream. 
+% -------------------------------------------------------
+\section{Method}
+% -------------------------------------------------------
+% ~1.5 pages.
+% Describe your pipeline clearly enough that someone could reproduce it.
+
+\subsection{Model and SAE}
+% GPT-2-small, 12 layers, 768-dim residual stream.
+% Joseph Bloom SAEs (gpt2-small-res-jb), 49152 features.
+% Hook point: blocks.{layer}.hook_resid_pre
+
+TODO
+
+\subsection{Prompt Design}
+% Describe clean_year_items — why no BC/AD tokens.
+% Explain the contamination discovery and why you switched.
+% Briefly describe the days/months prompts for phase 5.
+
+TODO
+
+\subsection{Temporal Axis Measurement}
+% PCA on SAE reconstruction.
+% PC1-year Pearson correlation |r| as the metric.
+% Why PC1 captures temporal ordering.
+
+TODO
+
+\subsection{Superposition Depth Scan}
+% The ablation loop — zeroing one SAE feature at a time.
+% Max single-feature drop as the concentration metric.
+% Why declining max drop with flat |r| indicates superposition.
+
+TODO
+
+\subsection{Circular Encoding Measurement}
+% For days of week and months of year.
+% Circle fitting on PC2/PC3 (fit_circle_algebraic).
+% Angular correlation as the metric instead of PC1-year r.
+% Why linear correlation fails for cyclic concepts.
+
+TODO
+
+% -------------------------------------------------------
+\section{Experiments and Results}
+% -------------------------------------------------------
+% This is the core of the paper. ~3-4 pages including figures.
+
+\subsection{BC/AD Token Contamination}
+% Your most methodologically important finding.
+% Show phase3 vs phase4 comparison.
+% Explain the British Columbia detector (Neuronpedia screenshot).
+% Original prompts: |r|~0.95 at layer 0. Clean prompts: |r|~0.40.
+
+TODO
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase4_clean_superposition_depth.png}
+  \caption{
+    Left: concentration of temporal signal (max single-feature SAE 
+    ablation drop) across all 12 layers for clean prompts. 
+    Right: baseline temporal axis strength (|PC1-year r|) across layers.
+    The temporal axis builds progressively from near zero at layer 0 
+    to $|r| \approx 0.93$ by layer 4, then remains stable.
+  }
+  \label{fig:clean_depth}
+\end{figure}
+
+\subsection{Temporal Axis Construction}
+% Clean prompts show |r| building from 0.40 to 0.93 across layers 0-4.
+% This was hidden in the contaminated dataset.
+% Contrast with original prompts where |r| is flat from layer 0.
+
+TODO
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase1_year_linearity.png}
+  \caption{
+    PC1 vs year value for all historical prompts at layer 4, 
+    showing strong linear decodability ($r = -0.920$).
+  }
+  \label{fig:year_linearity}
+\end{figure}
+
+\subsection{Superposition Transition}
+% Peak concentration at layer 3 (max drop = 0.285, feature 19325).
+% Monotonic decline to near zero by layer 9.
+% Baseline |r| stays flat throughout.
+% Neuronpedia: feature 19325 is a 19th century year detector.
+% Interpretation: construction then progressive superposition.
+
+TODO
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase3_superposition_depth.png}
+  \caption{
+    Superposition depth scan on original dataset across all 12 layers.
+    Left: max single-feature drop. Right: baseline $|r|$.
+    Note early layers dominated by BC token detector (feature 22992).
+  }
+  \label{fig:orig_depth}
+\end{figure}
+
+\subsection{Load-Bearing Feature Identification}
+% Feature 19325 at layer 3 — Neuronpedia lookup.
+% Fires on two-digit suffixes of 1800s year expressions.
+% Auto-label: "years in the 1800s" / "historical years".
+% Contrast with feature 22992 at layer 1 — British Columbia.
+% This is your mechanistic finding.
+
+TODO
+
+\subsection{Circular Concepts: Days of Week and Months of Year}
+% Phase 5 results.
+% Different pattern from linear time — oscillating concentration.
+% Days of week collapse at layers 10-11.
+% Comparison plot of all four concepts.
+
+TODO
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase5_circular_superposition_depth.png}
+  \caption{
+    Superposition depth scan for days of the week and months of the 
+    year using angular correlation as the signal metric. Unlike linear 
+    temporal encoding, circular concepts show oscillating concentration 
+    with no monotonic decline.
+  }
+  \label{fig:circular_depth}
+\end{figure}
+
+\subsection{Days of the Month: Novel Geometric Analysis}
+% Phase 6 results.
+% Do days of the month show circular geometry?
+% Compare angular_r against days of week and months of year.
+% This is your novel geometric finding.
+
+TODO
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase6_cyclic_concepts_comparison.png}
+  \caption{
+    PC2 vs PC3 geometric structure for three cyclic temporal concepts 
+    in GPT-2-small. Left: days of the week (layer 7). 
+    Middle: months of the year (layer 7). 
+    Right: days of the month (best layer). 
+    Points colored by position in cycle using HSV colormap.
+    Dashed circle shows algebraic least-squares fit.
+  }
+  \label{fig:cyclic_comparison}
+\end{figure}
+
+% -------------------------------------------------------
+\section{Discussion}
+% -------------------------------------------------------
+% ~1 page.
+% Interpret your findings. What do they mean?
+
+\subsection{Linear vs Circular Temporal Encoding}
+% Why does linear time show monotonic superposition but 
+% circular time shows oscillation?
+% Hypothesis: circular encoding requires coordinated multi-layer 
+% activity, linear encoding can be handed off between layers.
+
+TODO
+
+\subsection{The BC/AD Contamination Finding}
+% Methodological contribution.
+% Surface tokens can dominate early-layer representations.
+% Implication for probing studies generally.
+% The shortcut hypothesis — does surface token presence 
+% delay genuine semantic encoding?
+
+TODO
+
+\subsection{Limitations}
+% Small prompt set (63 prompts for temporal).
+% Single model (GPT-2-small).
+% SAE reconstruction error (~7% of variance).
+% Clustering algorithm optimized for temporal, less suited 
+% for geographic/numeric concepts.
+% Only one load-bearing feature identified via Neuronpedia.
+
+TODO
+
+% -------------------------------------------------------
+\section{Conclusion}
+% -------------------------------------------------------
+% ~0.5 page.
+% Summarize your two main findings:
+% 1. Temporal axis lifecycle: construction (layers 0-4), 
+%    peak concentration (layer 3), superposition (layers 4-9)
+% 2. Linear vs circular encoding behave fundamentally differently
+% State what future work should do next.
+
+TODO
+
+% -------------------------------------------------------
+\section*{Acknowledgements and Contributions}
+% -------------------------------------------------------
+
+\textbf{Sam Brown:} TODO (e.g. data pipeline, phase 1-3 analysis, writing)
+
+\textbf{Peyton Calvert:} TODO (e.g. geometric analysis, phase 5-6, writing)
+
+% -------------------------------------------------------
+\section*{Questions for the Instructor}
+% -------------------------------------------------------
+% Required section per the assignment.
+% List any conceptual or methodological questions you have.
+
+\begin{enumerate}
+  \item TODO
+  \item TODO
+\end{enumerate}
+
+% -------------------------------------------------------
+% BIBLIOGRAPHY
+% -------------------------------------------------------
+\bibliographystyle{abbrvnat}
+\bibliography{references}
+
+\appendix
+
+% -------------------------------------------------------
+\section{Additional Figures}
+% -------------------------------------------------------
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase1_all_pca.png}
+  \caption{
+    PCA of raw residual stream activations at layer 4 for all 
+    historical prompts. BC years (dark purple) and modern years 
+    (red/orange) separate clearly along PC1 and PC2.
+  }
+  \label{fig:all_pca}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase2_geometric_layer4.png}
+  \caption{
+    Phase 2 geometric analysis at layer 4. Left to right: raw PCA, 
+    PC2 vs PC3 with fitted circle (RMSE=3.235), detrended PCA, 
+    angular position vs year ($r=-0.625$). The high circle RMSE 
+    indicates the helical/circular hypothesis is not supported 
+    for historical time.
+  }
+  \label{fig:geometric}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{phase1_ablation_histogram.png}
+  \caption{
+    Distribution of single-feature ablation drops across 60 cluster 
+    features at layer 4. One feature causes a drop of $\sim$0.25, 
+    while the remaining 59 cause drops near zero.
+  }
+  \label{fig:ablation_hist}
+\end{figure}
+
+\end{document}
