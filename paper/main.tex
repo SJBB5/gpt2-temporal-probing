@@ -17,7 +17,7 @@
 % TITLE
 % -------------------------------------------------------
 \title{\textbf{Temporal Superposition in GPT-2: \\
-How Historical Time is Encoded and \\
+How Temporal Time is Encoded and \\
 Distributed Across Layers}}
 
 \author{
@@ -89,8 +89,7 @@ These layers write incremental updates into a shared vector called the residual 
 denotes the residual stream at layer $\ell$, each layer computes $\mathbf{x}^{(\ell+1)} = \mathbf{x}^{(\ell)} + f^{(\ell)}$, where 
 $f^{(\ell)}$ is the combined attention and MLP transformation. This additive structure means the residual stream accumulates information 
 across depth, and that respresentations at any layer can be read as a type of superposition of all contributions made so far.
-In this work we probe the residual stream of GPT-2 Small \cite{radford2019}, a 117 million parameter transformer with 12 layers, 
-12 attention heads, and a hidden dimension of d = 768. 
+In this work we probe the residual stream of GPT-2 Small \cite{radford2019}, a 117 million parameter transformer with a hidden dimension of d = 768. 
 \subsection{Superposition}
 A naive expectation is that each dimension of the residual stream encodes one interpretable feature. In practice, the number of concepts
 a model must represent exceeds its hidden dimension $d$ ($\mathbb{R}^{768}$ in this paper). As a result, models exploit the fact that high 
@@ -115,14 +114,31 @@ only a small number of active features at a time. The resulting latent dimension
 % Joseph Bloom SAEs (gpt2-small-res-jb), 49152 features.
 % Hook point: blocks.{layer}.hook_resid_pre
 
-TODO
+We do all experiments on GPT-2 Small \cite{radford2019}, a decoder-only transformer with 12 layers, 12 attention heads, and a residual 
+stream dimension of d = 768, totalling approximately 117 million paramters. GPT-2 Small is a well-studied model in the context of mechanistic
+interpretability, making it a good model for probing internal representations. 
+\\
+\\
+To decompose residual stream activations, we use the suite of SAEs released by \citet{bloom2024}, trained on GPT-2 Small's residual stream
+under the release identifier \texttt{gpt2-small-res-jb}. Each SAE is trained on the \texttt{hook\_resid\_pre} activation at its corresponding
+layer --  that is, the residual stream state \textit{before} the attention and MLP transformations of that layer have been applied.
+The SAE architecture uses a linear encoder with ReLU activation followed by a linear decoder, with an expansion factor of $64\times$, giving a latent dimension 
+of $d_{\text{SAE}} = 49{,}152$. For each layer $\ell$ we load the corresponding SAE independently, allowing us to probe how feature representations evolve across 
+depth.
+\\
+\\
+All activations are extracted at the final token position of each prompt, as this 
+is the position at which the model has processed the full input and is most likely 
+to have integrated contextual information into a coherent representation.
+
 
 \subsection{Prompt Design}
 % Describe clean_year_items — why no BC/AD tokens.
 % Explain the contamination discovery and why you switched.
 % Briefly describe the days/months prompts for phase 5.
 
-TODO
+TODO (May still try different prompts like prof mentioned... come back to)
+
 
 \subsection{Temporal Axis Measurement}
 % PCA on SAE reconstruction.

@@ -46,20 +46,18 @@ def _get_sae_reconstruction(model, prompts, layer, device):
     return recon
 
 
-def _plot_pc2_pc3(ax, coords, labels, n_categories, title, annotate_every=1):
+def _plot_pc2_pc3(ax, coords, labels, n_categories, title, annotate_every=1,
+                  colorbar_label=""):
     """
     Plot PC2 vs PC3 scatter on given axes object.
     Returns (angular_r, rmse).
     """
     labels_arr = np.array(labels)
-    cmap = plt.get_cmap("hsv")
-    norm = plt.Normalize(vmin=0.5, vmax=n_categories + 0.5)
-    colors = cmap(norm(labels_arr))
 
     sc = ax.scatter(coords[:, 1], coords[:, 2], c=labels_arr,
-                    cmap="hsv", vmin=0.5, vmax=n_categories + 0.5,
+                    cmap="plasma", vmin=0.5, vmax=n_categories + 0.5,
                     s=60, zorder=3)
-    plt.colorbar(sc, ax=ax)
+    plt.colorbar(sc, ax=ax, label=colorbar_label)
 
     angular_r = 0.0
     rmse = 999.0
@@ -196,7 +194,8 @@ def run_phase6() -> None:
         # Row 2 — PC2 vs PC3 with circle
         ax = axes[1, col]
         _plot_pc2_pc3(ax, coords, days_of_month_labels, n_categories=31,
-                      title=f"Layer {layer} — PC2 vs PC3", annotate_every=5)
+                      title=f"Layer {layer} — PC2 vs PC3", annotate_every=5,
+                      colorbar_label="Day of month")
         ax.set_xlabel(f"PC2 ({var[1]:.1%})")
         ax.set_ylabel(f"PC3 ({var[2]:.1%})")
 
@@ -324,7 +323,8 @@ def run_phase6() -> None:
     # Panel 1 — Days of week
     ax = axes[0]
     _plot_pc2_pc3(ax, dow_coords, days_of_week_labels, n_categories=7,
-                  title="Days of Week — Layer 7", annotate_every=1)
+                  title="Days of Week — Layer 7", annotate_every=1,
+                  colorbar_label="Day of week")
     ax.set_xlabel("PC2")
     ax.set_ylabel("PC3")
     # Overwrite annotations with day abbreviations
@@ -341,7 +341,8 @@ def run_phase6() -> None:
     # Panel 2 — Months of year
     ax = axes[1]
     _plot_pc2_pc3(ax, moy_coords, months_of_year_labels, n_categories=12,
-                  title="Months of Year — Layer 7", annotate_every=1)
+                  title="Months of Year — Layer 7", annotate_every=1,
+                  colorbar_label="Month")
     ax.set_xlabel("PC2")
     ax.set_ylabel("PC3")
     for txt in list(ax.texts):
@@ -357,7 +358,8 @@ def run_phase6() -> None:
     # Panel 3 — Days of month
     ax = axes[2]
     _plot_pc2_pc3(ax, best_coords, days_of_month_labels, n_categories=31,
-                  title=f"Days of Month — Layer {best_layer}", annotate_every=5)
+                  title=f"Days of Month — Layer {best_layer}", annotate_every=5,
+                  colorbar_label="Day of month")
     ax.set_xlabel("PC2")
     ax.set_ylabel("PC3")
 
