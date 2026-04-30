@@ -13,6 +13,9 @@ from src.plots import _plot_geometric_analysis
 
 
 def run_phase2() -> None:
+    phase_dir = OUTPUT_DIR / "phase2"
+    phase_dir.mkdir(parents=True, exist_ok=True)
+
     print("\n" + "=" * 65)
     print("PHASE 2  -  Geometric Analysis")
     print("=" * 65)
@@ -95,7 +98,7 @@ def run_phase2() -> None:
         coords_d, var_d, year_nums, year_labels,
         best_layer,
         year_categories=YEAR_CATEGORIES,
-        output_dir=OUTPUT_DIR,
+        output_dir=phase_dir,
     )
 
     print("\n" + "=" * 65)

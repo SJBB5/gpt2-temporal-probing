@@ -26,6 +26,9 @@ def run_phase4() -> None:
     print(f"  layers={PHASE4_LAYERS}")
     print("=" * 65)
 
+    phase_dir = OUTPUT_DIR / "phase4"
+    phase_dir.mkdir(parents=True, exist_ok=True)
+
     # -- 1. Load clean dataset -------------------------------------------------
     with open(_DATA_PATH) as f:
         data = json.load(f)
@@ -45,7 +48,7 @@ def run_phase4() -> None:
     acts_l4, _ = extract_activations(model, CLEAN_YEAR_ITEMS)
     plot_year_linearity(
         acts_l4, CLEAN_YEAR_ITEMS,
-        path=OUTPUT_DIR / "phase4_clean_year_linearity.png",
+        path=phase_dir / "phase4_clean_year_linearity.png",
         layer=4,
     )
     acts_np = acts_l4.numpy()
@@ -112,7 +115,7 @@ def run_phase4() -> None:
     ax.set_ylim(0, 1)
 
     fig.tight_layout()
-    p = OUTPUT_DIR / "phase4_clean_superposition_depth.png"
+    p = phase_dir / "phase4_clean_superposition_depth.png"
     fig.savefig(p, dpi=150)
     plt.close(fig)
     print(f"\n  Saved -> {p.name}")
@@ -141,8 +144,7 @@ def run_phase4() -> None:
         )
 
     # -- CSV output: phase4 ---------------------------------------------------
-    OUTPUT_DIR.mkdir(exist_ok=True)
-    p4_csv = OUTPUT_DIR / "phase4_layer_summary.csv"
+    p4_csv = phase_dir / "phase4_layer_summary.csv"
     with open(p4_csv, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "layer", "base_r", "max_drop", "top_feature_index",
@@ -163,8 +165,8 @@ def run_phase4() -> None:
     print(f"  Saved -> phase4_layer_summary.csv")
 
     # -- CSV output: comparison -----------------------------------------------
-    p3_csv = OUTPUT_DIR / "phase3_layer_summary.csv"
-    p_cmp  = OUTPUT_DIR / "phase3_vs_phase4_comparison.csv"
+    p3_csv = OUTPUT_DIR / "phase3" / "phase3_layer_summary.csv"
+    p_cmp  = phase_dir / "phase3_vs_phase4_comparison.csv"
     with open(p3_csv, newline="") as f3, open(p4_csv, newline="") as f4:
         p3_rows = {int(r["layer"]): r for r in csv.DictReader(f3)}
         p4_rows = {int(r["layer"]): r for r in csv.DictReader(f4)}

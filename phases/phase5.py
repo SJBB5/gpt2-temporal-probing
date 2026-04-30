@@ -114,8 +114,11 @@ def _circular_ablation_scan_at_layer(
 
 def _geometry_plot(
     model, layer: int, items: list, labels: list,
-    concept_name: str, item_labels_list: list, short_name: str
+    concept_name: str, item_labels_list: list, short_name: str,
+    output_dir=None,
 ) -> None:
+    if output_dir is None:
+        output_dir = OUTPUT_DIR
     """Generate the PC2/PC3 circle geometry validation plot at the given layer."""
     sae_id = f"blocks.{layer}.hook_resid_pre"
     print(f"  Loading SAE for geometry plot (layer {layer}) ...")
@@ -178,7 +181,7 @@ def _geometry_plot(
     ax.set_title(f"Angular position vs label\nangular_r = {angular_r:.4f}")
 
     fig.tight_layout()
-    p = OUTPUT_DIR / f"phase5_{short_name}_geometry_layer{layer}.png"
+    p = output_dir / f"phase5_{short_name}_geometry_layer{layer}.png"
     fig.savefig(p, dpi=150)
     plt.close(fig)
     print(f"  Saved -> {p.name}")
@@ -191,6 +194,8 @@ def run_phase5() -> None:
     print("=" * 65)
 
     OUTPUT_DIR.mkdir(exist_ok=True)
+    phase_dir = OUTPUT_DIR / "phase5"
+    phase_dir.mkdir(parents=True, exist_ok=True)
 
     # -- 1. Load data ----------------------------------------------------------
     with open(_DATA_PATH) as f:
@@ -228,8 +233,8 @@ def run_phase5() -> None:
 
     # -- 4. Geometry visualization at layer 7 ----------------------------------
     print("\n[Geometry visualization at layer 7]")
-    _geometry_plot(model, 7, days_items,   days_labels,   "Days of Week",   days_item_labels,   "days")
-    _geometry_plot(model, 7, months_items, months_labels, "Months of Year", months_item_labels, "months")
+    _geometry_plot(model, 7, days_items,   days_labels,   "Days of Week",   days_item_labels,   "days",   output_dir=phase_dir)
+    _geometry_plot(model, 7, months_items, months_labels, "Months of Year", months_item_labels, "months", output_dir=phase_dir)
 
     # -- 5. Circular superposition depth scan ----------------------------------
     print("\n[Circular superposition depth scan]")
@@ -260,7 +265,7 @@ def run_phase5() -> None:
         (days_results,   "phase5_days_layer_summary.csv"),
         (months_results, "phase5_months_layer_summary.csv"),
     ]:
-        p = OUTPUT_DIR / fname
+        p = phase_dir / fname
         with open(p, "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=[
                 "layer", "baseline_angular_r", "baseline_rmse",
@@ -319,15 +324,15 @@ def run_phase5() -> None:
         ax.set_ylim(0, 1)
 
     fig.tight_layout()
-    p = OUTPUT_DIR / "phase5_circular_superposition_depth.png"
+    p = phase_dir / "phase5_circular_superposition_depth.png"
     fig.savefig(p, dpi=150)
     plt.close(fig)
     print(f"  Saved -> {p.name}")
 
     # -- 8. Comparison plot with Phase 3/4 -------------------------------------
     try:
-        p3_csv = OUTPUT_DIR / "phase3_layer_summary.csv"
-        p4_csv = OUTPUT_DIR / "phase4_layer_summary.csv"
+        p3_csv = OUTPUT_DIR / "phase3" / "phase3_layer_summary.csv"
+        p4_csv = OUTPUT_DIR / "phase4" / "phase4_layer_summary.csv"
 
         with open(p3_csv, newline="") as f:
             p3_rows = {int(r["layer"]): r for r in csv.DictReader(f)}
@@ -381,7 +386,7 @@ def run_phase5() -> None:
         ax.legend(fontsize=9)
 
         fig.tight_layout()
-        p = OUTPUT_DIR / "phase5_all_concepts_comparison.png"
+        p = phase_dir / "phase5_all_concepts_comparison.png"
         fig.savefig(p, dpi=150)
         plt.close(fig)
         print(f"  Saved -> {p.name}")

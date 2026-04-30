@@ -103,6 +103,8 @@ def run_phase6() -> None:
     print("=" * 65)
 
     OUTPUT_DIR.mkdir(exist_ok=True)
+    phase_dir = OUTPUT_DIR / "phase6"
+    phase_dir.mkdir(parents=True, exist_ok=True)
 
     # -- 1. Load data ----------------------------------------------------------
     with open(_DATA_PATH) as f:
@@ -230,7 +232,7 @@ def run_phase6() -> None:
         ax.set_xticks([1, 6, 11, 16, 21, 26, 31])
 
     plt.tight_layout()
-    out_path = OUTPUT_DIR / "phase6_days_of_month_geometry.png"
+    out_path = phase_dir / "phase6_days_of_month_geometry.png"
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
     print("  Saved -> phase6_days_of_month_geometry.png")
@@ -282,7 +284,7 @@ def run_phase6() -> None:
     ax.set_title(title_str)
     ax.grid(alpha=0.3)
     plt.tight_layout()
-    out_path = OUTPUT_DIR / "phase6_days_of_month_best_layer.png"
+    out_path = phase_dir / "phase6_days_of_month_best_layer.png"
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
     print("  Saved -> phase6_days_of_month_best_layer.png")
@@ -364,13 +366,13 @@ def run_phase6() -> None:
     ax.set_ylabel("PC3")
 
     plt.tight_layout()
-    out_path = OUTPUT_DIR / "phase6_cyclic_concepts_comparison.png"
+    out_path = phase_dir / "phase6_cyclic_concepts_comparison.png"
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
     print("  Saved -> phase6_cyclic_concepts_comparison.png")
 
     # -- 8. Save results CSV ---------------------------------------------------
-    csv_path = OUTPUT_DIR / "phase6_days_of_month_geometry.csv"
+    csv_path = phase_dir / "phase6_days_of_month_geometry.csv"
     with open(csv_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "layer", "angular_r", "rmse", "pc1_var", "pc2_var", "pc3_var"

@@ -20,6 +20,9 @@ def run_phase1() -> None:
     print(f"  model=gpt2   layer={LAYER}   device={DEVICE}")
     print("=" * 65)
 
+    phase_dir = OUTPUT_DIR / "phase1"
+    phase_dir.mkdir(parents=True, exist_ok=True)
+
     # -- 1. Load model + SAE ---------------------------------------------------
     model = load_model()
     sae   = load_sae()
@@ -37,11 +40,11 @@ def run_phase1() -> None:
     plot_pca_overview(
         all_acts, all_labels, ALL_CATS,
         title=f"All Historical Tokens - Raw Residual Stream  (Layer {LAYER})",
-        path=OUTPUT_DIR / "phase1_all_pca.png",
+        path=phase_dir / "phase1_all_pca.png",
     )
     plot_year_linearity(
         year_acts, YEAR_ITEMS,
-        path=OUTPUT_DIR / "phase1_year_linearity.png",
+        path=phase_dir / "phase1_year_linearity.png",
         layer=LAYER,
     )
     # Report PC correlations in console too
@@ -109,7 +112,7 @@ def run_phase1() -> None:
                 f"S={entry['S']:.3f}  M_eps={entry['M_eps']:.3f}  "
                 f"irred={entry['irred']:.3f}"
             ),
-            path=OUTPUT_DIR / f"phase1_cluster{entry['id']}_rank{rank+1}.png",
+            path=phase_dir / f"phase1_cluster{entry['id']}_rank{rank+1}.png",
         )
 
     # -- 8. Feature ablation experiment ----------------------------------------
@@ -202,7 +205,7 @@ def run_phase1() -> None:
                      f"baseline |r| = {baseline_r:.4f}")
         ax.legend(fontsize=8)
         fig.tight_layout()
-        hist_path = OUTPUT_DIR / "phase1_ablation_histogram.png"
+        hist_path = phase_dir / "phase1_ablation_histogram.png"
         fig.savefig(hist_path, dpi=150)
         plt.close(fig)
         print(f"  Saved -> {hist_path.name}")

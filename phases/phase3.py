@@ -127,8 +127,9 @@ def run_phase3() -> None:
               f"{r['n_moderate']:>5}  {r['n_negligible']:>5}")
 
     # -- CSV output -----------------------------------------------------------
-    OUTPUT_DIR.mkdir(exist_ok=True)
-    p_csv = OUTPUT_DIR / "phase3_layer_summary.csv"
+    phase_dir = OUTPUT_DIR / "phase3"
+    phase_dir.mkdir(parents=True, exist_ok=True)
+    p_csv = phase_dir / "phase3_layer_summary.csv"
     with open(p_csv, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "layer", "base_r", "max_drop", "top_feature_index",
@@ -176,7 +177,7 @@ def run_phase3() -> None:
     ax.set_ylim(0, 1)
 
     fig.tight_layout()
-    p = OUTPUT_DIR / "phase3_superposition_depth.png"
+    p = phase_dir / "phase3_superposition_depth.png"
     fig.savefig(p, dpi=150)
     plt.close(fig)
     print(f"\n  Saved -> {p.name}")
@@ -203,7 +204,7 @@ def run_phase3() -> None:
                      "(narrowing = more distributed / more superposition)")
         ax.legend(fontsize=8)
         fig.tight_layout()
-        p2 = OUTPUT_DIR / "phase3_drop_distributions.png"
+        p2 = phase_dir / "phase3_drop_distributions.png"
         fig.savefig(p2, dpi=150)
         plt.close(fig)
         print(f"  Saved -> {p2.name}")

@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\graphicspath{{../outputs/}}
+\graphicspath{{../outputs/phase1/}{../outputs/phase2/}{../outputs/phase3/}{../outputs/phase4/}{../outputs/phase5/}{../outputs/phase6/}}
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{hyperref}
@@ -131,7 +131,6 @@ All activations are extracted at the final token position of each prompt, as thi
 is the position at which the model has processed the full input and is most likely 
 to have integrated contextual information into a coherent representation.
 
-
 \subsection{Prompt Design}
 % Describe clean_year_items — why no BC/AD tokens.
 % Explain the contamination discovery and why you switched.
@@ -140,12 +139,53 @@ to have integrated contextual information into a coherent representation.
 TODO (May still try different prompts like prof mentioned... come back to)
 
 
-\subsection{Temporal Axis Measurement}
+\subsection{Temporal Axis Measurement: Linear Concepts}
 % PCA on SAE reconstruction.
 % PC1-year Pearson correlation |r| as the metric.
 % Why PC1 captures temporal ordering.
 
-TODO
+To quantify how strongly a layer encodes temporal order for historical year prompts, we measure the alignment 
+between the model's internal representations and chronological position. For each layer $l$, we pass the year prompt activations
+through the pretrained SAE encoder and reconstruct them via the decoder:
+$$\hat{x}_i = \mathbf{W}_{\text{dec}}\mathbf{a}_i \in \mathbb{R}^{768}$$
+where $\mathbf{a}_i \in \mathbb{R}^{49152}$ is the sparse feature activation vector for prompt $i$. This reconstruction discard variance
+not captured by the SAE, meaning our metric reflects temporal structure as expressed through the SAE's feature basis specifically.
+\\
+\\
+We apply Principal Component Analysis (PCA) to the ($N \times 768$) reconstruction matrix, retaining a single component (PC1), and compute 
+the absolute Pearson correlation between PC1 scores and numeric year values:
+$$|r| = \left| \text{corr}\left(\text{PC1}(\hat{\mathbf{X}}),\ \mathbf{y}\right) \right|$$
+where $y \in \mathbb{R}^N$ contains the numeric year for each prompt, with pre-common-era dates represented as negative integers.
+We use PC1 because it captures the direction of maximum variance in the reconstruction. If the model encodes temporal position as a linear axis,
+that axis should dominate the variance structure and align with PC1. The absolute value discards PCA's arbritrary sign convention. 
+We refer to this quantity as the baseline temporal correlation $|r|_{\text{base}}$ at a given layer, and use drops in $|r|$ under
+feature ablation as the primary signal in our superposition analysis. described in Section 4.5.
+
+
+\subsection{Temporal Axis Measurement: Cyclic Concepts}
+
+For cyclic concepts -- days of the week, months of the year, and days of the month -- a linear correlation metric is inappropriate.
+Day 7 and day 1 are adjacent in the cyclic ordering but greatly separated under any linear projection, meaning Pearson $r$ will be near 
+zero even for a geometrically well-structured representatiion. We therefore adopt a circular measurement pipeline. 
+\\
+\\
+We retain five PCA components from the SAE reconstruction and fit an algebraic circle to the PC2/PC3 plane using the Coope(1993) least squares
+method \cite{coope1993}. PC1 is deliberately excluded as it captures non-cyclic variance. PC1 captures whether the text refers to a weekday or month and the
+PC2/PC3 captures the circular structure. For each prompt we compute its angular position relative to the fitted circle center $(c_x, c_y)$:
+$$\theta_i = \arctan2\left(\text{PC3}_i - c_y,\ \text{PC2}_i - c_x\right)$$
+We then compute the Fisher circular-linear correlation between angular position and the integer label $\mathbf{y}$. A standard Pearson correlation 
+is inappropriate here because $\theta_i$ is a circular variable — day 7 and day 1 are adjacent in the cyclic ordering but nearly $\pi$ apart in angle, 
+causing Pearson $r$ to underestimate the true correspondence. The Fisher metric instead projects the angular variable onto $\cos\theta$ and $\sin\theta$ 
+and measures how well both components jointly predict the label, correctly treating the concept as periodic.
+$$r_{\text{angular}} = \sqrt{\frac{r_{xc}^2 + r_{xs}^2 - 2r_{xc}r_{xs}r_{cs}}{1 - r_{cs}^2}}$$
+where $r_{xc} = \text{corr}(\cos\theta, \mathbf{y})$, $r_{xs} = \text{corr}(\sin\theta, \mathbf{y})$, 
+and $r_{cs} = \text{corr}(\cos\theta, \sin\theta)$. This metric is bounded in $[0, 1]$ and correctly treats the label as 
+periodic, with $r_{\text{angular}} = 1$ indicating that the label perfectly predicts angular position on the circle. For the ablation scan in Phase 5, 
+drops in $r_{\text{angular}}$ under single-feature ablation replace drops in $|r|$ as the signal metric, with all other aspects of the pipeline held 
+constant.
+
+\subsection{Feature Clustering}
+% prereq to understanding the following section
 
 \subsection{Superposition Depth Scan}
 % The ablation loop — zeroing one SAE feature at a time.
@@ -154,13 +194,6 @@ TODO
 
 TODO
 
-\subsection{Circular Encoding Measurement}
-% For days of week and months of year.
-% Circle fitting on PC2/PC3 (fit_circle_algebraic).
-% Angular correlation as the metric instead of PC1-year r.
-% Why linear correlation fails for cyclic concepts.
-
-TODO
 
 % -------------------------------------------------------
 \section{Experiments and Results}
@@ -175,18 +208,7 @@ TODO
 
 TODO
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase4_clean_superposition_depth.png}
-  \caption{
-    Left: concentration of temporal signal (max single-feature SAE 
-    ablation drop) across all 12 layers for clean prompts. 
-    Right: baseline temporal axis strength (|PC1-year r|) across layers.
-    The temporal axis builds progressively from near zero at layer 0 
-    to $|r| \approx 0.93$ by layer 4, then remains stable.
-  }
-  \label{fig:clean_depth}
-\end{figure}
+
 
 \subsection{Temporal Axis Construction}
 % Clean prompts show |r| building from 0.40 to 0.93 across layers 0-4.
@@ -195,15 +217,7 @@ TODO
 
 TODO
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase1_year_linearity.png}
-  \caption{
-    PC1 vs year value for all historical prompts at layer 4, 
-    showing strong linear decodability ($r = -0.920$).
-  }
-  \label{fig:year_linearity}
-\end{figure}
+
 
 \subsection{Superposition Transition}
 % Peak concentration at layer 3 (max drop = 0.285, feature 19325).
@@ -214,16 +228,7 @@ TODO
 
 TODO
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase3_superposition_depth.png}
-  \caption{
-    Superposition depth scan on original dataset across all 12 layers.
-    Left: max single-feature drop. Right: baseline $|r|$.
-    Note early layers dominated by BC token detector (feature 22992).
-  }
-  \label{fig:orig_depth}
-\end{figure}
+
 
 \subsection{Load-Bearing Feature Identification}
 % Feature 19325 at layer 3 — Neuronpedia lookup.
@@ -242,17 +247,7 @@ TODO
 
 TODO
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase5_circular_superposition_depth.png}
-  \caption{
-    Superposition depth scan for days of the week and months of the 
-    year using angular correlation as the signal metric. Unlike linear 
-    temporal encoding, circular concepts show oscillating concentration 
-    with no monotonic decline.
-  }
-  \label{fig:circular_depth}
-\end{figure}
+
 
 \subsection{Days of the Month: Novel Geometric Analysis}
 % Phase 6 results.
@@ -262,19 +257,7 @@ TODO
 
 TODO
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase6_cyclic_concepts_comparison.png}
-  \caption{
-    PC2 vs PC3 geometric structure for three cyclic temporal concepts 
-    in GPT-2-small. Left: days of the week (layer 7). 
-    Middle: months of the year (layer 7). 
-    Right: days of the month (best layer). 
-    Points colored by position in cycle using HSV colormap.
-    Dashed circle shows algebraic least-squares fit.
-  }
-  \label{fig:cyclic_comparison}
-\end{figure}
+
 
 % -------------------------------------------------------
 \section{Discussion}
@@ -352,39 +335,6 @@ TODO
 \section{Additional Figures}
 % -------------------------------------------------------
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase1_all_pca.png}
-  \caption{
-    PCA of raw residual stream activations at layer 4 for all 
-    historical prompts. BC years (dark purple) and modern years 
-    (red/orange) separate clearly along PC1 and PC2.
-  }
-  \label{fig:all_pca}
-\end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase2_geometric_layer4.png}
-  \caption{
-    Phase 2 geometric analysis at layer 4. Left to right: raw PCA, 
-    PC2 vs PC3 with fitted circle (RMSE=3.235), detrended PCA, 
-    angular position vs year ($r=-0.625$). The high circle RMSE 
-    indicates the helical/circular hypothesis is not supported 
-    for historical time.
-  }
-  \label{fig:geometric}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{phase1_ablation_histogram.png}
-  \caption{
-    Distribution of single-feature ablation drops across 60 cluster 
-    features at layer 4. One feature causes a drop of $\sim$0.25, 
-    while the remaining 59 cause drops near zero.
-  }
-  \label{fig:ablation_hist}
-\end{figure}
 
 \end{document}
