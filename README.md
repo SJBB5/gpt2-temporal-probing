@@ -87,57 +87,10 @@ Both concepts show clear circular structure in PC2/PC3. The circular signal is s
 
 First study of whether GPT-2 encodes days-of-the-month (1–31) as a circle. 93 prompts across 3 linguistic frames (simple statement, wraparound sequential, positional). Purely geometric — no ablation.
 
-Results across layers 4, 6, 7, 8, 10:
-
-| Layer | angular_r | RMSE   | Structure       |
-|-------|-----------|--------|-----------------|
-| 4     | **0.495** | 2.651  | moderate circle |
-| 6     | 0.424     | 2.792  | moderate circle |
-| 7     | 0.379     | 3.481  | weak circle     |
-| 8     | 0.403     | 4.114  | moderate circle |
-| 10    | 0.419     | 6.530  | moderate circle |
-
-Comparison at their respective best layers:
-- Days of week (L7): `angular_r = 0.662`
-- Months of year (L7): `angular_r = 0.748`
-- **Days of month (L4): `angular_r = 0.495`**
-
-Days of the month show *moderate* circular geometry — weaker than the 7-day and 12-month cycles but well above noise. The cluster quality check flagged high within-day variance (intra/inter ratio = 1.42), suggesting the 3 prompt frames pull the same-day representations apart more than for simpler cyclic concepts. This is expected: "1st" and "first" and "day after 31st" activate different surface-level features.
-
-**Mind change:** A weaker circle for 31 days was expected (less redundancy, more noise), but the moderate signal is still a positive finding — the model does appear to represent day-of-month position geometrically, not just as an ordinal lookup.
-
 **Outputs:** `phase6_days_of_month_geometry.png`, `phase6_days_of_month_best_layer.png`, `phase6_cyclic_concepts_comparison.png`, `phase6_days_of_month_geometry.csv`
 
 ---
 
-## Remaining Experiments
-
-1. **Phase 6 superposition scan** — run the circular ablation scan for days-of-month across all 12 layers, matching the Phase 5 methodology. This will reveal whether the circular signal is carried by a small number of features (concentrated) or is superposed.
-
-2. **Prompt robustness for days of month** — the high frame variance (ratio 1.42) suggests frame 3 ("The 15th is the fifteenth day") may be degrading the signal. Running geometry on frame 1 alone ("Today is the Nth of the month") would test whether cleaner prompts yield a stronger circle.
-
-3. **Cross-concept superposition** — do the same SAE features that carry day-of-week circularity also contribute to day-of-month or month-of-year circularity? A feature overlap analysis would test whether temporal cycles share a representational substrate.
-
-4. **Helical structure** — historical years show both a linear axis (PC1 ≈ year) and a circular component (PC2/PC3). A full 3-D PCA visualization could confirm a helix, which would be the clearest evidence of a single unified temporal representation.
-
----
-
-## How Results Will Inform the Conclusion
-
-- If the days-of-month ablation scan (remaining experiment 1) shows concentrated circular signal (large max-drop at a single feature), it would suggest the 31-day cycle is represented more sparsely than the 7-day or 12-month cycles — perhaps because it's less culturally salient. If distributed, it matches the pattern seen for years.
-- If single-frame prompts yield `angular_r > 0.6` for days of month, the moderate result in Phase 6 was a prompt-noise artifact, not a weaker representational geometry.
-- If cross-concept feature overlap is high, it supports a unified "temporal position" circuit. If low, each cyclic concept has its own dedicated features.
-- The helix test will be the cleanest statement about whether years are encoded in a fundamentally higher-dimensional structure than a simple linear axis.
-
----
-
-## Roadblocks
-
-- **SAE loading per layer is slow on CPU** — each phase that scans all 12 layers (phases 3–5) is I/O-heavy. Phase 6 was scoped to 5 layers for this reason.
-- **High frame variance for days of month** — 31 distinct days × 3 frames creates more noise than 7 days × 3 frames. The intra/inter ratio of 1.42 means that within-day spread is larger than between-day spread in the first 3 PCA dimensions, which inflates RMSE and depresses `angular_r`. This is a data quality concern, not a modeling one.
-- **No ground-truth circular signal strength** — `angular_r` is sensitive to prompt framing. Without a frame-invariant baseline, it is hard to say definitively whether days-of-month have a "weaker" circle than months-of-year or just noisier prompts.
-
----
 
 ## Codebase Map
 
