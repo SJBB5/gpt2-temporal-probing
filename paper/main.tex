@@ -186,13 +186,45 @@ constant.
 
 \subsection{Feature Clustering}
 % prereq to understanding the following section
+Given the high dimensionality of the SAE feature space ($d_\text{SAE} = 49,152$), directly ablating all features is computationally unmanageable and 
+statistically uninformative. We therefore apply a two stage filtering procedure to identify a coherent subset of features likley to be encoding temporal 
+structure, which then forms the canidate set for the ablation scan. 
+\\
+\\
+We First filter to \textit{active} features, those that fire on at least two prompts in the input set. For each active feature
+$f_i$ we compute a one-way ANOVA F-score across epoch category groups, where each group contains the feature activations for all prompts belonging to that epoch.
+We retain the top $N_{\text{disc}} = 60$ features by F-score as the discriminative candidate set. However, since two features can both score 
+highly on ANOVA while activating in entirely different patterns across epochs, we apply a second stage to enforce coherence. For each 
+candiate feature we compute its epoch-mean activation profile $\mathbf{p}_i \in \mathbb{R}^K$, z scored across the K epoch categories. 
+Features whose profiles correlate above $|\rho| > 0.5$ are connected in a graph, and connected components of size $\geq 2$ are taken as 
+clusters. If no clusters are found at this threshold we fall back to $|\rho| > 0.3$. We select the cluster containing the single most discriminative
+feature by ANOVA F-score as the candidate set for ablation, with each feature in the cluster ablated individually and independently. 
+\\
+\\
+For the cyclic concepts the graph clustering step is omitted and the top 60 features by ANOVA F-score are used directly as the candidate set,
+with integer cycle labels replacing epoch categories as the grouping variable. 
+
 
 \subsection{Superposition Depth Scan}
 % The ablation loop — zeroing one SAE feature at a time.
 % Max single-feature drop as the concentration metric.
 % Why declining max drop with flat |r| indicates superposition.
 
-TODO
+To examine how the temporal representation evolves across the network, we run a layer-wise ablation scan across all 12 layers of GPT2-Small. At each 
+layer $l$ we load the corresponding pretrained SAE, extract residual stream activations at \texttt{hook\_resid\_pre}, and apply the feature clustering 
+procedure described in SECTION REF to identify the candidate feature set. We then establish a baseline temporal correlation $|r|_{\text{base}}$ by encoding 
+the year prompts through the SAE, reconstructing via the decoder, and computing the abolsute Peasron correlation between PC1 and numeric year
+values as described in SECTION REF. 
+\\
+\\
+For each feature $f_i$ in the candidate set, we zero its activation across all year prompts simultaneously, setting column $i$ of the ($N_{\text{years}} \times 49{,}152$)
+feature activation matrix to zero in SAE space, and recompute the $|r|$ on the modified reconstruction. The drop is:
+$$\Delta_i = \lvert r \rvert_{\text{base}} - \lvert r \rvert_{\text{abl}, i}$$
+A large $\Delta_i$ indicates that feature $f_i$ is individually load-bearing for the temporal axis. A near-zero or negative $\Delta_i$ indicates negligible contribution or a suppressive feature 
+whose removal improves temporal linearity. PCA is re-fit from scratch on each ablated reconstruction rather than projecting onto a 
+fixed baseline direction, meaning $\Delta_i$ measures whether a temporal axis still 
+exists after ablation, not merely whether the ablated reconstruction aligns with the original one. 
+The test is therefore conservative --- a feature only registers as load-bearing if the remaining features cannot reorganise to compensate.
 
 
 % -------------------------------------------------------
@@ -290,7 +322,13 @@ TODO
 % for geographic/numeric concepts.
 % Only one load-bearing feature identified via Neuronpedia.
 
-TODO
+Need to think about clustering criteria for which cluster to take for ablating.
+\\
+Current: Take the cluster that contains the single most discriminative features by ANOVA F-score
+\\
+Could also try taking the largest cluster.
+\\
+Need to include cluster sizes for ablation scans
 
 % -------------------------------------------------------
 \section{Conclusion}
