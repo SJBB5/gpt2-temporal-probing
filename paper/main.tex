@@ -37,15 +37,33 @@ Distributed Across Layers}}
 
 % -------------------------------------------------------
 \begin{abstract}
-% -------------------------------------------------------
-% 150-250 words.
-% Cover: (1) what you did, (2) how you did it, 
-% (3) what you found, (4) why it matters.
-% Write this last once the paper is finished.
+We investigate how GPT-2 Small encodes temporal concepts in its residual
+stream, combining principal component analysis of raw activations with a
+layer-wise sparse autoencoder (SAE) ablation scan across all 12 layers.
+Using a 100-prompt historical year corpus spanning roughly 2{,}800 years
+and three cyclic concept datasets (days of the week, months of the year,
+and days of the month), we characterise both linear and circular temporal
+representations and track how they evolve with depth.
 
-We investigate how GPT-2-small encodes historical time in its residual 
-stream using sparse autoencoders (SAEs). TODO: fill in findings summary.
+For linear historical time, the temporal axis is strongly present
+($|r|_{\text{base}} \approx 0.85$--$0.92$) from early layers onward, but
+the representation transitions from concentrated to distributed: at layers
+0--1 a single SAE feature accounts for a drop of $\approx 0.43$ in
+temporal correlation when ablated, whereas by layer 7 no individual feature
+is load-bearing. We show this early concentration is partly an artifact of
+BC/AD surface tokens, whose removal collapses the layer-1 signal entirely
+and shifts peak concentration to layers 4--5, after which both corpora
+converge to the same fully distributed superposition regime.
 
+For cyclic concepts, we replicate the circular PC2/PC3 geometry reported
+by prior work for days of the week ($r_{\text{angular}} = 0.662$) and
+months of the year ($r_{\text{angular}} = 0.748$), and extend the analysis
+to days of the month, finding a weaker but present circular structure
+($r_{\text{angular}} = 0.495$) whose strength is highly prompt-frame
+dependent. Together, these results suggest that GPT-2 Small encodes linear
+and cyclic temporal structure through fundamentally different geometric
+mechanisms, and that surface token identity can dominate early-layer probing
+signals in ways that obscure genuine semantic encoding.
 \end{abstract}
 
 % -------------------------------------------------------
@@ -189,7 +207,7 @@ We refer to this quantity as the baseline temporal correlation $|r|_{\text{base}
 feature ablation as the primary signal in our superposition analysis. described in Section 4.5.
 
 
-\subsection{Temporal Axis Measurement: Cyclic Concepts}
+\subsection{Temporal Axis Measurement: Cyclic Concepts **NOTE** May not use this}
 
 For cyclic concepts -- days of the week, months of the year, and days of the month -- a linear correlation metric is inappropriate.
 Day 7 and day 1 are adjacent in the cyclic ordering but greatly separated under any linear projection, meaning Pearson $r$ will be near 
@@ -397,26 +415,68 @@ regime.
     \label{fig:phase4_depth}
 \end{figure}
 
-\subsection{Circular Concepts: Days of Week and Months of Year}
+\subsection{Cyclical Concepts: Days of Week and Months of Year}
 % Phase 5 results.
 % Different pattern from linear time — oscillating concentration.
 % Days of week collapse at layers 10-11.
 % Comparison plot of all four concepts.
 
-TODO
+
+Prior work by \citet{engels2024} demonstrated that GPT-2 Small encodes days of the week and months of the year as circular representations in the 
+PC2/PC3 plane of the residual stream. We replicate and extend these findings, additionally examining days of the month --- a novel cyclic concept with 31 
+labels that has not previously been studied in this context.
+\\
+\\
+\noindent
+Figure~\ref{fig:cyclic_comparison} shows the PC2/PC3 geometry for all three concepts at their best layers. Days of the week (layer 7, $r_{\text{angular}} 
+= 0.662$, RMSE $= 8.201$) and months of the year (layer 7, $r_{\text{angular}} = 0.748$, RMSE $= 7.070$) both show clear circular organisation, with 
+concepts arranged sequentially around the fitted circle. Days of the month (layer 4, $r_{\text{angular}} = 0.495$, RMSE $= 2.651$) shows a weaker but 
+present circular structure, with points partially arranged along an arc rather than a full circle. The lower $r_{\text{angular}}$ for days of the 
+month is consistent with the increased difficulty of encoding 31 distinct labels compared to 7 or 12.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase6_cyclic_concepts_comparison.png}
+    \caption{PC2/PC3 geometry for cyclic temporal concepts in GPT-2 Small. 
+    Left: days of the week at layer 7 ($r_{\text{angular}} = 0.662$, 
+    RMSE $= 8.201$). Centre: months of the year at layer 7 
+    ($r_{\text{angular}} = 0.748$, RMSE $= 7.070$). Right: days of the 
+    month at layer 4 ($r_{\text{angular}} = 0.495$, RMSE $= 2.651$). 
+    Colour indicates the numeric label for each concept.}
+    \label{fig:cyclic_comparison}
+\end{figure}
 
 
 
-\subsection{Days of the Month: Novel Geometric Analysis}
-% Phase 6 results.
-% Do days of the month show circular geometry?
-% Compare angular_r against days of week and months of year.
-% This is your novel geometric finding.
-
-TODO
+\subsection{Circular Encoding of Days of the Month}
 
 
+Figure~\ref{fig:phase6_by_frame} shows the PC2/PC3 geometry for days of the month across five layers and three prompt frames. The all-frames rows 
+reveal that the circular structure is weak and frame-dependent --- no layer produces a clean circular arrangement when all three frames are combined.
+\\
+\\
+Examining frames individually tells a clearer story. Frame 1 (simple statement: \textit{``Today is the Nth of the month''}) collapses to a 
+tight cluster near the origin at all layers, carrying almost no day-number information in the PC2/PC3 plane. Frame 2 (wraparound sequential: 
+\textit{``The day after the Nth is the (N+1)th''}) produces the strongest circular structure, with points arranged along a partial arc that becomes 
+more pronounced at layers 6--8. Frame 3 (positional: \textit{``The Nth is the Nth day of the month''}) shows linear rather than circular organisation, 
+with day number varying along a single axis rather than wrapping around a circle.
+\\
+\\
+The frame dependence suggests the model does not maintain a single unified circular representation of days of the month. Instead, different 
+prompt framings engage different representational structures.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase6_days_of_month_by_frame.png}
+    \caption{PC2/PC3 geometry for days of the month across five layers 
+    (columns) and three prompt frames (rows 2--4), with all frames combined 
+    in row 1. Colour indicates day number (1--31).}
+    \label{fig:phase6_by_frame}
+\end{figure}
+
+\subsection{Superposition of Circular ideas}
+
+TODO (maybe)
 % -------------------------------------------------------
 \section{Discussion}
 % -------------------------------------------------------

@@ -201,12 +201,13 @@ def run_phase5() -> None:
     with open(_DATA_PATH) as f:
         data = json.load(f)
 
-    days_raw    = data["days_of_week"]
+    p5 = data["phase5"]
+    days_raw    = p5["days_of_week"]
     days_items  = [(e["label"], e["prompt"], e["day"]) for e in days_raw]
     days_labels = [e["day"] for e in days_raw]
     days_item_labels = [e["label"] for e in days_raw]
 
-    months_raw    = data["months_of_year"]
+    months_raw    = p5["months_of_year"]
     months_items  = [(e["label"], e["prompt"], e["month"]) for e in months_raw]
     months_labels = [e["month"] for e in months_raw]
     months_item_labels = [e["label"] for e in months_raw]

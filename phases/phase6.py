@@ -110,17 +110,18 @@ def run_phase6() -> None:
     with open(_DATA_PATH) as f:
         data = json.load(f)
 
-    dom_raw = data["days_of_month"]
+    p6 = data["phase6"]
+    dom_raw = p6["days_of_month"]
     dom_prompts = [(e["label"], e["prompt"], e["day"]) for e in dom_raw]
-    days_of_month_labels = data["days_of_month_labels"]
+    days_of_month_labels = p6["days_of_month_labels"]
 
-    days_raw = data["days_of_week"]
+    days_raw = p6["days_of_week"]
     dow_prompts = [(e["label"], e["prompt"], e["day"]) for e in days_raw]
-    days_of_week_labels = data["days_of_week_labels"]
+    days_of_week_labels = p6["days_of_week_labels"]
 
-    months_raw = data["months_of_year"]
+    months_raw = p6["months_of_year"]
     moy_prompts = [(e["label"], e["prompt"], e["month"]) for e in months_raw]
-    months_of_year_labels = data["months_of_year_labels"]
+    months_of_year_labels = p6["months_of_year_labels"]
 
     print(f"  Loaded {len(dom_prompts)} days-of-month prompts")
 
@@ -236,6 +237,67 @@ def run_phase6() -> None:
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
     print("  Saved -> phase6_days_of_month_geometry.png")
+
+    # -- 5b. Per-frame breakdown plot (4 rows x 5 cols) ------------------------
+    print("\n[Saving per-frame geometry plot]")
+    fig, axes = plt.subplots(4, 5, figsize=(25, 16))
+    fig.suptitle("Days of the Month — PC2 vs PC3 by Frame", fontsize=14)
+
+    row_titles = ["All frames", "Frame 1 only", "Frame 2 only", "Frame 3 only"]
+
+    for col, layer in enumerate(TARGET_LAYERS):
+        coords = results[layer]["coords"]
+        var    = results[layer]["var"]
+
+        # Fit circle on all points for this layer
+        try:
+            cx, cy, radius, _ = fit_circle_algebraic(coords[:, 1:3])
+            has_circle = True
+        except Exception:
+            has_circle = False
+
+        def _draw_circle(ax):
+            if has_circle:
+                theta = np.linspace(0, 2 * np.pi, 300)
+                ax.plot(cx + radius * np.cos(theta), cy + radius * np.sin(theta),
+                        "--", color="black", linewidth=1.2, alpha=0.4, zorder=2)
+                ax.plot(cx, cy, "k+", markersize=8, markeredgewidth=1.2, zorder=3)
+
+        # Row 0 — all frames
+        ax = axes[0, col]
+        sc = ax.scatter(coords[:, 1], coords[:, 2],
+                        c=days_of_month_labels, cmap="plasma",
+                        vmin=0.5, vmax=31.5, s=40, zorder=3)
+        plt.colorbar(sc, ax=ax, label="Day")
+        _draw_circle(ax)
+        ax.set_xlabel(f"PC2 ({var[1]:.1%})")
+        ax.set_ylabel(f"PC3 ({var[2]:.1%})")
+        ax.set_title(f"Layer {layer} — All frames")
+
+        # Rows 1-3 — one frame each
+        for row, frame_num in enumerate([1, 2, 3], start=1):
+            ax = axes[row, col]
+            idxs = [i for i, f in enumerate(frame_labels_list) if f == frame_num]
+            frame_coords  = coords[idxs]
+            frame_labels  = [days_of_month_labels[i] for i in idxs]
+            sc = ax.scatter(frame_coords[:, 1], frame_coords[:, 2],
+                            c=frame_labels, cmap="plasma",
+                            vmin=0.5, vmax=31.5, s=40, zorder=3)
+            plt.colorbar(sc, ax=ax, label="Day")
+            _draw_circle(ax)
+            ax.set_xlabel(f"PC2 ({var[1]:.1%})")
+            ax.set_ylabel(f"PC3 ({var[2]:.1%})")
+            ax.set_title(f"Layer {layer} — Frame {frame_num}")
+
+        if col == 0:
+            for row, title in enumerate(row_titles):
+                axes[row, 0].set_ylabel(f"{title}\nPC3 ({var[2]:.1%})")
+
+    plt.tight_layout()
+    out_path = phase_dir / "phase6_days_of_month_by_frame.png"
+    fig.savefig(out_path, dpi=150)
+    plt.close(fig)
+    print("  Saved -> phase6_days_of_month_by_frame.png")
 
     # -- 6. Best-layer focused plot --------------------------------------------
     print("\n[Saving best-layer focused plot]")
