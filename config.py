@@ -13,8 +13,8 @@ SAE_RELEASE = "gpt2-small-res-jb"
 SAE_ID      = f"blocks.{LAYER}.hook_resid_pre"
 
 CORR_THRESHOLD = 0.5
-MIN_CLUSTER_SZ = 2
-N_DISC         = 60
+MIN_CLUSTER_SZ = 3
+N_DISC         = 100
 
 PHASE2_LAYERS = [4, 6, 8, 10]
 PHASE3_LAYERS = list(range(12))

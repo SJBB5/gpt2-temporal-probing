@@ -11,6 +11,7 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{float}
 
 
 % -------------------------------------------------------
@@ -136,7 +137,33 @@ to have integrated contextual information into a coherent representation.
 % Explain the contamination discovery and why you switched.
 % Briefly describe the days/months prompts for phase 5.
 
-TODO (May still try different prompts like prof mentioned... come back to)
+All prompts are short declarative sentences placing the concept of interest 
+in natural linguistic context. The model processes each prompt without 
+instruction or chat formatting, with activations extracted at the final 
+token position.
+\\
+\\
+\noindent
+\textbf{Historical year corpus.} The primary dataset consists of 100 prompts spanning approximately 2800 years of history, with 20 prompts per epoch 
+category: \texttt{ancient\_bc} ($-776$ to $-31$), \texttt{ancient\_ad} ($79$--$529$), \texttt{medieval}, \texttt{early\_modern}, and \texttt{modern} 
+(through 1991). Each prompt is a single declarative sentence describing a well-known historical event at a specific year, for example \textit{``The 
+first Olympic Games were held in 776 BC''} or \textit{``The Norman Conquest of England occurred in 1066''}. The balanced design ensures equal 
+representation across epochs for ANOVA-based feature selection. BC and AD year ranges are non-overlapping by design --- BC items span $-776$ to $-31$ 
+and AD items span $79$ to $529$ --- avoiding any ambiguity in numeric year assignment.
+\\
+\\
+\textbf{Surface token comparison.} The superposition depth scan is run twice on the same 50 events to isolate the effect of BC/AD surface tokens. In the 
+first scan, the 40 ancient prompts carry explicit era markers (e.g. \textit{``...in 776 BC''}, \textit{``...in 79 AD''}). In the second scan, 
+era markers are stripped from all ancient prompts, leaving bare year numbers (e.g. \textit{``...in 776''}). Medieval through modern prompts are 
+word-for-word identical across both scans. This design ensures the only variable between the two conditions is the presence or absence of the tokens 
+``BC'' and ``AD'', with corpus size, event selection, year values, and category labels held constant.
+\\
+\\
+\textbf{Cyclic concept datasets.} To examine whether cyclic temporal concepts are encoded with circular geometry, we construct three datasets. Days of the 
+week ($N = 21$) and months of the year ($N = 36$) each represent their respective concepts across three prompt frames per item: a simple statement 
+(\textit{``Today is Monday''}), a wraparound sequential statement (\textit{``The day after Sunday is Monday''}), and a positional statement 
+(\textit{``Monday is the first day of the working week''}). Days of the month ($N = 93$) extends this structure to all 31 days. The multi-frame design 
+ensures geometric structure in the representations reflects the underlying concept rather than a single surface phrasing.
 
 
 \subsection{Temporal Axis Measurement: Linear Concepts}
@@ -193,7 +220,7 @@ structure, which then forms the canidate set for the ablation scan.
 \\
 We First filter to \textit{active} features, those that fire on at least two prompts in the input set. For each active feature
 $f_i$ we compute a one-way ANOVA F-score across epoch category groups, where each group contains the feature activations for all prompts belonging to that epoch.
-We retain the top $N_{\text{disc}} = 60$ features by F-score as the discriminative candidate set. However, since two features can both score 
+We retain the top $N_{\text{disc}} = 100$ features by F-score as the discriminative candidate set. However, since two features can both score 
 highly on ANOVA while activating in entirely different patterns across epochs, we apply a second stage to enforce coherence. For each 
 candiate feature we compute its epoch-mean activation profile $\mathbf{p}_i \in \mathbb{R}^K$, z scored across the K epoch categories. 
 Features whose profiles correlate above $|\rho| > 0.5$ are connected in a graph, and connected components of size $\geq 2$ are taken as 
@@ -201,7 +228,7 @@ clusters. If no clusters are found at this threshold we fall back to $|\rho| > 0
 feature by ANOVA F-score as the candidate set for ablation, with each feature in the cluster ablated individually and independently. 
 \\
 \\
-For the cyclic concepts the graph clustering step is omitted and the top 60 features by ANOVA F-score are used directly as the candidate set,
+For the cyclic concepts the graph clustering step is omitted and the top 100 features by ANOVA F-score are used directly as the candidate set,
 with integer cycle labels replacing epoch categories as the grouping variable. 
 
 
@@ -225,6 +252,10 @@ whose removal improves temporal linearity. PCA is re-fit from scratch on each ab
 fixed baseline direction, meaning $\Delta_i$ measures whether a temporal axis still 
 exists after ablation, not merely whether the ablated reconstruction aligns with the original one. 
 The test is therefore conservative --- a feature only registers as load-bearing if the remaining features cannot reorganise to compensate.
+\\
+\\
+TODO: Talk about the classes created for the plots \newline
+Discuss the creation and use of the numerical data without BC/AD
 
 
 % -------------------------------------------------------
@@ -232,44 +263,139 @@ The test is therefore conservative --- a feature only registers as load-bearing 
 % -------------------------------------------------------
 % This is the core of the paper. ~3-4 pages including figures.
 
-\subsection{BC/AD Token Contamination}
-% Your most methodologically important finding.
-% Show phase3 vs phase4 comparison.
-% Explain the British Columbia detector (Neuronpedia screenshot).
-% Original prompts: |r|~0.95 at layer 0. Clean prompts: |r|~0.40.
-
-TODO
+\subsection{Temporal Structure in the Residual Stream}
 
 
+PCA of the raw residual stream at layer 4 reveals that GPT-2 Small organises historical prompts into three distinct clusters in the PC1/PC2 plane and
+four clusters in three dimensions (Figure~\ref{fig:phase1_all_pca}): BC-eraprompts, ancient AD-era prompts, medieval and early modern prompts, and
+modern prompts, accounting for 73.4\% of variance across the top threeprincipal components. PC1 (41.9\%) separates ancient from modern prompts
+while PC2 (20.9\%) separates BC from AD within the ancient period.
 
-\subsection{Temporal Axis Construction}
-% Clean prompts show |r| building from 0.40 to 0.93 across layers 0-4.
-% This was hidden in the contaminated dataset.
-% Contrast with original prompts where |r| is flat from layer 0.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase1_all_pca.png}
+    \caption{PCA of raw residual stream activations at layer 4. Left: PC1
+    vs PC2 coloured by epoch category. Right: 3-D scatter}
+    \label{fig:phase1_all_pca}
+\end{figure}
 
-TODO
+\noindent
+The PC2/PC3 plane reveals a somewhat circular organisation of epoch categories (Figure~\ref{fig:phase2_pc2pc3}). An algebraic circle fit (RMSE $= 5.616$) 
+shows the four epoch groups occupying distinct arcs: BC-era prompts cluster on the left arc, ancient AD-era prompts on the right, modern prompts at the 
+top, and medieval through early modern prompts at the bottom. This suggests the PC2/PC3 plane encodes additional temporal structure 
+beyond the PC1 axis, with epoch categories occupying geometrically distinct regions, though the high circle fit error (RMSE $= 5.616$) 
+indicates the circular structure is approximate rather than precise.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{phase2_pc2pc3_layer4.png}
+    \caption{PC2 vs PC3 at layer 4 with algebraic circle fit 
+    (RMSE $= 5.616$).}
+    \label{fig:phase2_pc2pc3}
+\end{figure}
+\noindent
+Angular position on the fitted circle correlates moderately with numeric year ($r = +0.511$, Figure~\ref{fig:phase2_angular}), with epoch categories 
+occupying discrete angular bands rather than a smooth progression, confirming the circular structure reflects epoch-level separation rather 
+than a continuous encoding of chronological position.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{phase2_angular_layer4.png}
+    \caption{Angular position on fitted circle vs numeric year at layer 4 
+    ($r = +0.511$). Points coloured by epoch category.}
+    \label{fig:phase2_angular}
+\end{figure}
+
+\subsection{Superposition of Temporal Representations Across Depth}
+
+The superposition argument rests on reading $|r|_{\text{base}}$ and $\max_i \Delta_i$ together. A high $|r|_{\text{base}}$ with low 
+$\max_i \Delta_i$ is the fingerprint of distributed superposition --- the temporal signal is present and SAE-recoverable, but cannot be attributed 
+to any single feature, as the remaining features compensate collectively for any individual ablation. Conversely, a high $|r|_{\text{base}}$ with 
+high $\max_i \Delta_i$ indicates a concentrated representation where one or a few features are individually load-bearing.
+\\
+\\
+Figure~\ref{fig:phase3_depth} shows the layer-wise depth scan for the original BC/AD corpus. The right panel shows $|r|_{\text{base}}$ remaining 
+stable around $0.85$--$0.92$ across layers 0--9, confirming the temporal signal is consistently present throughout the network. The left panel 
+shows that the $\max_i \Delta_i$ starts high at layers 0--1 ($\approx 0.43$, well above the load-bearing threshold of $0.10$), then 
+declines monotonically through layers 2--9, falling below the load-bearing threshold by layer 7. This divergence between flat $|r|_{\text{base}}$ and 
+declining $\max_i \Delta_i$ is the superposition signature: the temporal signal is maintained at constant strength but becomes progressively 
+impossible to attribute to any individual SAE feature.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase3_superposition_depth.png}
+    \caption{Layer-wise superposition depth scan for the original BC/AD 
+    corpus. Left: maximum single-feature ablation drop per layer with 
+    load-bearing ($\Delta > 0.10$) and moderate ($\Delta > 0.02$) thresholds. 
+    Right: baseline temporal correlation $|r|_{\text{base}}$ per layer.}
+    \label{fig:phase3_depth}
+\end{figure}
+\noindent
+The full distribution of ablation drops at each layer is shown in 
+Figure~\ref{fig:phase3_violin}. At every layer the vast majority of features 
+have negligible drops --- the violin bodies are compressed near zero 
+throughout. The upper tails at layers 0--6 represent single outlier 
+load-bearing features, confirming the pattern of one dominant feature with 
+all others negligible rather than a uniform distribution of contributions. 
+From layer 7 onward the tails shrink below the load-bearing threshold, 
+marking the transition to fully distributed superposition.
+\\
+\\
+Two anomalies are worth noting. At layer 10 $\max_i \Delta_i$ spikes back 
+up to $\approx 0.23$ after falling near zero at layers 7--9, suggesting a 
+single feature temporarily concentrates the temporal signal during output 
+preparation. At layer 11 $|r|_{\text{base}}$ drops sharply to $\approx 0.58$ 
+and the violin shows a wide body of large negative drops --- features whose 
+removal improves temporal linearity. Both anomalies are consistent with the 
+model reorganising its residual stream for next-token prediction at the 
+final layers, partially overwriting the stable temporal representation 
+maintained through layers 0--9.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase3_drop_distributions.png}
+    \caption{Distribution of single-feature ablation drops by layer for 
+    the original BC/AD corpus. Violin bodies compressed near zero at all 
+    layers confirm the superposition signature --- one outlier load-bearing 
+    feature at early layers with all others negligible, transitioning to 
+    fully distributed encoding at layers 7--9.}
+    \label{fig:phase3_violin}
+\end{figure}
 
 
 
-\subsection{Superposition Transition}
-% Peak concentration at layer 3 (max drop = 0.285, feature 19325).
-% Monotonic decline to near zero by layer 9.
-% Baseline |r| stays flat throughout.
-% Neuronpedia: feature 19325 is a 19th century year detector.
-% Interpretation: construction then progressive superposition.
 
-TODO
+\subsection{Surface Token Contamination}
 
+Repeating the depth scan on the clean corpus reveals that BC/AD tokens substantially inflate early-layer signals in the original corpus. 
+Figure~\ref{fig:phase4_linearity} shows that without BC/AD tokens, PC1 correlation at layer 4 drops from $r = -0.920$ to $r = 0.723$, with PC2 
+now carrying more temporal information ($r = 0.525$) than before, indicating the temporal signal is more distributed across principal 
+components when surface token identity is unavailable.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase4_clean_year_linearity.png}
+    \caption{Linear decodability of year value at layer 4 for the clean 
+    corpus. PC1 $r = 0.723$, PC2 $r = 0.525$, PC3 $r = -0.131$.}
+    \label{fig:phase4_linearity}
+\end{figure}
+\noindent
+The most striking result is the collapse of $|r|_{\text{base}}$ to near zero at layer 1 (Figure~\ref{fig:phase4_depth}, right panel), confirming 
+that the original corpus's strong early-layer signal was driven by surface token detectors rather than semantic content. Genuine temporal encoding 
+builds monotonically from layer 2, reaching $\approx 0.90$ by layers 9--11 and remaining stable through the final layer --- unlike the original 
+corpus which degraded at layers 10--11. The concentration profile (left panel) peaks at layers 4--5 rather than layer 0, showing that 
+genuinely load-bearing temporal features emerge at mid-layers. From layer 6 onward both corpora converge to the same fully distributed superposition 
+regime.
 
-\subsection{Load-Bearing Feature Identification}
-% Feature 19325 at layer 3 — Neuronpedia lookup.
-% Fires on two-digit suffixes of 1800s year expressions.
-% Auto-label: "years in the 1800s" / "historical years".
-% Contrast with feature 22992 at layer 1 — British Columbia.
-% This is your mechanistic finding.
-
-TODO
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase4_clean_superposition_depth.png}
+    \caption{Layer-wise depth scan for the clean corpus. Left: maximum 
+    single-feature ablation drop. Right: $|r|_{\text{base}}$ per layer. 
+    $|r|_{\text{base}}$ collapses at layer 1 before building monotonically 
+    to $\approx 0.90$ by layers 9--11.}
+    \label{fig:phase4_depth}
+\end{figure}
 
 \subsection{Circular Concepts: Days of Week and Months of Year}
 % Phase 5 results.

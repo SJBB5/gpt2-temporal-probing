@@ -10,7 +10,10 @@ from sae_lens import SAE
 from transformer_lens import HookedTransformer
 
 from config import DEVICE, OUTPUT_DIR, SAE_RELEASE, CORR_THRESHOLD, PHASE3_LAYERS
-from src.data_loading import YEAR_ITEMS, ALL_ITEMS, ALL_CATS
+from src.data_loading import (
+    PHASE3_YEAR_ITEMS      as YEAR_ITEMS,
+    PHASE3_YEAR_CATEGORIES as ALL_CATS,
+)
 from src.model import load_model
 from src.clustering import find_clusters
 
@@ -37,7 +40,7 @@ def _ablation_scan_at_layer(
     )
     sae.eval()
 
-    # Extract year activations at this layer
+    # Extract activations and encode through SAE
     rows = []
     for _, prompt, _ in tqdm(YEAR_ITEMS, desc=f"  L{layer} acts", leave=False):
         tokens = model.to_tokens(prompt, prepend_bos=True)
@@ -46,23 +49,13 @@ def _ablation_scan_at_layer(
         rows.append(cache[hook][0, -1, :].cpu())
     acts = torch.stack(rows)                    # (N_years, 768)
 
-    # SAE feature activations for all items (for clustering)
-    all_rows = []
-    for _, prompt, _ in tqdm(ALL_ITEMS, desc=f"  L{layer} all acts", leave=False):
-        tokens = model.to_tokens(prompt, prepend_bos=True)
-        with torch.no_grad():
-            _, cache = model.run_with_cache(tokens, names_filter=hook, device=DEVICE)
-        all_rows.append(cache[hook][0, -1, :].cpu())
-    all_acts_l = torch.stack(all_rows)
-
     with torch.no_grad():
-        feat_acts_all  = sae.encode(all_acts_l.to(DEVICE)).cpu()
         feat_acts_year = sae.encode(acts.to(DEVICE)).cpu()
 
-    # Find clusters using epoch categories
-    clusters, _ = find_clusters(feat_acts_all, ALL_CATS, corr_threshold=CORR_THRESHOLD)
+    # Find clusters — clustering and ablation use the same pool
+    clusters, _ = find_clusters(feat_acts_year, ALL_CATS, corr_threshold=CORR_THRESHOLD)
     if not clusters:
-        clusters, _ = find_clusters(feat_acts_all, ALL_CATS, corr_threshold=0.3)
+        clusters, _ = find_clusters(feat_acts_year, ALL_CATS, corr_threshold=0.3)
     if not clusters:
         print(f"    No clusters found at layer {layer} — skipping.")
         return dict(layer=layer, baseline_r=float("nan"), max_drop=float("nan"),

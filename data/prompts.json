@@ -1,2678 +1,3407 @@
 {
-  "bc_ad_pairs": [
-    {
-      "year": 1,
-      "bc_prompt": "The last year before the common era was 1 BC",
-      "ad_prompt": "The first year of the common era was 1 AD"
-    },
-    {
-      "year": 44,
-      "bc_prompt": "Julius Caesar was assassinated in 44 BC",
-      "ad_prompt": "Emperor Claudius ordered the invasion of Britain in 44 AD"
-    },
-    {
-      "year": 50,
-      "bc_prompt": "Julius Caesar conducted his Gallic campaigns around 50 BC",
-      "ad_prompt": "Emperor Claudius expanded Roman rule into Britain around 50 AD"
-    },
-    {
-      "year": 100,
-      "bc_prompt": "The Roman Republic was at its height around 100 BC",
-      "ad_prompt": "Emperor Trajan extended the Roman Empire to its peak around 100 AD"
-    },
-    {
-      "year": 150,
-      "bc_prompt": "Rome completed its conquest of Macedonia around 150 BC",
-      "ad_prompt": "Emperor Marcus Aurelius defended the Roman Empire around 150 AD"
-    },
-    {
-      "year": 200,
-      "bc_prompt": "Hannibal Barca crossed the Alps to invade Italy around 200 BC",
-      "ad_prompt": "Emperor Septimius Severus ruled Rome around 200 AD"
-    },
-    {
-      "year": 250,
-      "bc_prompt": "Archimedes made his greatest mathematical discoveries around 250 BC",
-      "ad_prompt": "Gothic tribes began invading the Roman Empire around 250 AD"
-    },
-    {
-      "year": 300,
-      "bc_prompt": "Euclid wrote his Elements of mathematics around 300 BC",
-      "ad_prompt": "Emperor Diocletian divided the Roman Empire for administration in 300 AD"
-    },
-    {
-      "year": 323,
-      "bc_prompt": "Alexander the Great died in Babylon in 323 BC",
-      "ad_prompt": "Constantine defeated Licinius to become sole Roman emperor in 323 AD"
-    },
-    {
-      "year": 400,
-      "bc_prompt": "Plato founded his Academy in Athens around 400 BC",
-      "ad_prompt": "The Western Roman Empire began to fragment around 400 AD"
-    },
-    {
-      "year": 450,
-      "bc_prompt": "Pericles led Athens during its golden age around 450 BC",
-      "ad_prompt": "Attila the Hun invaded and ravaged Western Europe in 450 AD"
-    },
-    {
-      "year": 500,
-      "bc_prompt": "Classical Athens entered its golden age around 500 BC",
-      "ad_prompt": "The last vestiges of the Western Roman Empire had dissolved by 500 AD"
-    },
-    {
-      "year": 600,
-      "bc_prompt": "Solon enacted democratic reforms in Athens around 600 BC",
-      "ad_prompt": "Prophet Muhammad began receiving revelations around 600 AD"
-    },
-    {
-      "year": 700,
-      "bc_prompt": "The Assyrian Empire under Sennacherib was at its height in 700 BC",
-      "ad_prompt": "The Islamic caliphate was expanding across North Africa in 700 AD"
-    },
-    {
-      "year": 776,
-      "bc_prompt": "The first Olympic Games were held in 776 BC",
-      "ad_prompt": "Charlemagne was consolidating his Frankish kingdom in 776 AD"
-    }
-  ],
-  "extra_year_items": [
-    {
-      "label": "1066",
-      "prompt": "The Norman Conquest of England occurred in 1066",
-      "year": 1066
-    },
-    {
-      "label": "1095",
-      "prompt": "The First Crusade was called in 1095",
-      "year": 1095
-    },
-    {
-      "label": "1215",
-      "prompt": "The Magna Carta was signed in 1215",
-      "year": 1215
-    },
-    {
-      "label": "1337",
-      "prompt": "The Hundred Years War began in 1337",
-      "year": 1337
-    },
-    {
-      "label": "1348",
-      "prompt": "The Black Death spread across Europe in 1348",
-      "year": 1348
-    },
-    {
-      "label": "1453",
-      "prompt": "Constantinople fell to the Ottomans in 1453",
-      "year": 1453
-    },
-    {
-      "label": "1492",
-      "prompt": "Columbus reached the Americas in 1492",
-      "year": 1492
-    },
-    {
-      "label": "1517",
-      "prompt": "Martin Luther published his theses in 1517",
-      "year": 1517
-    },
-    {
-      "label": "1588",
-      "prompt": "The Spanish Armada was defeated in 1588",
-      "year": 1588
-    },
-    {
-      "label": "1648",
-      "prompt": "The Peace of Westphalia was signed in 1648",
-      "year": 1648
-    },
-    {
-      "label": "1687",
-      "prompt": "Newton published Principia Mathematica in 1687",
-      "year": 1687
-    },
-    {
-      "label": "1776",
-      "prompt": "The United States declared independence in 1776",
-      "year": 1776
-    },
-    {
-      "label": "1789",
-      "prompt": "The French Revolution began in 1789",
-      "year": 1789
-    },
-    {
-      "label": "1815",
-      "prompt": "Napoleon was defeated at Waterloo in 1815",
-      "year": 1815
-    },
-    {
-      "label": "1848",
-      "prompt": "The year of revolutions across Europe was 1848",
-      "year": 1848
-    },
-    {
-      "label": "1865",
-      "prompt": "The American Civil War ended in 1865",
-      "year": 1865
-    },
-    {
-      "label": "1903",
-      "prompt": "The Wright Brothers first flew in 1903",
-      "year": 1903
-    },
-    {
-      "label": "1914",
-      "prompt": "World War I began in 1914",
-      "year": 1914
-    },
-    {
-      "label": "1918",
-      "prompt": "World War I ended in 1918",
-      "year": 1918
-    },
-    {
-      "label": "1929",
-      "prompt": "The Great Depression began in 1929",
-      "year": 1929
-    },
-    {
-      "label": "1939",
-      "prompt": "World War II began in 1939",
-      "year": 1939
-    },
-    {
-      "label": "1945",
-      "prompt": "World War II ended in 1945",
-      "year": 1945
-    },
-    {
-      "label": "1969",
-      "prompt": "The Moon landing occurred in 1969",
-      "year": 1969
-    },
-    {
-      "label": "1991",
-      "prompt": "The Soviet Union dissolved in 1991",
-      "year": 1991
-    }
-  ],
-  "battle_europe": [
-    {
-      "label": "Hastings",
-      "prompt": "The pivotal Norman battle was the Battle of Hastings",
-      "year": 1066
-    },
-    {
-      "label": "Agincourt",
-      "prompt": "Henry V's famous victory was the Battle of Agincourt",
-      "year": 1415
-    },
-    {
-      "label": "Trafalgar",
-      "prompt": "Nelson's naval victory was the Battle of Trafalgar",
-      "year": 1805
-    },
-    {
-      "label": "Waterloo",
-      "prompt": "Napoleon's final defeat was at the Battle of Waterloo",
-      "year": 1815
-    },
-    {
-      "label": "Somme",
-      "prompt": "One of WWI's bloodiest battles was the Battle of the Somme",
-      "year": 1916
-    }
-  ],
-  "battle_america": [
-    {
-      "label": "BunkerHill",
-      "prompt": "The early American Revolution battle was Bunker Hill",
-      "year": 1775
-    },
-    {
-      "label": "Yorktown",
-      "prompt": "The battle that ended the American Revolution was Yorktown",
-      "year": 1781
-    },
-    {
-      "label": "Antietam",
-      "prompt": "The bloodiest single day of the Civil War was Antietam",
-      "year": 1862
-    },
-    {
-      "label": "Gettysburg",
-      "prompt": "The Civil War turning point was the Battle of Gettysburg",
-      "year": 1863
-    },
-    {
-      "label": "Midway",
-      "prompt": "The Pacific turning point was the Battle of Midway",
-      "year": 1942
-    }
-  ],
-  "battle_east": [
-    {
-      "label": "RedCliffs",
-      "prompt": "Cao Cao's naval defeat in ancient China was Red Cliffs",
-      "year": 208
-    },
-    {
-      "label": "Sekigahara",
-      "prompt": "The battle that unified Japan was Sekigahara",
-      "year": 1600
-    },
-    {
-      "label": "Borodino",
-      "prompt": "Napoleon's bloody battle in Russia was Borodino",
-      "year": 1812
-    },
-    {
-      "label": "Tsushima",
-      "prompt": "Japan's decisive naval victory over Russia was Tsushima",
-      "year": 1905
-    },
-    {
-      "label": "Stalingrad",
-      "prompt": "The decisive Eastern Front clash was Stalingrad",
-      "year": 1943
-    }
-  ],
-  "clean_year_items": [
-    {
-      "label": "-776",
-      "prompt": "The first Olympic Games were held in -776",
-      "year": -776
-    },
-    {
-      "label": "-753",
-      "prompt": "The traditional founding of Rome occurred in -753",
-      "year": -753
-    },
-    {
-      "label": "-700",
-      "prompt": "The Assyrian Empire under Sennacherib was at its height in -700",
-      "year": -700
-    },
-    {
-      "label": "-600",
-      "prompt": "Solon enacted democratic reforms in Athens around -600",
-      "year": -600
-    },
-    {
-      "label": "-550",
-      "prompt": "Cyrus the Great founded the Achaemenid Persian Empire in -550",
-      "year": -550
-    },
-    {
-      "label": "-509",
-      "prompt": "The Roman Republic was founded in -509",
-      "year": -509
-    },
-    {
-      "label": "-500",
-      "prompt": "Classical Athens entered its golden age around -500",
-      "year": -500
-    },
-    {
-      "label": "-490",
-      "prompt": "The Battle of Marathon was fought in -490",
-      "year": -490
-    },
-    {
-      "label": "-450",
-      "prompt": "Pericles led Athens during its golden age around -450",
-      "year": -450
-    },
-    {
-      "label": "-400",
-      "prompt": "Plato founded his Academy in Athens around -400",
-      "year": -400
-    },
-    {
-      "label": "-336",
-      "prompt": "Alexander the Great became king of Macedon in -336",
-      "year": -336
-    },
-    {
-      "label": "-323",
-      "prompt": "Alexander the Great died in Babylon in -323",
-      "year": -323
-    },
-    {
-      "label": "-300",
-      "prompt": "Euclid wrote his Elements of mathematics around -300",
-      "year": -300
-    },
-    {
-      "label": "-264",
-      "prompt": "The First Punic War between Rome and Carthage began in -264",
-      "year": -264
-    },
-    {
-      "label": "-218",
-      "prompt": "Hannibal Barca crossed the Alps to invade Italy in -218",
-      "year": -218
-    },
-    {
-      "label": "-100",
-      "prompt": "Julius Caesar was born around -100",
-      "year": -100
-    },
-    {
-      "label": "-44",
-      "prompt": "Julius Caesar was assassinated in -44",
-      "year": -44
-    },
-    {
-      "label": "30",
-      "prompt": "Jesus of Nazareth was crucified around 30",
-      "year": 30
-    },
-    {
-      "label": "70",
-      "prompt": "Roman forces destroyed the Temple in Jerusalem in 70",
-      "year": 70
-    },
-    {
-      "label": "79",
-      "prompt": "Mount Vesuvius erupted and buried Pompeii in 79",
-      "year": 79
-    },
-    {
-      "label": "100",
-      "prompt": "Emperor Trajan extended the Roman Empire to its peak around 100",
-      "year": 100
-    },
-    {
-      "label": "200",
-      "prompt": "Emperor Septimius Severus ruled Rome around 200",
-      "year": 200
-    },
-    {
-      "label": "313",
-      "prompt": "Constantine issued the Edict of Milan granting religious tolerance in 313",
-      "year": 313
-    },
-    {
-      "label": "380",
-      "prompt": "Christianity became the official religion of the Roman Empire in 380",
-      "year": 380
-    },
-    {
-      "label": "476",
-      "prompt": "The Western Roman Empire fell in 476",
-      "year": 476
-    },
-    {
-      "label": "570",
-      "prompt": "Prophet Muhammad was born around 570",
-      "year": 570
-    },
-    {
-      "label": "622",
-      "prompt": "The Islamic calendar began in 622",
-      "year": 622
-    },
-    {
-      "label": "732",
-      "prompt": "Charles Martel halted Muslim expansion at Tours in 732",
-      "year": 732
-    },
-    {
-      "label": "800",
-      "prompt": "Charlemagne was crowned Holy Roman Emperor in 800",
-      "year": 800
-    },
-    {
-      "label": "1000",
-      "prompt": "Leif Erikson reached North America around 1000",
-      "year": 1000
-    },
-    {
-      "label": "1066",
-      "prompt": "The Norman Conquest of England occurred in 1066",
-      "year": 1066
-    },
-    {
-      "label": "1095",
-      "prompt": "The First Crusade was called in 1095",
-      "year": 1095
-    },
-    {
-      "label": "1215",
-      "prompt": "The Magna Carta was signed in 1215",
-      "year": 1215
-    },
-    {
-      "label": "1271",
-      "prompt": "Marco Polo began his journey to China in 1271",
-      "year": 1271
-    },
-    {
-      "label": "1337",
-      "prompt": "The Hundred Years War began in 1337",
-      "year": 1337
-    },
-    {
-      "label": "1348",
-      "prompt": "The Black Death spread across Europe in 1348",
-      "year": 1348
-    },
-    {
-      "label": "1415",
-      "prompt": "Henry V won the Battle of Agincourt in 1415",
-      "year": 1415
-    },
-    {
-      "label": "1453",
-      "prompt": "Constantinople fell to the Ottomans in 1453",
-      "year": 1453
-    },
-    {
-      "label": "1492",
-      "prompt": "Columbus reached the Americas in 1492",
-      "year": 1492
-    },
-    {
-      "label": "1517",
-      "prompt": "Martin Luther published his theses in 1517",
-      "year": 1517
-    },
-    {
-      "label": "1543",
-      "prompt": "Copernicus published his heliocentric theory in 1543",
-      "year": 1543
-    },
-    {
-      "label": "1588",
-      "prompt": "The Spanish Armada was defeated in 1588",
-      "year": 1588
-    },
-    {
-      "label": "1600",
-      "prompt": "The Battle of Sekigahara unified Japan in 1600",
-      "year": 1600
-    },
-    {
-      "label": "1607",
-      "prompt": "The first permanent English settlement at Jamestown was founded in 1607",
-      "year": 1607
-    },
-    {
-      "label": "1648",
-      "prompt": "The Peace of Westphalia was signed in 1648",
-      "year": 1648
-    },
-    {
-      "label": "1687",
-      "prompt": "Newton published Principia Mathematica in 1687",
-      "year": 1687
-    },
-    {
-      "label": "1776",
-      "prompt": "The United States declared independence in 1776",
-      "year": 1776
-    },
-    {
-      "label": "1789",
-      "prompt": "The French Revolution began in 1789",
-      "year": 1789
-    },
-    {
-      "label": "1815",
-      "prompt": "Napoleon was defeated at Waterloo in 1815",
-      "year": 1815
-    },
-    {
-      "label": "1848",
-      "prompt": "The year of revolutions across Europe was 1848",
-      "year": 1848
-    },
-    {
-      "label": "1861",
-      "prompt": "The American Civil War began in 1861",
-      "year": 1861
-    },
-    {
-      "label": "1865",
-      "prompt": "The American Civil War ended in 1865",
-      "year": 1865
-    },
-    {
-      "label": "1869",
-      "prompt": "The Suez Canal was opened in 1869",
-      "year": 1869
-    },
-    {
-      "label": "1879",
-      "prompt": "Thomas Edison invented the practical electric light bulb in 1879",
-      "year": 1879
-    },
-    {
-      "label": "1903",
-      "prompt": "The Wright Brothers first flew in 1903",
-      "year": 1903
-    },
-    {
-      "label": "1914",
-      "prompt": "World War I began in 1914",
-      "year": 1914
-    },
-    {
-      "label": "1918",
-      "prompt": "World War I ended in 1918",
-      "year": 1918
-    },
-    {
-      "label": "1929",
-      "prompt": "The Great Depression began in 1929",
-      "year": 1929
-    },
-    {
-      "label": "1939",
-      "prompt": "World War II began in 1939",
-      "year": 1939
-    },
-    {
-      "label": "1945",
-      "prompt": "World War II ended in 1945",
-      "year": 1945
-    },
-    {
-      "label": "1969",
-      "prompt": "The Moon landing occurred in 1969",
-      "year": 1969
-    },
-    {
-      "label": "1989",
-      "prompt": "The Berlin Wall fell in 1989",
-      "year": 1989
-    },
-    {
-      "label": "1991",
-      "prompt": "The Soviet Union dissolved in 1991",
-      "year": 1991
-    }
-  ],
-  "clean_year_categories": [
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "ancient_pre",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "early_ad",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "medieval",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "early_modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern",
-    "modern"
-  ],
-  "boundary_probes": [
-    {
-      "label": "200BC",
-      "prompt": "The year 200 BC was during the Roman Republic era",
-      "year": -200
-    },
-    {
-      "label": "150BC",
-      "prompt": "The year 150 BC was during the Hellenistic period",
-      "year": -150
-    },
-    {
-      "label": "100BC",
-      "prompt": "The year 100 BC was during the late Roman Republic",
-      "year": -100
-    },
-    {
-      "label": "75BC",
-      "prompt": "The year 75 BC was during the late Roman Republic",
-      "year": -75
-    },
-    {
-      "label": "50BC",
-      "prompt": "The year 50 BC was during Julius Caesar's rise to power",
-      "year": -50
-    },
-    {
-      "label": "25BC",
-      "prompt": "The year 25 BC was during the reign of Augustus Caesar",
-      "year": -25
-    },
-    {
-      "label": "10BC",
-      "prompt": "The year 10 BC was during the early Roman Empire",
-      "year": -10
-    },
-    {
-      "label": "5BC",
-      "prompt": "The year 5 BC was just before the common era began",
-      "year": -5
-    },
-    {
-      "label": "2BC",
-      "prompt": "The year 2 BC was during the reign of Emperor Augustus",
-      "year": -2
-    },
-    {
-      "label": "1BC",
-      "prompt": "The year 1 BC was the last year before the common era",
-      "year": -1
-    },
-    {
-      "label": "1AD",
-      "prompt": "The year 1 AD was the first year of the common era",
-      "year": 1
-    },
-    {
-      "label": "2AD",
-      "prompt": "The year 2 AD was during the reign of Emperor Augustus",
-      "year": 2
-    },
-    {
-      "label": "5AD",
-      "prompt": "The year 5 AD was during the early Roman Empire",
-      "year": 5
-    },
-    {
-      "label": "10AD",
-      "prompt": "The year 10 AD was during the reign of Augustus Caesar",
-      "year": 10
-    },
-    {
-      "label": "25AD",
-      "prompt": "The year 25 AD was during the early reign of Tiberius",
-      "year": 25
-    },
-    {
-      "label": "50AD",
-      "prompt": "The year 50 AD was during the reign of Emperor Claudius",
-      "year": 50
-    },
-    {
-      "label": "75AD",
-      "prompt": "The year 75 AD was during the Flavian dynasty of Rome",
-      "year": 75
-    },
-    {
-      "label": "100AD",
-      "prompt": "The year 100 AD was during the reign of Emperor Trajan",
-      "year": 100
-    },
-    {
-      "label": "150AD",
-      "prompt": "The year 150 AD was during the reign of Marcus Aurelius",
-      "year": 150
-    },
-    {
-      "label": "200AD",
-      "prompt": "The year 200 AD was during the Severan dynasty of Rome",
-      "year": 200
-    }
-  ],
-  "geographic_cities": [
-    {
-      "label": "Paris",
-      "prompt": "Paris is located at 49 degrees north and 2 degrees east",
-      "lat": 48.9,
-      "lon": 2.3
-    },
-    {
-      "label": "London",
-      "prompt": "London is located at 51 degrees north and 0 degrees east",
-      "lat": 51.5,
-      "lon": 0.0
-    },
-    {
-      "label": "Berlin",
-      "prompt": "Berlin is located at 53 degrees north and 13 degrees east",
-      "lat": 52.5,
-      "lon": 13.4
-    },
-    {
-      "label": "Madrid",
-      "prompt": "Madrid is located at 40 degrees north and 4 degrees west",
-      "lat": 40.4,
-      "lon": -3.7
-    },
-    {
-      "label": "Rome",
-      "prompt": "Rome is located at 42 degrees north and 12 degrees east",
-      "lat": 41.9,
-      "lon": 12.5
-    },
-    {
-      "label": "Moscow",
-      "prompt": "Moscow is located at 56 degrees north and 38 degrees east",
-      "lat": 55.8,
-      "lon": 37.6
-    },
-    {
-      "label": "Amsterdam",
-      "prompt": "Amsterdam is located at 52 degrees north and 5 degrees east",
-      "lat": 52.4,
-      "lon": 4.9
-    },
-    {
-      "label": "Vienna",
-      "prompt": "Vienna is located at 48 degrees north and 16 degrees east",
-      "lat": 48.2,
-      "lon": 16.4
-    },
-    {
-      "label": "Athens",
-      "prompt": "Athens is located at 38 degrees north and 24 degrees east",
-      "lat": 37.9,
-      "lon": 23.7
-    },
-    {
-      "label": "Stockholm",
-      "prompt": "Stockholm is located at 59 degrees north and 18 degrees east",
-      "lat": 59.3,
-      "lon": 18.1
-    },
-    {
-      "label": "Warsaw",
-      "prompt": "Warsaw is located at 52 degrees north and 21 degrees east",
-      "lat": 52.2,
-      "lon": 21.0
-    },
-    {
-      "label": "Lisbon",
-      "prompt": "Lisbon is located at 39 degrees north and 9 degrees west",
-      "lat": 38.7,
-      "lon": -9.1
-    },
-    {
-      "label": "Tokyo",
-      "prompt": "Tokyo is located at 36 degrees north and 140 degrees east",
-      "lat": 35.7,
-      "lon": 139.7
-    },
-    {
-      "label": "Beijing",
-      "prompt": "Beijing is located at 40 degrees north and 116 degrees east",
-      "lat": 39.9,
-      "lon": 116.4
-    },
-    {
-      "label": "Shanghai",
-      "prompt": "Shanghai is located at 31 degrees north and 121 degrees east",
-      "lat": 31.2,
-      "lon": 121.5
-    },
-    {
-      "label": "Mumbai",
-      "prompt": "Mumbai is located at 19 degrees north and 73 degrees east",
-      "lat": 19.1,
-      "lon": 72.9
-    },
-    {
-      "label": "Delhi",
-      "prompt": "Delhi is located at 29 degrees north and 77 degrees east",
-      "lat": 28.6,
-      "lon": 77.2
-    },
-    {
-      "label": "Bangkok",
-      "prompt": "Bangkok is located at 14 degrees north and 101 degrees east",
-      "lat": 13.8,
-      "lon": 100.5
-    },
-    {
-      "label": "Singapore",
-      "prompt": "Singapore is located at 1 degree north and 104 degrees east",
-      "lat": 1.4,
-      "lon": 103.8
-    },
-    {
-      "label": "Seoul",
-      "prompt": "Seoul is located at 38 degrees north and 127 degrees east",
-      "lat": 37.6,
-      "lon": 127.0
-    },
-    {
-      "label": "HongKong",
-      "prompt": "Hong Kong is located at 22 degrees north and 114 degrees east",
-      "lat": 22.3,
-      "lon": 114.2
-    },
-    {
-      "label": "KualaLumpur",
-      "prompt": "Kuala Lumpur is located at 3 degrees north and 102 degrees east",
-      "lat": 3.1,
-      "lon": 101.7
-    },
-    {
-      "label": "Jakarta",
-      "prompt": "Jakarta is located at 6 degrees south and 107 degrees east",
-      "lat": -6.2,
-      "lon": 106.8
-    },
-    {
-      "label": "Taipei",
-      "prompt": "Taipei is located at 25 degrees north and 122 degrees east",
-      "lat": 25.0,
-      "lon": 121.5
-    },
-    {
-      "label": "Karachi",
-      "prompt": "Karachi is located at 25 degrees north and 67 degrees east",
-      "lat": 24.9,
-      "lon": 67.0
-    },
-    {
-      "label": "Dhaka",
-      "prompt": "Dhaka is located at 24 degrees north and 90 degrees east",
-      "lat": 23.7,
-      "lon": 90.4
-    },
-    {
-      "label": "Kolkata",
-      "prompt": "Kolkata is located at 23 degrees north and 88 degrees east",
-      "lat": 22.6,
-      "lon": 88.4
-    },
-    {
-      "label": "NewYork",
-      "prompt": "New York is located at 41 degrees north and 74 degrees west",
-      "lat": 40.7,
-      "lon": -74.0
-    },
-    {
-      "label": "LosAngeles",
-      "prompt": "Los Angeles is located at 34 degrees north and 118 degrees west",
-      "lat": 34.1,
-      "lon": -118.2
-    },
-    {
-      "label": "Chicago",
-      "prompt": "Chicago is located at 42 degrees north and 88 degrees west",
-      "lat": 41.9,
-      "lon": -87.6
-    },
-    {
-      "label": "Toronto",
-      "prompt": "Toronto is located at 44 degrees north and 79 degrees west",
-      "lat": 43.7,
-      "lon": -79.4
-    },
-    {
-      "label": "MexicoCity",
-      "prompt": "Mexico City is located at 19 degrees north and 99 degrees west",
-      "lat": 19.4,
-      "lon": -99.1
-    },
-    {
-      "label": "SanFrancisco",
-      "prompt": "San Francisco is located at 38 degrees north and 122 degrees west",
-      "lat": 37.8,
-      "lon": -122.4
-    },
-    {
-      "label": "Houston",
-      "prompt": "Houston is located at 30 degrees north and 95 degrees west",
-      "lat": 29.8,
-      "lon": -95.4
-    },
-    {
-      "label": "Montreal",
-      "prompt": "Montreal is located at 45 degrees north and 74 degrees west",
-      "lat": 45.5,
-      "lon": -73.6
-    },
-    {
-      "label": "Vancouver",
-      "prompt": "Vancouver is located at 49 degrees north and 123 degrees west",
-      "lat": 49.3,
-      "lon": -123.1
-    },
-    {
-      "label": "Miami",
-      "prompt": "Miami is located at 26 degrees north and 80 degrees west",
-      "lat": 25.8,
-      "lon": -80.2
-    },
-    {
-      "label": "SaoPaulo",
-      "prompt": "Sao Paulo is located at 24 degrees south and 47 degrees west",
-      "lat": -23.5,
-      "lon": -46.6
-    },
-    {
-      "label": "BuenosAires",
-      "prompt": "Buenos Aires is located at 34 degrees south and 58 degrees west",
-      "lat": -34.6,
-      "lon": -58.4
-    },
-    {
-      "label": "RioDeJaneiro",
-      "prompt": "Rio de Janeiro is located at 23 degrees south and 43 degrees west",
-      "lat": -22.9,
-      "lon": -43.2
-    },
-    {
-      "label": "Santiago",
-      "prompt": "Santiago is located at 33 degrees south and 71 degrees west",
-      "lat": -33.5,
-      "lon": -70.7
-    },
-    {
-      "label": "Bogota",
-      "prompt": "Bogota is located at 5 degrees north and 74 degrees west",
-      "lat": 4.7,
-      "lon": -74.1
-    },
-    {
-      "label": "Lima",
-      "prompt": "Lima is located at 12 degrees south and 77 degrees west",
-      "lat": -12.1,
-      "lon": -77.0
-    },
-    {
-      "label": "Caracas",
-      "prompt": "Caracas is located at 11 degrees north and 67 degrees west",
-      "lat": 10.5,
-      "lon": -66.9
-    },
-    {
-      "label": "Quito",
-      "prompt": "Quito is located at 0 degrees south and 78 degrees west",
-      "lat": -0.2,
-      "lon": -78.5
-    },
-    {
-      "label": "Cairo",
-      "prompt": "Cairo is located at 30 degrees north and 31 degrees east",
-      "lat": 30.1,
-      "lon": 31.2
-    },
-    {
-      "label": "Lagos",
-      "prompt": "Lagos is located at 6 degrees north and 3 degrees east",
-      "lat": 6.5,
-      "lon": 3.4
-    },
-    {
-      "label": "Nairobi",
-      "prompt": "Nairobi is located at 1 degree south and 37 degrees east",
-      "lat": -1.3,
-      "lon": 36.8
-    },
-    {
-      "label": "Johannesburg",
-      "prompt": "Johannesburg is located at 26 degrees south and 28 degrees east",
-      "lat": -26.2,
-      "lon": 28.0
-    },
-    {
-      "label": "Casablanca",
-      "prompt": "Casablanca is located at 34 degrees north and 8 degrees west",
-      "lat": 33.6,
-      "lon": -7.6
-    },
-    {
-      "label": "Accra",
-      "prompt": "Accra is located at 6 degrees north and 0 degrees west",
-      "lat": 5.6,
-      "lon": -0.2
-    },
-    {
-      "label": "AddisAbaba",
-      "prompt": "Addis Ababa is located at 9 degrees north and 39 degrees east",
-      "lat": 9.0,
-      "lon": 38.7
-    },
-    {
-      "label": "Kinshasa",
-      "prompt": "Kinshasa is located at 4 degrees south and 15 degrees east",
-      "lat": -4.3,
-      "lon": 15.3
-    },
-    {
-      "label": "DarEsSalaam",
-      "prompt": "Dar es Salaam is located at 7 degrees south and 39 degrees east",
-      "lat": -6.8,
-      "lon": 39.3
-    },
-    {
-      "label": "Tunis",
-      "prompt": "Tunis is located at 37 degrees north and 10 degrees east",
-      "lat": 36.8,
-      "lon": 10.2
-    },
-    {
-      "label": "Sydney",
-      "prompt": "Sydney is located at 34 degrees south and 151 degrees east",
-      "lat": -33.9,
-      "lon": 151.2
-    },
-    {
-      "label": "Melbourne",
-      "prompt": "Melbourne is located at 38 degrees south and 145 degrees east",
-      "lat": -37.8,
-      "lon": 144.9
-    },
-    {
-      "label": "Auckland",
-      "prompt": "Auckland is located at 37 degrees south and 175 degrees east",
-      "lat": -36.9,
-      "lon": 174.8
-    },
-    {
-      "label": "Brisbane",
-      "prompt": "Brisbane is located at 27 degrees south and 153 degrees east",
-      "lat": -27.5,
-      "lon": 153.0
-    },
-    {
-      "label": "Perth",
-      "prompt": "Perth is located at 32 degrees south and 116 degrees east",
-      "lat": -31.9,
-      "lon": 115.9
-    },
-    {
-      "label": "Istanbul",
-      "prompt": "Istanbul is located at 41 degrees north and 29 degrees east",
-      "lat": 41.0,
-      "lon": 29.0
-    },
-    {
-      "label": "Dubai",
-      "prompt": "Dubai is located at 25 degrees north and 55 degrees east",
-      "lat": 25.2,
-      "lon": 55.3
-    },
-    {
-      "label": "Riyadh",
-      "prompt": "Riyadh is located at 25 degrees north and 47 degrees east",
-      "lat": 24.7,
-      "lon": 46.7
-    },
-    {
-      "label": "Tehran",
-      "prompt": "Tehran is located at 36 degrees north and 51 degrees east",
-      "lat": 35.7,
-      "lon": 51.4
-    },
-    {
-      "label": "Baghdad",
-      "prompt": "Baghdad is located at 33 degrees north and 44 degrees east",
-      "lat": 33.3,
-      "lon": 44.4
-    }
-  ],
-  "geographic_cities_continents": [
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Europe",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "Asia",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "North America",
-    "South America",
-    "South America",
-    "South America",
-    "South America",
-    "South America",
-    "South America",
-    "South America",
-    "South America",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Africa",
-    "Oceania",
-    "Oceania",
-    "Oceania",
-    "Oceania",
-    "Oceania",
-    "Middle East",
-    "Middle East",
-    "Middle East",
-    "Middle East",
-    "Middle East"
-  ],
-  "numeric_magnitude": [
-    {
-      "label": "0.001",
-      "prompt": "The particle had a mass of 0.001 grams",
-      "value": 0.001
-    },
-    {
-      "label": "0.01",
-      "prompt": "The probability of the rare event was 0.01",
-      "value": 0.01
-    },
-    {
-      "label": "0.05",
-      "prompt": "The concentration of the solution was 0.05 moles per liter",
-      "value": 0.05
-    },
-    {
-      "label": "0.1",
-      "prompt": "The coin was 0.1 centimeters thick",
-      "value": 0.1
-    },
-    {
-      "label": "0.25",
-      "prompt": "The recipe called for 0.25 cups of butter",
-      "value": 0.25
-    },
-    {
-      "label": "0.5",
-      "prompt": "The tablet contained 0.5 milligrams of the compound",
-      "value": 0.5
-    },
-    {
-      "label": "0.75",
-      "prompt": "The pitcher was filled with 0.75 liters of water",
-      "value": 0.75
-    },
-    {
-      "label": "0.9",
-      "prompt": "The filter blocked 0.9 of all incoming light",
-      "value": 0.9
-    },
-    {
-      "label": "1",
-      "prompt": "The room had exactly 1 window",
-      "value": 1
-    },
-    {
-      "label": "2",
-      "prompt": "The chemical reaction took 2 hours to complete",
-      "value": 2
-    },
-    {
-      "label": "3",
-      "prompt": "The package weighed 3 kilograms",
-      "value": 3
-    },
-    {
-      "label": "5",
-      "prompt": "The child was 5 years old",
-      "value": 5
-    },
-    {
-      "label": "7",
-      "prompt": "The journey took 7 days to complete",
-      "value": 7
-    },
-    {
-      "label": "10",
-      "prompt": "The ladder had 10 rungs",
-      "value": 10
-    },
-    {
-      "label": "12",
-      "prompt": "There were 12 months in the year",
-      "value": 12
-    },
-    {
-      "label": "15",
-      "prompt": "The temperature outside was negative 15 degrees",
-      "value": 15
-    },
-    {
-      "label": "20",
-      "prompt": "The class had 20 students enrolled",
-      "value": 20
-    },
-    {
-      "label": "25",
-      "prompt": "The athlete ran 25 kilometers that morning",
-      "value": 25
-    },
-    {
-      "label": "42",
-      "prompt": "The answer to the question was the number 42",
-      "value": 42
-    },
-    {
-      "label": "50",
-      "prompt": "The survey had 50 respondents",
-      "value": 50
-    },
-    {
-      "label": "60",
-      "prompt": "The meeting lasted 60 minutes",
-      "value": 60
-    },
-    {
-      "label": "72",
-      "prompt": "The building had 72 floors",
-      "value": 72
-    },
-    {
-      "label": "99",
-      "prompt": "The test score was 99 out of 100",
-      "value": 99
-    },
-    {
-      "label": "100",
-      "prompt": "The sprint was exactly 100 meters long",
-      "value": 100
-    },
-    {
-      "label": "150",
-      "prompt": "The book contained 150 pages",
-      "value": 150
-    },
-    {
-      "label": "200",
-      "prompt": "The town had 200 households",
-      "value": 200
-    },
-    {
-      "label": "365",
-      "prompt": "The year contained 365 days",
-      "value": 365
-    },
-    {
-      "label": "500",
-      "prompt": "The prize money was 500 dollars",
-      "value": 500
-    },
-    {
-      "label": "847",
-      "prompt": "The population of the village was 847 people",
-      "value": 847
-    },
-    {
-      "label": "1000",
-      "prompt": "The mountain was 1000 meters above sea level",
-      "value": 1000
-    },
-    {
-      "label": "1200",
-      "prompt": "The bridge was 1200 meters long",
-      "value": 1200
-    },
-    {
-      "label": "1500",
-      "prompt": "The factory employed 1500 workers",
-      "value": 1500
-    },
-    {
-      "label": "2000",
-      "prompt": "The ancient text was written 2000 years ago",
-      "value": 2000
-    },
-    {
-      "label": "3000",
-      "prompt": "The concert had an audience of 3000 people",
-      "value": 3000
-    },
-    {
-      "label": "5000",
-      "prompt": "The expedition covered 5000 miles in total",
-      "value": 5000
-    },
-    {
-      "label": "7500",
-      "prompt": "The endurance runner completed 7500 meters",
-      "value": 7500
-    },
-    {
-      "label": "8848",
-      "prompt": "Mount Everest stands 8848 meters tall",
-      "value": 8848
-    },
-    {
-      "label": "9999",
-      "prompt": "The lock had 9999 possible combinations",
-      "value": 9999
-    },
-    {
-      "label": "10000",
-      "prompt": "The stadium held 10000 spectators",
-      "value": 10000
-    },
-    {
-      "label": "15000",
-      "prompt": "The ancient army had 15000 soldiers",
-      "value": 15000
-    },
-    {
-      "label": "25000",
-      "prompt": "The factory produced 25000 units per day",
-      "value": 25000
-    },
-    {
-      "label": "50000",
-      "prompt": "The small city had 50000 residents",
-      "value": 50000
-    },
-    {
-      "label": "75000",
-      "prompt": "The stadium held 75000 spectators",
-      "value": 75000
-    },
-    {
-      "label": "100000",
-      "prompt": "The library contained 100000 books",
-      "value": 100000
-    },
-    {
-      "label": "200000",
-      "prompt": "The marathon attracted 200000 spectators",
-      "value": 200000
-    },
-    {
-      "label": "500000",
-      "prompt": "The city had 500000 inhabitants",
-      "value": 500000
-    },
-    {
-      "label": "750000",
-      "prompt": "The company had 750000 customers worldwide",
-      "value": 750000
-    },
-    {
-      "label": "999999",
-      "prompt": "The ticket sales reached 999999 copies",
-      "value": 999999
-    },
-    {
-      "label": "1e6",
-      "prompt": "The lottery jackpot was 1000000 dollars",
-      "value": 1000000
-    },
-    {
-      "label": "5e6",
-      "prompt": "The city had 5000000 residents",
-      "value": 5000000
-    },
-    {
-      "label": "1e7",
-      "prompt": "The country had 10000000 citizens",
-      "value": 10000000
-    },
-    {
-      "label": "5e7",
-      "prompt": "The social media platform had 50000000 active users",
-      "value": 50000000
-    },
-    {
-      "label": "1e8",
-      "prompt": "The film earned 100000000 dollars at the box office",
-      "value": 100000000
-    },
-    {
-      "label": "5e8",
-      "prompt": "The company was valued at 500000000 dollars",
-      "value": 500000000
-    },
-    {
-      "label": "7e9",
-      "prompt": "The world population reached 7000000000 people",
-      "value": 7000000000
-    }
-  ],
-  "numeric_magnitude_categories": [
-    "very_small",
-    "very_small",
-    "very_small",
-    "very_small",
-    "very_small",
-    "very_small",
-    "very_small",
-    "very_small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "small",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "medium",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "large",
-    "very_large",
-    "very_large",
-    "very_large",
-    "very_large",
-    "very_large",
-    "very_large",
-    "very_large"
-  ],
-  "days_of_week": [
-    {
-      "label": "Monday_1",
-      "prompt": "Today is Monday",
-      "day": 1,
-      "day_name": "Monday",
-      "frame": 1
-    },
-    {
-      "label": "Monday_2",
-      "prompt": "The day after Sunday is Monday",
-      "day": 1,
-      "day_name": "Monday",
-      "frame": 2
-    },
-    {
-      "label": "Monday_3",
-      "prompt": "Monday is the first day of the working week",
-      "day": 1,
-      "day_name": "Monday",
-      "frame": 3
-    },
-    {
-      "label": "Tuesday_1",
-      "prompt": "Today is Tuesday",
-      "day": 2,
-      "day_name": "Tuesday",
-      "frame": 1
-    },
-    {
-      "label": "Tuesday_2",
-      "prompt": "The day after Monday is Tuesday",
-      "day": 2,
-      "day_name": "Tuesday",
-      "frame": 2
-    },
-    {
-      "label": "Tuesday_3",
-      "prompt": "Tuesday is the second day of the working week",
-      "day": 2,
-      "day_name": "Tuesday",
-      "frame": 3
-    },
-    {
-      "label": "Wednesday_1",
-      "prompt": "Today is Wednesday",
-      "day": 3,
-      "day_name": "Wednesday",
-      "frame": 1
-    },
-    {
-      "label": "Wednesday_2",
-      "prompt": "The day after Tuesday is Wednesday",
-      "day": 3,
-      "day_name": "Wednesday",
-      "frame": 2
-    },
-    {
-      "label": "Wednesday_3",
-      "prompt": "Wednesday is the third day of the working week",
-      "day": 3,
-      "day_name": "Wednesday",
-      "frame": 3
-    },
-    {
-      "label": "Thursday_1",
-      "prompt": "Today is Thursday",
-      "day": 4,
-      "day_name": "Thursday",
-      "frame": 1
-    },
-    {
-      "label": "Thursday_2",
-      "prompt": "The day after Wednesday is Thursday",
-      "day": 4,
-      "day_name": "Thursday",
-      "frame": 2
-    },
-    {
-      "label": "Thursday_3",
-      "prompt": "Thursday is the fourth day of the working week",
-      "day": 4,
-      "day_name": "Thursday",
-      "frame": 3
-    },
-    {
-      "label": "Friday_1",
-      "prompt": "Today is Friday",
-      "day": 5,
-      "day_name": "Friday",
-      "frame": 1
-    },
-    {
-      "label": "Friday_2",
-      "prompt": "The day after Thursday is Friday",
-      "day": 5,
-      "day_name": "Friday",
-      "frame": 2
-    },
-    {
-      "label": "Friday_3",
-      "prompt": "Friday is the fifth day of the working week",
-      "day": 5,
-      "day_name": "Friday",
-      "frame": 3
-    },
-    {
-      "label": "Saturday_1",
-      "prompt": "Today is Saturday",
-      "day": 6,
-      "day_name": "Saturday",
-      "frame": 1
-    },
-    {
-      "label": "Saturday_2",
-      "prompt": "The day after Friday is Saturday",
-      "day": 6,
-      "day_name": "Saturday",
-      "frame": 2
-    },
-    {
-      "label": "Saturday_3",
-      "prompt": "Saturday is the sixth day of the week",
-      "day": 6,
-      "day_name": "Saturday",
-      "frame": 3
-    },
-    {
-      "label": "Sunday_1",
-      "prompt": "Today is Sunday",
-      "day": 7,
-      "day_name": "Sunday",
-      "frame": 1
-    },
-    {
-      "label": "Sunday_2",
-      "prompt": "The day after Saturday is Sunday",
-      "day": 7,
-      "day_name": "Sunday",
-      "frame": 2
-    },
-    {
-      "label": "Sunday_3",
-      "prompt": "Sunday is the seventh day of the week",
-      "day": 7,
-      "day_name": "Sunday",
-      "frame": 3
-    }
-  ],
-  "days_of_week_labels": [
-    1,
-    1,
-    1,
-    2,
-    2,
-    2,
-    3,
-    3,
-    3,
-    4,
-    4,
-    4,
-    5,
-    5,
-    5,
-    6,
-    6,
-    6,
-    7,
-    7,
-    7
-  ],
-  "months_of_year": [
-    {
-      "label": "January_1",
-      "prompt": "This month is January",
-      "month": 1,
-      "month_name": "January",
-      "frame": 1
-    },
-    {
-      "label": "January_2",
-      "prompt": "The month after December is January",
-      "month": 1,
-      "month_name": "January",
-      "frame": 2
-    },
-    {
-      "label": "January_3",
-      "prompt": "January is the first month of the year",
-      "month": 1,
-      "month_name": "January",
-      "frame": 3
-    },
-    {
-      "label": "February_1",
-      "prompt": "This month is February",
-      "month": 2,
-      "month_name": "February",
-      "frame": 1
-    },
-    {
-      "label": "February_2",
-      "prompt": "The month after January is February",
-      "month": 2,
-      "month_name": "February",
-      "frame": 2
-    },
-    {
-      "label": "February_3",
-      "prompt": "February is the second month of the year",
-      "month": 2,
-      "month_name": "February",
-      "frame": 3
-    },
-    {
-      "label": "March_1",
-      "prompt": "This month is March",
-      "month": 3,
-      "month_name": "March",
-      "frame": 1
-    },
-    {
-      "label": "March_2",
-      "prompt": "The month after February is March",
-      "month": 3,
-      "month_name": "March",
-      "frame": 2
-    },
-    {
-      "label": "March_3",
-      "prompt": "March is the third month of the year",
-      "month": 3,
-      "month_name": "March",
-      "frame": 3
-    },
-    {
-      "label": "April_1",
-      "prompt": "This month is April",
-      "month": 4,
-      "month_name": "April",
-      "frame": 1
-    },
-    {
-      "label": "April_2",
-      "prompt": "The month after March is April",
-      "month": 4,
-      "month_name": "April",
-      "frame": 2
-    },
-    {
-      "label": "April_3",
-      "prompt": "April is the fourth month of the year",
-      "month": 4,
-      "month_name": "April",
-      "frame": 3
-    },
-    {
-      "label": "May_1",
-      "prompt": "This month is May",
-      "month": 5,
-      "month_name": "May",
-      "frame": 1
-    },
-    {
-      "label": "May_2",
-      "prompt": "The month after April is May",
-      "month": 5,
-      "month_name": "May",
-      "frame": 2
-    },
-    {
-      "label": "May_3",
-      "prompt": "May is the fifth month of the year",
-      "month": 5,
-      "month_name": "May",
-      "frame": 3
-    },
-    {
-      "label": "June_1",
-      "prompt": "This month is June",
-      "month": 6,
-      "month_name": "June",
-      "frame": 1
-    },
-    {
-      "label": "June_2",
-      "prompt": "The month after May is June",
-      "month": 6,
-      "month_name": "June",
-      "frame": 2
-    },
-    {
-      "label": "June_3",
-      "prompt": "June is the sixth month of the year",
-      "month": 6,
-      "month_name": "June",
-      "frame": 3
-    },
-    {
-      "label": "July_1",
-      "prompt": "This month is July",
-      "month": 7,
-      "month_name": "July",
-      "frame": 1
-    },
-    {
-      "label": "July_2",
-      "prompt": "The month after June is July",
-      "month": 7,
-      "month_name": "July",
-      "frame": 2
-    },
-    {
-      "label": "July_3",
-      "prompt": "July is the seventh month of the year",
-      "month": 7,
-      "month_name": "July",
-      "frame": 3
-    },
-    {
-      "label": "August_1",
-      "prompt": "This month is August",
-      "month": 8,
-      "month_name": "August",
-      "frame": 1
-    },
-    {
-      "label": "August_2",
-      "prompt": "The month after July is August",
-      "month": 8,
-      "month_name": "August",
-      "frame": 2
-    },
-    {
-      "label": "August_3",
-      "prompt": "August is the eighth month of the year",
-      "month": 8,
-      "month_name": "August",
-      "frame": 3
-    },
-    {
-      "label": "September_1",
-      "prompt": "This month is September",
-      "month": 9,
-      "month_name": "September",
-      "frame": 1
-    },
-    {
-      "label": "September_2",
-      "prompt": "The month after August is September",
-      "month": 9,
-      "month_name": "September",
-      "frame": 2
-    },
-    {
-      "label": "September_3",
-      "prompt": "September is the ninth month of the year",
-      "month": 9,
-      "month_name": "September",
-      "frame": 3
-    },
-    {
-      "label": "October_1",
-      "prompt": "This month is October",
-      "month": 10,
-      "month_name": "October",
-      "frame": 1
-    },
-    {
-      "label": "October_2",
-      "prompt": "The month after September is October",
-      "month": 10,
-      "month_name": "October",
-      "frame": 2
-    },
-    {
-      "label": "October_3",
-      "prompt": "October is the tenth month of the year",
-      "month": 10,
-      "month_name": "October",
-      "frame": 3
-    },
-    {
-      "label": "November_1",
-      "prompt": "This month is November",
-      "month": 11,
-      "month_name": "November",
-      "frame": 1
-    },
-    {
-      "label": "November_2",
-      "prompt": "The month after October is November",
-      "month": 11,
-      "month_name": "November",
-      "frame": 2
-    },
-    {
-      "label": "November_3",
-      "prompt": "November is the eleventh month of the year",
-      "month": 11,
-      "month_name": "November",
-      "frame": 3
-    },
-    {
-      "label": "December_1",
-      "prompt": "This month is December",
-      "month": 12,
-      "month_name": "December",
-      "frame": 1
-    },
-    {
-      "label": "December_2",
-      "prompt": "The month after November is December",
-      "month": 12,
-      "month_name": "December",
-      "frame": 2
-    },
-    {
-      "label": "December_3",
-      "prompt": "December is the twelfth month of the year",
-      "month": 12,
-      "month_name": "December",
-      "frame": 3
-    }
-  ],
-  "months_of_year_labels": [
-    1,
-    1,
-    1,
-    2,
-    2,
-    2,
-    3,
-    3,
-    3,
-    4,
-    4,
-    4,
-    5,
-    5,
-    5,
-    6,
-    6,
-    6,
-    7,
-    7,
-    7,
-    8,
-    8,
-    8,
-    9,
-    9,
-    9,
-    10,
-    10,
-    10,
-    11,
-    11,
-    11,
-    12,
-    12,
-    12
-  ],
-  "days_of_month": [
-    {
-      "label": "day1_frame1",
-      "prompt": "Today is the 1st of the month",
-      "day": 1,
-      "frame": 1
-    },
-    {
-      "label": "day1_frame2",
-      "prompt": "The day after the 31st is the 1st",
-      "day": 1,
-      "frame": 2
-    },
-    {
-      "label": "day1_frame3",
-      "prompt": "The 1st is the first day of the month",
-      "day": 1,
-      "frame": 3
-    },
-    {
-      "label": "day2_frame1",
-      "prompt": "Today is the 2nd of the month",
-      "day": 2,
-      "frame": 1
-    },
-    {
-      "label": "day2_frame2",
-      "prompt": "The day after the 1st is the 2nd",
-      "day": 2,
-      "frame": 2
-    },
-    {
-      "label": "day2_frame3",
-      "prompt": "The 2nd is the second day of the month",
-      "day": 2,
-      "frame": 3
-    },
-    {
-      "label": "day3_frame1",
-      "prompt": "Today is the 3rd of the month",
-      "day": 3,
-      "frame": 1
-    },
-    {
-      "label": "day3_frame2",
-      "prompt": "The day after the 2nd is the 3rd",
-      "day": 3,
-      "frame": 2
-    },
-    {
-      "label": "day3_frame3",
-      "prompt": "The 3rd is the third day of the month",
-      "day": 3,
-      "frame": 3
-    },
-    {
-      "label": "day4_frame1",
-      "prompt": "Today is the 4th of the month",
-      "day": 4,
-      "frame": 1
-    },
-    {
-      "label": "day4_frame2",
-      "prompt": "The day after the 3rd is the 4th",
-      "day": 4,
-      "frame": 2
-    },
-    {
-      "label": "day4_frame3",
-      "prompt": "The 4th is the fourth day of the month",
-      "day": 4,
-      "frame": 3
-    },
-    {
-      "label": "day5_frame1",
-      "prompt": "Today is the 5th of the month",
-      "day": 5,
-      "frame": 1
-    },
-    {
-      "label": "day5_frame2",
-      "prompt": "The day after the 4th is the 5th",
-      "day": 5,
-      "frame": 2
-    },
-    {
-      "label": "day5_frame3",
-      "prompt": "The 5th is the fifth day of the month",
-      "day": 5,
-      "frame": 3
-    },
-    {
-      "label": "day6_frame1",
-      "prompt": "Today is the 6th of the month",
-      "day": 6,
-      "frame": 1
-    },
-    {
-      "label": "day6_frame2",
-      "prompt": "The day after the 5th is the 6th",
-      "day": 6,
-      "frame": 2
-    },
-    {
-      "label": "day6_frame3",
-      "prompt": "The 6th is the sixth day of the month",
-      "day": 6,
-      "frame": 3
-    },
-    {
-      "label": "day7_frame1",
-      "prompt": "Today is the 7th of the month",
-      "day": 7,
-      "frame": 1
-    },
-    {
-      "label": "day7_frame2",
-      "prompt": "The day after the 6th is the 7th",
-      "day": 7,
-      "frame": 2
-    },
-    {
-      "label": "day7_frame3",
-      "prompt": "The 7th is the seventh day of the month",
-      "day": 7,
-      "frame": 3
-    },
-    {
-      "label": "day8_frame1",
-      "prompt": "Today is the 8th of the month",
-      "day": 8,
-      "frame": 1
-    },
-    {
-      "label": "day8_frame2",
-      "prompt": "The day after the 7th is the 8th",
-      "day": 8,
-      "frame": 2
-    },
-    {
-      "label": "day8_frame3",
-      "prompt": "The 8th is the eighth day of the month",
-      "day": 8,
-      "frame": 3
-    },
-    {
-      "label": "day9_frame1",
-      "prompt": "Today is the 9th of the month",
-      "day": 9,
-      "frame": 1
-    },
-    {
-      "label": "day9_frame2",
-      "prompt": "The day after the 8th is the 9th",
-      "day": 9,
-      "frame": 2
-    },
-    {
-      "label": "day9_frame3",
-      "prompt": "The 9th is the ninth day of the month",
-      "day": 9,
-      "frame": 3
-    },
-    {
-      "label": "day10_frame1",
-      "prompt": "Today is the 10th of the month",
-      "day": 10,
-      "frame": 1
-    },
-    {
-      "label": "day10_frame2",
-      "prompt": "The day after the 9th is the 10th",
-      "day": 10,
-      "frame": 2
-    },
-    {
-      "label": "day10_frame3",
-      "prompt": "The 10th is the tenth day of the month",
-      "day": 10,
-      "frame": 3
-    },
-    {
-      "label": "day11_frame1",
-      "prompt": "Today is the 11th of the month",
-      "day": 11,
-      "frame": 1
-    },
-    {
-      "label": "day11_frame2",
-      "prompt": "The day after the 10th is the 11th",
-      "day": 11,
-      "frame": 2
-    },
-    {
-      "label": "day11_frame3",
-      "prompt": "The 11th is the eleventh day of the month",
-      "day": 11,
-      "frame": 3
-    },
-    {
-      "label": "day12_frame1",
-      "prompt": "Today is the 12th of the month",
-      "day": 12,
-      "frame": 1
-    },
-    {
-      "label": "day12_frame2",
-      "prompt": "The day after the 11th is the 12th",
-      "day": 12,
-      "frame": 2
-    },
-    {
-      "label": "day12_frame3",
-      "prompt": "The 12th is the twelfth day of the month",
-      "day": 12,
-      "frame": 3
-    },
-    {
-      "label": "day13_frame1",
-      "prompt": "Today is the 13th of the month",
-      "day": 13,
-      "frame": 1
-    },
-    {
-      "label": "day13_frame2",
-      "prompt": "The day after the 12th is the 13th",
-      "day": 13,
-      "frame": 2
-    },
-    {
-      "label": "day13_frame3",
-      "prompt": "The 13th is the thirteenth day of the month",
-      "day": 13,
-      "frame": 3
-    },
-    {
-      "label": "day14_frame1",
-      "prompt": "Today is the 14th of the month",
-      "day": 14,
-      "frame": 1
-    },
-    {
-      "label": "day14_frame2",
-      "prompt": "The day after the 13th is the 14th",
-      "day": 14,
-      "frame": 2
-    },
-    {
-      "label": "day14_frame3",
-      "prompt": "The 14th is the fourteenth day of the month",
-      "day": 14,
-      "frame": 3
-    },
-    {
-      "label": "day15_frame1",
-      "prompt": "Today is the 15th of the month",
-      "day": 15,
-      "frame": 1
-    },
-    {
-      "label": "day15_frame2",
-      "prompt": "The day after the 14th is the 15th",
-      "day": 15,
-      "frame": 2
-    },
-    {
-      "label": "day15_frame3",
-      "prompt": "The 15th is the fifteenth day of the month",
-      "day": 15,
-      "frame": 3
-    },
-    {
-      "label": "day16_frame1",
-      "prompt": "Today is the 16th of the month",
-      "day": 16,
-      "frame": 1
-    },
-    {
-      "label": "day16_frame2",
-      "prompt": "The day after the 15th is the 16th",
-      "day": 16,
-      "frame": 2
-    },
-    {
-      "label": "day16_frame3",
-      "prompt": "The 16th is the sixteenth day of the month",
-      "day": 16,
-      "frame": 3
-    },
-    {
-      "label": "day17_frame1",
-      "prompt": "Today is the 17th of the month",
-      "day": 17,
-      "frame": 1
-    },
-    {
-      "label": "day17_frame2",
-      "prompt": "The day after the 16th is the 17th",
-      "day": 17,
-      "frame": 2
-    },
-    {
-      "label": "day17_frame3",
-      "prompt": "The 17th is the seventeenth day of the month",
-      "day": 17,
-      "frame": 3
-    },
-    {
-      "label": "day18_frame1",
-      "prompt": "Today is the 18th of the month",
-      "day": 18,
-      "frame": 1
-    },
-    {
-      "label": "day18_frame2",
-      "prompt": "The day after the 17th is the 18th",
-      "day": 18,
-      "frame": 2
-    },
-    {
-      "label": "day18_frame3",
-      "prompt": "The 18th is the eighteenth day of the month",
-      "day": 18,
-      "frame": 3
-    },
-    {
-      "label": "day19_frame1",
-      "prompt": "Today is the 19th of the month",
-      "day": 19,
-      "frame": 1
-    },
-    {
-      "label": "day19_frame2",
-      "prompt": "The day after the 18th is the 19th",
-      "day": 19,
-      "frame": 2
-    },
-    {
-      "label": "day19_frame3",
-      "prompt": "The 19th is the nineteenth day of the month",
-      "day": 19,
-      "frame": 3
-    },
-    {
-      "label": "day20_frame1",
-      "prompt": "Today is the 20th of the month",
-      "day": 20,
-      "frame": 1
-    },
-    {
-      "label": "day20_frame2",
-      "prompt": "The day after the 19th is the 20th",
-      "day": 20,
-      "frame": 2
-    },
-    {
-      "label": "day20_frame3",
-      "prompt": "The 20th is the twentieth day of the month",
-      "day": 20,
-      "frame": 3
-    },
-    {
-      "label": "day21_frame1",
-      "prompt": "Today is the 21st of the month",
-      "day": 21,
-      "frame": 1
-    },
-    {
-      "label": "day21_frame2",
-      "prompt": "The day after the 20th is the 21st",
-      "day": 21,
-      "frame": 2
-    },
-    {
-      "label": "day21_frame3",
-      "prompt": "The 21st is the twenty-first day of the month",
-      "day": 21,
-      "frame": 3
-    },
-    {
-      "label": "day22_frame1",
-      "prompt": "Today is the 22nd of the month",
-      "day": 22,
-      "frame": 1
-    },
-    {
-      "label": "day22_frame2",
-      "prompt": "The day after the 21st is the 22nd",
-      "day": 22,
-      "frame": 2
-    },
-    {
-      "label": "day22_frame3",
-      "prompt": "The 22nd is the twenty-second day of the month",
-      "day": 22,
-      "frame": 3
-    },
-    {
-      "label": "day23_frame1",
-      "prompt": "Today is the 23rd of the month",
-      "day": 23,
-      "frame": 1
-    },
-    {
-      "label": "day23_frame2",
-      "prompt": "The day after the 22nd is the 23rd",
-      "day": 23,
-      "frame": 2
-    },
-    {
-      "label": "day23_frame3",
-      "prompt": "The 23rd is the twenty-third day of the month",
-      "day": 23,
-      "frame": 3
-    },
-    {
-      "label": "day24_frame1",
-      "prompt": "Today is the 24th of the month",
-      "day": 24,
-      "frame": 1
-    },
-    {
-      "label": "day24_frame2",
-      "prompt": "The day after the 23rd is the 24th",
-      "day": 24,
-      "frame": 2
-    },
-    {
-      "label": "day24_frame3",
-      "prompt": "The 24th is the twenty-fourth day of the month",
-      "day": 24,
-      "frame": 3
-    },
-    {
-      "label": "day25_frame1",
-      "prompt": "Today is the 25th of the month",
-      "day": 25,
-      "frame": 1
-    },
-    {
-      "label": "day25_frame2",
-      "prompt": "The day after the 24th is the 25th",
-      "day": 25,
-      "frame": 2
-    },
-    {
-      "label": "day25_frame3",
-      "prompt": "The 25th is the twenty-fifth day of the month",
-      "day": 25,
-      "frame": 3
-    },
-    {
-      "label": "day26_frame1",
-      "prompt": "Today is the 26th of the month",
-      "day": 26,
-      "frame": 1
-    },
-    {
-      "label": "day26_frame2",
-      "prompt": "The day after the 25th is the 26th",
-      "day": 26,
-      "frame": 2
-    },
-    {
-      "label": "day26_frame3",
-      "prompt": "The 26th is the twenty-sixth day of the month",
-      "day": 26,
-      "frame": 3
-    },
-    {
-      "label": "day27_frame1",
-      "prompt": "Today is the 27th of the month",
-      "day": 27,
-      "frame": 1
-    },
-    {
-      "label": "day27_frame2",
-      "prompt": "The day after the 26th is the 27th",
-      "day": 27,
-      "frame": 2
-    },
-    {
-      "label": "day27_frame3",
-      "prompt": "The 27th is the twenty-seventh day of the month",
-      "day": 27,
-      "frame": 3
-    },
-    {
-      "label": "day28_frame1",
-      "prompt": "Today is the 28th of the month",
-      "day": 28,
-      "frame": 1
-    },
-    {
-      "label": "day28_frame2",
-      "prompt": "The day after the 27th is the 28th",
-      "day": 28,
-      "frame": 2
-    },
-    {
-      "label": "day28_frame3",
-      "prompt": "The 28th is the twenty-eighth day of the month",
-      "day": 28,
-      "frame": 3
-    },
-    {
-      "label": "day29_frame1",
-      "prompt": "Today is the 29th of the month",
-      "day": 29,
-      "frame": 1
-    },
-    {
-      "label": "day29_frame2",
-      "prompt": "The day after the 28th is the 29th",
-      "day": 29,
-      "frame": 2
-    },
-    {
-      "label": "day29_frame3",
-      "prompt": "The 29th is the twenty-ninth day of the month",
-      "day": 29,
-      "frame": 3
-    },
-    {
-      "label": "day30_frame1",
-      "prompt": "Today is the 30th of the month",
-      "day": 30,
-      "frame": 1
-    },
-    {
-      "label": "day30_frame2",
-      "prompt": "The day after the 29th is the 30th",
-      "day": 30,
-      "frame": 2
-    },
-    {
-      "label": "day30_frame3",
-      "prompt": "The 30th is the thirtieth day of the month",
-      "day": 30,
-      "frame": 3
-    },
-    {
-      "label": "day31_frame1",
-      "prompt": "Today is the 31st of the month",
-      "day": 31,
-      "frame": 1
-    },
-    {
-      "label": "day31_frame2",
-      "prompt": "The day after the 30th is the 31st",
-      "day": 31,
-      "frame": 2
-    },
-    {
-      "label": "day31_frame3",
-      "prompt": "The 31st is the thirty-first day of the month",
-      "day": 31,
-      "frame": 3
-    }
-  ],
-  "days_of_month_labels": [
-    1,
-    1,
-    1,
-    2,
-    2,
-    2,
-    3,
-    3,
-    3,
-    4,
-    4,
-    4,
-    5,
-    5,
-    5,
-    6,
-    6,
-    6,
-    7,
-    7,
-    7,
-    8,
-    8,
-    8,
-    9,
-    9,
-    9,
-    10,
-    10,
-    10,
-    11,
-    11,
-    11,
-    12,
-    12,
-    12,
-    13,
-    13,
-    13,
-    14,
-    14,
-    14,
-    15,
-    15,
-    15,
-    16,
-    16,
-    16,
-    17,
-    17,
-    17,
-    18,
-    18,
-    18,
-    19,
-    19,
-    19,
-    20,
-    20,
-    20,
-    21,
-    21,
-    21,
-    22,
-    22,
-    22,
-    23,
-    23,
-    23,
-    24,
-    24,
-    24,
-    25,
-    25,
-    25,
-    26,
-    26,
-    26,
-    27,
-    27,
-    27,
-    28,
-    28,
-    28,
-    29,
-    29,
-    29,
-    30,
-    30,
-    30,
-    31,
-    31,
-    31
-  ]
+  "phase1_2": {
+    "year_items": [
+      {
+        "label": "776BC",
+        "prompt": "The first Olympic Games were held in 776 BC",
+        "year": -776
+      },
+      {
+        "label": "753BC",
+        "prompt": "The traditional founding of Rome occurred in 753 BC",
+        "year": -753
+      },
+      {
+        "label": "490BC",
+        "prompt": "The Battle of Marathon was fought in 490 BC",
+        "year": -490
+      },
+      {
+        "label": "399BC",
+        "prompt": "Socrates was tried and executed in Athens in 399 BC",
+        "year": -399
+      },
+      {
+        "label": "338BC",
+        "prompt": "Philip II of Macedon unified Greece at Chaeronea in 338 BC",
+        "year": -338
+      },
+      {
+        "label": "264BC",
+        "prompt": "The First Punic War between Rome and Carthage began in 264 BC",
+        "year": -264
+      },
+      {
+        "label": "218BC",
+        "prompt": "Hannibal Barca crossed the Alps to invade Italy in 218 BC",
+        "year": -218
+      },
+      {
+        "label": "146BC",
+        "prompt": "Rome destroyed Carthage ending the Punic Wars in 146 BC",
+        "year": -146
+      },
+      {
+        "label": "49BC",
+        "prompt": "Julius Caesar crossed the Rubicon beginning the Roman civil war in 49 BC",
+        "year": -49
+      },
+      {
+        "label": "31BC",
+        "prompt": "Octavian defeated Antony and Cleopatra at the Battle of Actium in 31 BC",
+        "year": -31
+      },
+      {
+        "label": "79AD",
+        "prompt": "Vesuvius erupted and destroyed Pompeii in 79 AD",
+        "year": 79
+      },
+      {
+        "label": "117AD",
+        "prompt": "Emperor Trajan died and Hadrian became Roman emperor in 117 AD",
+        "year": 117
+      },
+      {
+        "label": "212AD",
+        "prompt": "Emperor Caracalla extended Roman citizenship to all free inhabitants in 212 AD",
+        "year": 212
+      },
+      {
+        "label": "285AD",
+        "prompt": "Emperor Diocletian divided the Roman Empire for administration in 285 AD",
+        "year": 285
+      },
+      {
+        "label": "313AD",
+        "prompt": "The Edict of Milan legalised Christianity throughout the Roman Empire in 313 AD",
+        "year": 313
+      },
+      {
+        "label": "380AD",
+        "prompt": "Emperor Theodosius made Christianity the official religion of Rome in 380 AD",
+        "year": 380
+      },
+      {
+        "label": "410AD",
+        "prompt": "The Visigoths sacked Rome for the first time in centuries in 410 AD",
+        "year": 410
+      },
+      {
+        "label": "451AD",
+        "prompt": "Attila the Hun was defeated at the Battle of the Catalaunian Plains in 451 AD",
+        "year": 451
+      },
+      {
+        "label": "476AD",
+        "prompt": "The Western Roman Empire fell when Romulus Augustulus was deposed in 476 AD",
+        "year": 476
+      },
+      {
+        "label": "529AD",
+        "prompt": "Emperor Justinian published his comprehensive Code of Roman law in 529 AD",
+        "year": 529
+      },
+      {
+        "label": "570",
+        "prompt": "The Prophet Muhammad was born in Mecca in 570",
+        "year": 570
+      },
+      {
+        "label": "622",
+        "prompt": "Muhammad's migration from Mecca to Medina known as the Hijra occurred in 622",
+        "year": 622
+      },
+      {
+        "label": "711",
+        "prompt": "Muslim forces under Tariq ibn Ziyad invaded the Iberian Peninsula in 711",
+        "year": 711
+      },
+      {
+        "label": "800",
+        "prompt": "Charlemagne was crowned Holy Roman Emperor by Pope Leo III in 800",
+        "year": 800
+      },
+      {
+        "label": "1054",
+        "prompt": "The Great Schism permanently divided Christianity into Eastern and Western churches in 1054",
+        "year": 1054
+      },
+      {
+        "label": "1066",
+        "prompt": "The Norman Conquest of England occurred at the Battle of Hastings in 1066",
+        "year": 1066
+      },
+      {
+        "label": "1095",
+        "prompt": "Pope Urban II called the First Crusade to reclaim Jerusalem in 1095",
+        "year": 1095
+      },
+      {
+        "label": "1215",
+        "prompt": "King John of England sealed the Magna Carta at Runnymede in 1215",
+        "year": 1215
+      },
+      {
+        "label": "1347",
+        "prompt": "The Black Death arrived in Europe killing a third of the population in 1347",
+        "year": 1347
+      },
+      {
+        "label": "1453",
+        "prompt": "Constantinople fell to the Ottoman Turks ending the Byzantine Empire in 1453",
+        "year": 1453
+      },
+      {
+        "label": "1492",
+        "prompt": "Columbus reached the Americas in 1492",
+        "year": 1492
+      },
+      {
+        "label": "1517",
+        "prompt": "Martin Luther published his Ninety-Five Theses beginning the Reformation in 1517",
+        "year": 1517
+      },
+      {
+        "label": "1543",
+        "prompt": "Copernicus published his heliocentric model of the solar system in 1543",
+        "year": 1543
+      },
+      {
+        "label": "1588",
+        "prompt": "The Spanish Armada was defeated by the English fleet in 1588",
+        "year": 1588
+      },
+      {
+        "label": "1607",
+        "prompt": "The first permanent English settlement in America was founded at Jamestown in 1607",
+        "year": 1607
+      },
+      {
+        "label": "1618",
+        "prompt": "The Thirty Years War began tearing apart central Europe in 1618",
+        "year": 1618
+      },
+      {
+        "label": "1648",
+        "prompt": "The Peace of Westphalia ended the Thirty Years War in 1648",
+        "year": 1648
+      },
+      {
+        "label": "1687",
+        "prompt": "Newton published his Principia Mathematica establishing classical mechanics in 1687",
+        "year": 1687
+      },
+      {
+        "label": "1707",
+        "prompt": "The Act of Union united England and Scotland into Great Britain in 1707",
+        "year": 1707
+      },
+      {
+        "label": "1756",
+        "prompt": "The Seven Years War began as the first truly global conflict in 1756",
+        "year": 1756
+      },
+      {
+        "label": "1776",
+        "prompt": "The United States declared independence from Britain in 1776",
+        "year": 1776
+      },
+      {
+        "label": "1789",
+        "prompt": "The French Revolution began with the storming of the Bastille in 1789",
+        "year": 1789
+      },
+      {
+        "label": "1815",
+        "prompt": "Napoleon was finally defeated at the Battle of Waterloo in 1815",
+        "year": 1815
+      },
+      {
+        "label": "1848",
+        "prompt": "Revolutions swept across Europe in 1848",
+        "year": 1848
+      },
+      {
+        "label": "1865",
+        "prompt": "The American Civil War ended with the Union victory in 1865",
+        "year": 1865
+      },
+      {
+        "label": "1903",
+        "prompt": "The Wright Brothers achieved the first powered flight in 1903",
+        "year": 1903
+      },
+      {
+        "label": "1914",
+        "prompt": "World War I began with the assassination of Archduke Franz Ferdinand in 1914",
+        "year": 1914
+      },
+      {
+        "label": "1939",
+        "prompt": "World War II began when Germany invaded Poland in 1939",
+        "year": 1939
+      },
+      {
+        "label": "1969",
+        "prompt": "Humans landed on the Moon for the first time in 1969",
+        "year": 1969
+      },
+      {
+        "label": "1991",
+        "prompt": "The Soviet Union dissolved ending the Cold War in 1991",
+        "year": 1991
+      },
+      {
+        "label": "509BC",
+        "prompt": "The Roman Republic was founded after the expulsion of the last Roman king in 509 BC",
+        "year": -509
+      },
+      {
+        "label": "480BC",
+        "prompt": "Xerxes led the Persian invasion of Greece and the defenders fell at Thermopylae in 480 BC",
+        "year": -480
+      },
+      {
+        "label": "447BC",
+        "prompt": "Construction of the Parthenon began on the Acropolis of Athens in 447 BC",
+        "year": -447
+      },
+      {
+        "label": "431BC",
+        "prompt": "The Peloponnesian War began between Athens and Sparta in 431 BC",
+        "year": -431
+      },
+      {
+        "label": "356BC",
+        "prompt": "Alexander the Great was born in Pella Macedonia in 356 BC",
+        "year": -356
+      },
+      {
+        "label": "323BC",
+        "prompt": "Alexander the Great died in Babylon ending his vast empire in 323 BC",
+        "year": -323
+      },
+      {
+        "label": "272BC",
+        "prompt": "Rome completed its conquest of the Italian peninsula with the fall of Tarentum in 272 BC",
+        "year": -272
+      },
+      {
+        "label": "88BC",
+        "prompt": "Sulla marched his legions on Rome beginning the era of Roman civil wars in 88 BC",
+        "year": -88
+      },
+      {
+        "label": "63BC",
+        "prompt": "Pompey the Great captured Jerusalem bringing Judea under Roman control in 63 BC",
+        "year": -63
+      },
+      {
+        "label": "44BC",
+        "prompt": "Julius Caesar was assassinated in the Roman Senate on the Ides of March in 44 BC",
+        "year": -44
+      },
+      {
+        "label": "98AD",
+        "prompt": "Emperor Trajan succeeded Nerva and began the greatest expansion of Roman territory in 98 AD",
+        "year": 98
+      },
+      {
+        "label": "161AD",
+        "prompt": "Marcus Aurelius became Roman emperor beginning his reign as philosopher king in 161 AD",
+        "year": 161
+      },
+      {
+        "label": "180AD",
+        "prompt": "Marcus Aurelius died ending the era of the Five Good Emperors of Rome in 180 AD",
+        "year": 180
+      },
+      {
+        "label": "301AD",
+        "prompt": "Armenia became the first nation to adopt Christianity as its official state religion in 301 AD",
+        "year": 301
+      },
+      {
+        "label": "330AD",
+        "prompt": "Constantine the Great dedicated Constantinople as the new capital of the Roman Empire in 330 AD",
+        "year": 330
+      },
+      {
+        "label": "370AD",
+        "prompt": "The Huns swept into Europe from Central Asia driving Germanic tribes into Roman territory in 370 AD",
+        "year": 370
+      },
+      {
+        "label": "395AD",
+        "prompt": "Emperor Theodosius I died permanently dividing the Roman Empire into eastern and western halves in 395 AD",
+        "year": 395
+      },
+      {
+        "label": "432AD",
+        "prompt": "Saint Patrick began his Christian mission to convert the people of Ireland in 432 AD",
+        "year": 432
+      },
+      {
+        "label": "455AD",
+        "prompt": "The Vandals sacked Rome causing widespread destruction to the ancient city in 455 AD",
+        "year": 455
+      },
+      {
+        "label": "493AD",
+        "prompt": "Theodoric the Great defeated Odoacer and established the Ostrogothic Kingdom in Italy in 493 AD",
+        "year": 493
+      },
+      {
+        "label": "732",
+        "prompt": "Charles Martel defeated the Muslim forces at the Battle of Tours halting their advance into Europe in 732",
+        "year": 732
+      },
+      {
+        "label": "793",
+        "prompt": "Vikings raided the monastery at Lindisfarne marking the beginning of the Viking Age in 793",
+        "year": 793
+      },
+      {
+        "label": "1000",
+        "prompt": "Leif Erikson reached the shores of North America becoming the first European explorer in 1000",
+        "year": 1000
+      },
+      {
+        "label": "1099",
+        "prompt": "Crusaders captured Jerusalem during the First Crusade establishing the Kingdom of Jerusalem in 1099",
+        "year": 1099
+      },
+      {
+        "label": "1189",
+        "prompt": "The Third Crusade began after Saladin recaptured Jerusalem from the Christian forces in 1189",
+        "year": 1189
+      },
+      {
+        "label": "1206",
+        "prompt": "Genghis Khan united the Mongol tribes and founded the vast Mongol Empire in 1206",
+        "year": 1206
+      },
+      {
+        "label": "1271",
+        "prompt": "Marco Polo began his famous journey to China and the court of Kublai Khan in 1271",
+        "year": 1271
+      },
+      {
+        "label": "1337",
+        "prompt": "The Hundred Years War between England and France began over the French throne in 1337",
+        "year": 1337
+      },
+      {
+        "label": "1368",
+        "prompt": "The Ming Dynasty was founded in China after the overthrow of Mongol Yuan rule in 1368",
+        "year": 1368
+      },
+      {
+        "label": "1415",
+        "prompt": "Henry V of England defeated a much larger French army at the Battle of Agincourt in 1415",
+        "year": 1415
+      },
+      {
+        "label": "1494",
+        "prompt": "The Treaty of Tordesillas divided the New World between Spain and Portugal in 1494",
+        "year": 1494
+      },
+      {
+        "label": "1519",
+        "prompt": "Ferdinand Magellan departed Spain on the first circumnavigation of the globe in 1519",
+        "year": 1519
+      },
+      {
+        "label": "1521",
+        "prompt": "Hernan Cortes conquered the Aztec Empire and captured the city of Tenochtitlan in 1521",
+        "year": 1521
+      },
+      {
+        "label": "1534",
+        "prompt": "Henry VIII broke with Rome and established himself as head of the Church of England in 1534",
+        "year": 1534
+      },
+      {
+        "label": "1571",
+        "prompt": "The Battle of Lepanto halted Ottoman naval expansion in the Mediterranean in 1571",
+        "year": 1571
+      },
+      {
+        "label": "1600",
+        "prompt": "The British East India Company was founded in London beginning English colonial trade in 1600",
+        "year": 1600
+      },
+      {
+        "label": "1620",
+        "prompt": "The Pilgrims arrived at Plymouth Rock on the Mayflower establishing a colony in 1620",
+        "year": 1620
+      },
+      {
+        "label": "1665",
+        "prompt": "The Great Plague struck London killing tens of thousands of its inhabitants in 1665",
+        "year": 1665
+      },
+      {
+        "label": "1688",
+        "prompt": "The Glorious Revolution replaced King James II with William III and Mary II in England in 1688",
+        "year": 1688
+      },
+      {
+        "label": "1715",
+        "prompt": "Louis XIV died after a reign of seventy two years as the Sun King of France in 1715",
+        "year": 1715
+      },
+      {
+        "label": "1804",
+        "prompt": "Napoleon Bonaparte crowned himself Emperor of France in a ceremony at Notre Dame in 1804",
+        "year": 1804
+      },
+      {
+        "label": "1859",
+        "prompt": "Charles Darwin published On the Origin of Species revolutionizing our understanding of biology in 1859",
+        "year": 1859
+      },
+      {
+        "label": "1879",
+        "prompt": "Thomas Edison demonstrated the first practical incandescent light bulb in his laboratory in 1879",
+        "year": 1879
+      },
+      {
+        "label": "1917",
+        "prompt": "The Russian Revolution overthrew Tsar Nicholas II and brought the Bolsheviks to power in 1917",
+        "year": 1917
+      },
+      {
+        "label": "1928",
+        "prompt": "Alexander Fleming discovered penicillin in his laboratory transforming the treatment of infection in 1928",
+        "year": 1928
+      },
+      {
+        "label": "1945",
+        "prompt": "World War II ended with the surrender of Germany and Japan bringing peace to the world in 1945",
+        "year": 1945
+      },
+      {
+        "label": "1953",
+        "prompt": "Watson and Crick published their description of the double helix structure of DNA in 1953",
+        "year": 1953
+      },
+      {
+        "label": "1961",
+        "prompt": "Yuri Gagarin became the first human to travel into space orbiting the Earth in 1961",
+        "year": 1961
+      },
+      {
+        "label": "1989",
+        "prompt": "The Berlin Wall fell ending the division of Germany and symbolising the end of the Cold War in 1989",
+        "year": 1989
+      },
+      {
+        "label": "1994",
+        "prompt": "Nelson Mandela became the first democratically elected president of South Africa in 1994",
+        "year": 1994
+      }
+    ],
+    "year_categories": [
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern"
+    ]
+  },
+  "phase3": {
+    "year_items": [
+      {
+        "label": "776BC",
+        "prompt": "The first Olympic Games were held in 776 BC",
+        "year": -776
+      },
+      {
+        "label": "753BC",
+        "prompt": "The traditional founding of Rome occurred in 753 BC",
+        "year": -753
+      },
+      {
+        "label": "490BC",
+        "prompt": "The Battle of Marathon was fought in 490 BC",
+        "year": -490
+      },
+      {
+        "label": "399BC",
+        "prompt": "Socrates was tried and executed in Athens in 399 BC",
+        "year": -399
+      },
+      {
+        "label": "338BC",
+        "prompt": "Philip II of Macedon unified Greece at Chaeronea in 338 BC",
+        "year": -338
+      },
+      {
+        "label": "264BC",
+        "prompt": "The First Punic War between Rome and Carthage began in 264 BC",
+        "year": -264
+      },
+      {
+        "label": "218BC",
+        "prompt": "Hannibal Barca crossed the Alps to invade Italy in 218 BC",
+        "year": -218
+      },
+      {
+        "label": "146BC",
+        "prompt": "Rome destroyed Carthage ending the Punic Wars in 146 BC",
+        "year": -146
+      },
+      {
+        "label": "49BC",
+        "prompt": "Julius Caesar crossed the Rubicon beginning the Roman civil war in 49 BC",
+        "year": -49
+      },
+      {
+        "label": "31BC",
+        "prompt": "Octavian defeated Antony and Cleopatra at the Battle of Actium in 31 BC",
+        "year": -31
+      },
+      {
+        "label": "79AD",
+        "prompt": "Vesuvius erupted and destroyed Pompeii in 79 AD",
+        "year": 79
+      },
+      {
+        "label": "117AD",
+        "prompt": "Emperor Trajan died and Hadrian became Roman emperor in 117 AD",
+        "year": 117
+      },
+      {
+        "label": "212AD",
+        "prompt": "Emperor Caracalla extended Roman citizenship to all free inhabitants in 212 AD",
+        "year": 212
+      },
+      {
+        "label": "285AD",
+        "prompt": "Emperor Diocletian divided the Roman Empire for administration in 285 AD",
+        "year": 285
+      },
+      {
+        "label": "313AD",
+        "prompt": "The Edict of Milan legalised Christianity throughout the Roman Empire in 313 AD",
+        "year": 313
+      },
+      {
+        "label": "380AD",
+        "prompt": "Emperor Theodosius made Christianity the official religion of Rome in 380 AD",
+        "year": 380
+      },
+      {
+        "label": "410AD",
+        "prompt": "The Visigoths sacked Rome for the first time in centuries in 410 AD",
+        "year": 410
+      },
+      {
+        "label": "451AD",
+        "prompt": "Attila the Hun was defeated at the Battle of the Catalaunian Plains in 451 AD",
+        "year": 451
+      },
+      {
+        "label": "476AD",
+        "prompt": "The Western Roman Empire fell when Romulus Augustulus was deposed in 476 AD",
+        "year": 476
+      },
+      {
+        "label": "529AD",
+        "prompt": "Emperor Justinian published his comprehensive Code of Roman law in 529 AD",
+        "year": 529
+      },
+      {
+        "label": "570",
+        "prompt": "The Prophet Muhammad was born in Mecca in 570",
+        "year": 570
+      },
+      {
+        "label": "622",
+        "prompt": "Muhammad's migration from Mecca to Medina known as the Hijra occurred in 622",
+        "year": 622
+      },
+      {
+        "label": "711",
+        "prompt": "Muslim forces under Tariq ibn Ziyad invaded the Iberian Peninsula in 711",
+        "year": 711
+      },
+      {
+        "label": "800",
+        "prompt": "Charlemagne was crowned Holy Roman Emperor by Pope Leo III in 800",
+        "year": 800
+      },
+      {
+        "label": "1054",
+        "prompt": "The Great Schism permanently divided Christianity into Eastern and Western churches in 1054",
+        "year": 1054
+      },
+      {
+        "label": "1066",
+        "prompt": "The Norman Conquest of England occurred at the Battle of Hastings in 1066",
+        "year": 1066
+      },
+      {
+        "label": "1095",
+        "prompt": "Pope Urban II called the First Crusade to reclaim Jerusalem in 1095",
+        "year": 1095
+      },
+      {
+        "label": "1215",
+        "prompt": "King John of England sealed the Magna Carta at Runnymede in 1215",
+        "year": 1215
+      },
+      {
+        "label": "1347",
+        "prompt": "The Black Death arrived in Europe killing a third of the population in 1347",
+        "year": 1347
+      },
+      {
+        "label": "1453",
+        "prompt": "Constantinople fell to the Ottoman Turks ending the Byzantine Empire in 1453",
+        "year": 1453
+      },
+      {
+        "label": "1492",
+        "prompt": "Columbus reached the Americas in 1492",
+        "year": 1492
+      },
+      {
+        "label": "1517",
+        "prompt": "Martin Luther published his Ninety-Five Theses beginning the Reformation in 1517",
+        "year": 1517
+      },
+      {
+        "label": "1543",
+        "prompt": "Copernicus published his heliocentric model of the solar system in 1543",
+        "year": 1543
+      },
+      {
+        "label": "1588",
+        "prompt": "The Spanish Armada was defeated by the English fleet in 1588",
+        "year": 1588
+      },
+      {
+        "label": "1607",
+        "prompt": "The first permanent English settlement in America was founded at Jamestown in 1607",
+        "year": 1607
+      },
+      {
+        "label": "1618",
+        "prompt": "The Thirty Years War began tearing apart central Europe in 1618",
+        "year": 1618
+      },
+      {
+        "label": "1648",
+        "prompt": "The Peace of Westphalia ended the Thirty Years War in 1648",
+        "year": 1648
+      },
+      {
+        "label": "1687",
+        "prompt": "Newton published his Principia Mathematica establishing classical mechanics in 1687",
+        "year": 1687
+      },
+      {
+        "label": "1707",
+        "prompt": "The Act of Union united England and Scotland into Great Britain in 1707",
+        "year": 1707
+      },
+      {
+        "label": "1756",
+        "prompt": "The Seven Years War began as the first truly global conflict in 1756",
+        "year": 1756
+      },
+      {
+        "label": "1776",
+        "prompt": "The United States declared independence from Britain in 1776",
+        "year": 1776
+      },
+      {
+        "label": "1789",
+        "prompt": "The French Revolution began with the storming of the Bastille in 1789",
+        "year": 1789
+      },
+      {
+        "label": "1815",
+        "prompt": "Napoleon was finally defeated at the Battle of Waterloo in 1815",
+        "year": 1815
+      },
+      {
+        "label": "1848",
+        "prompt": "Revolutions swept across Europe in 1848",
+        "year": 1848
+      },
+      {
+        "label": "1865",
+        "prompt": "The American Civil War ended with the Union victory in 1865",
+        "year": 1865
+      },
+      {
+        "label": "1903",
+        "prompt": "The Wright Brothers achieved the first powered flight in 1903",
+        "year": 1903
+      },
+      {
+        "label": "1914",
+        "prompt": "World War I began with the assassination of Archduke Franz Ferdinand in 1914",
+        "year": 1914
+      },
+      {
+        "label": "1939",
+        "prompt": "World War II began when Germany invaded Poland in 1939",
+        "year": 1939
+      },
+      {
+        "label": "1969",
+        "prompt": "Humans landed on the Moon for the first time in 1969",
+        "year": 1969
+      },
+      {
+        "label": "1991",
+        "prompt": "The Soviet Union dissolved ending the Cold War in 1991",
+        "year": 1991
+      },
+      {
+        "label": "509BC",
+        "prompt": "The Roman Republic was founded after the expulsion of the last Roman king in 509 BC",
+        "year": -509
+      },
+      {
+        "label": "480BC",
+        "prompt": "Xerxes led the Persian invasion of Greece and the defenders fell at Thermopylae in 480 BC",
+        "year": -480
+      },
+      {
+        "label": "447BC",
+        "prompt": "Construction of the Parthenon began on the Acropolis of Athens in 447 BC",
+        "year": -447
+      },
+      {
+        "label": "431BC",
+        "prompt": "The Peloponnesian War began between Athens and Sparta in 431 BC",
+        "year": -431
+      },
+      {
+        "label": "356BC",
+        "prompt": "Alexander the Great was born in Pella Macedonia in 356 BC",
+        "year": -356
+      },
+      {
+        "label": "323BC",
+        "prompt": "Alexander the Great died in Babylon ending his vast empire in 323 BC",
+        "year": -323
+      },
+      {
+        "label": "272BC",
+        "prompt": "Rome completed its conquest of the Italian peninsula with the fall of Tarentum in 272 BC",
+        "year": -272
+      },
+      {
+        "label": "88BC",
+        "prompt": "Sulla marched his legions on Rome beginning the era of Roman civil wars in 88 BC",
+        "year": -88
+      },
+      {
+        "label": "63BC",
+        "prompt": "Pompey the Great captured Jerusalem bringing Judea under Roman control in 63 BC",
+        "year": -63
+      },
+      {
+        "label": "44BC",
+        "prompt": "Julius Caesar was assassinated in the Roman Senate on the Ides of March in 44 BC",
+        "year": -44
+      },
+      {
+        "label": "98AD",
+        "prompt": "Emperor Trajan succeeded Nerva and began the greatest expansion of Roman territory in 98 AD",
+        "year": 98
+      },
+      {
+        "label": "161AD",
+        "prompt": "Marcus Aurelius became Roman emperor beginning his reign as philosopher king in 161 AD",
+        "year": 161
+      },
+      {
+        "label": "180AD",
+        "prompt": "Marcus Aurelius died ending the era of the Five Good Emperors of Rome in 180 AD",
+        "year": 180
+      },
+      {
+        "label": "301AD",
+        "prompt": "Armenia became the first nation to adopt Christianity as its official state religion in 301 AD",
+        "year": 301
+      },
+      {
+        "label": "330AD",
+        "prompt": "Constantine the Great dedicated Constantinople as the new capital of the Roman Empire in 330 AD",
+        "year": 330
+      },
+      {
+        "label": "370AD",
+        "prompt": "The Huns swept into Europe from Central Asia driving Germanic tribes into Roman territory in 370 AD",
+        "year": 370
+      },
+      {
+        "label": "395AD",
+        "prompt": "Emperor Theodosius I died permanently dividing the Roman Empire into eastern and western halves in 395 AD",
+        "year": 395
+      },
+      {
+        "label": "432AD",
+        "prompt": "Saint Patrick began his Christian mission to convert the people of Ireland in 432 AD",
+        "year": 432
+      },
+      {
+        "label": "455AD",
+        "prompt": "The Vandals sacked Rome causing widespread destruction to the ancient city in 455 AD",
+        "year": 455
+      },
+      {
+        "label": "493AD",
+        "prompt": "Theodoric the Great defeated Odoacer and established the Ostrogothic Kingdom in Italy in 493 AD",
+        "year": 493
+      },
+      {
+        "label": "732",
+        "prompt": "Charles Martel defeated the Muslim forces at the Battle of Tours halting their advance into Europe in 732",
+        "year": 732
+      },
+      {
+        "label": "793",
+        "prompt": "Vikings raided the monastery at Lindisfarne marking the beginning of the Viking Age in 793",
+        "year": 793
+      },
+      {
+        "label": "1000",
+        "prompt": "Leif Erikson reached the shores of North America becoming the first European explorer in 1000",
+        "year": 1000
+      },
+      {
+        "label": "1099",
+        "prompt": "Crusaders captured Jerusalem during the First Crusade establishing the Kingdom of Jerusalem in 1099",
+        "year": 1099
+      },
+      {
+        "label": "1189",
+        "prompt": "The Third Crusade began after Saladin recaptured Jerusalem from the Christian forces in 1189",
+        "year": 1189
+      },
+      {
+        "label": "1206",
+        "prompt": "Genghis Khan united the Mongol tribes and founded the vast Mongol Empire in 1206",
+        "year": 1206
+      },
+      {
+        "label": "1271",
+        "prompt": "Marco Polo began his famous journey to China and the court of Kublai Khan in 1271",
+        "year": 1271
+      },
+      {
+        "label": "1337",
+        "prompt": "The Hundred Years War between England and France began over the French throne in 1337",
+        "year": 1337
+      },
+      {
+        "label": "1368",
+        "prompt": "The Ming Dynasty was founded in China after the overthrow of Mongol Yuan rule in 1368",
+        "year": 1368
+      },
+      {
+        "label": "1415",
+        "prompt": "Henry V of England defeated a much larger French army at the Battle of Agincourt in 1415",
+        "year": 1415
+      },
+      {
+        "label": "1494",
+        "prompt": "The Treaty of Tordesillas divided the New World between Spain and Portugal in 1494",
+        "year": 1494
+      },
+      {
+        "label": "1519",
+        "prompt": "Ferdinand Magellan departed Spain on the first circumnavigation of the globe in 1519",
+        "year": 1519
+      },
+      {
+        "label": "1521",
+        "prompt": "Hernan Cortes conquered the Aztec Empire and captured the city of Tenochtitlan in 1521",
+        "year": 1521
+      },
+      {
+        "label": "1534",
+        "prompt": "Henry VIII broke with Rome and established himself as head of the Church of England in 1534",
+        "year": 1534
+      },
+      {
+        "label": "1571",
+        "prompt": "The Battle of Lepanto halted Ottoman naval expansion in the Mediterranean in 1571",
+        "year": 1571
+      },
+      {
+        "label": "1600",
+        "prompt": "The British East India Company was founded in London beginning English colonial trade in 1600",
+        "year": 1600
+      },
+      {
+        "label": "1620",
+        "prompt": "The Pilgrims arrived at Plymouth Rock on the Mayflower establishing a colony in 1620",
+        "year": 1620
+      },
+      {
+        "label": "1665",
+        "prompt": "The Great Plague struck London killing tens of thousands of its inhabitants in 1665",
+        "year": 1665
+      },
+      {
+        "label": "1688",
+        "prompt": "The Glorious Revolution replaced King James II with William III and Mary II in England in 1688",
+        "year": 1688
+      },
+      {
+        "label": "1715",
+        "prompt": "Louis XIV died after a reign of seventy two years as the Sun King of France in 1715",
+        "year": 1715
+      },
+      {
+        "label": "1804",
+        "prompt": "Napoleon Bonaparte crowned himself Emperor of France in a ceremony at Notre Dame in 1804",
+        "year": 1804
+      },
+      {
+        "label": "1859",
+        "prompt": "Charles Darwin published On the Origin of Species revolutionizing our understanding of biology in 1859",
+        "year": 1859
+      },
+      {
+        "label": "1879",
+        "prompt": "Thomas Edison demonstrated the first practical incandescent light bulb in his laboratory in 1879",
+        "year": 1879
+      },
+      {
+        "label": "1917",
+        "prompt": "The Russian Revolution overthrew Tsar Nicholas II and brought the Bolsheviks to power in 1917",
+        "year": 1917
+      },
+      {
+        "label": "1928",
+        "prompt": "Alexander Fleming discovered penicillin in his laboratory transforming the treatment of infection in 1928",
+        "year": 1928
+      },
+      {
+        "label": "1945",
+        "prompt": "World War II ended with the surrender of Germany and Japan bringing peace to the world in 1945",
+        "year": 1945
+      },
+      {
+        "label": "1953",
+        "prompt": "Watson and Crick published their description of the double helix structure of DNA in 1953",
+        "year": 1953
+      },
+      {
+        "label": "1961",
+        "prompt": "Yuri Gagarin became the first human to travel into space orbiting the Earth in 1961",
+        "year": 1961
+      },
+      {
+        "label": "1989",
+        "prompt": "The Berlin Wall fell ending the division of Germany and symbolising the end of the Cold War in 1989",
+        "year": 1989
+      },
+      {
+        "label": "1994",
+        "prompt": "Nelson Mandela became the first democratically elected president of South Africa in 1994",
+        "year": 1994
+      }
+    ],
+    "year_categories": [
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern"
+    ]
+  },
+  "phase4": {
+    "year_items": [
+      {
+        "label": "776BC",
+        "prompt": "The first Olympic Games were held in 776",
+        "year": -776
+      },
+      {
+        "label": "753BC",
+        "prompt": "The traditional founding of Rome occurred in 753",
+        "year": -753
+      },
+      {
+        "label": "490BC",
+        "prompt": "The Battle of Marathon was fought in 490",
+        "year": -490
+      },
+      {
+        "label": "399BC",
+        "prompt": "Socrates was tried and executed in Athens in 399",
+        "year": -399
+      },
+      {
+        "label": "338BC",
+        "prompt": "Philip II of Macedon unified Greece at Chaeronea in 338",
+        "year": -338
+      },
+      {
+        "label": "264BC",
+        "prompt": "The First Punic War between Rome and Carthage began in 264",
+        "year": -264
+      },
+      {
+        "label": "218BC",
+        "prompt": "Hannibal Barca crossed the Alps to invade Italy in 218",
+        "year": -218
+      },
+      {
+        "label": "146BC",
+        "prompt": "Rome destroyed Carthage ending the Punic Wars in 146",
+        "year": -146
+      },
+      {
+        "label": "49BC",
+        "prompt": "Julius Caesar crossed the Rubicon beginning the Roman civil war in 49",
+        "year": -49
+      },
+      {
+        "label": "31BC",
+        "prompt": "Octavian defeated Antony and Cleopatra at the Battle of Actium in 31",
+        "year": -31
+      },
+      {
+        "label": "79AD",
+        "prompt": "Vesuvius erupted and destroyed Pompeii in 79",
+        "year": 79
+      },
+      {
+        "label": "117AD",
+        "prompt": "Emperor Trajan died and Hadrian became Roman emperor in 117",
+        "year": 117
+      },
+      {
+        "label": "212AD",
+        "prompt": "Emperor Caracalla extended Roman citizenship to all free inhabitants in 212",
+        "year": 212
+      },
+      {
+        "label": "285AD",
+        "prompt": "Emperor Diocletian divided the Roman Empire for administration in 285",
+        "year": 285
+      },
+      {
+        "label": "313AD",
+        "prompt": "The Edict of Milan legalised Christianity throughout the Roman Empire in 313",
+        "year": 313
+      },
+      {
+        "label": "380AD",
+        "prompt": "Emperor Theodosius made Christianity the official religion of Rome in 380",
+        "year": 380
+      },
+      {
+        "label": "410AD",
+        "prompt": "The Visigoths sacked Rome for the first time in centuries in 410",
+        "year": 410
+      },
+      {
+        "label": "451AD",
+        "prompt": "Attila the Hun was defeated at the Battle of the Catalaunian Plains in 451",
+        "year": 451
+      },
+      {
+        "label": "476AD",
+        "prompt": "The Western Roman Empire fell when Romulus Augustulus was deposed in 476",
+        "year": 476
+      },
+      {
+        "label": "529AD",
+        "prompt": "Emperor Justinian published his comprehensive Code of Roman law in 529",
+        "year": 529
+      },
+      {
+        "label": "570",
+        "prompt": "The Prophet Muhammad was born in Mecca in 570",
+        "year": 570
+      },
+      {
+        "label": "622",
+        "prompt": "Muhammad's migration from Mecca to Medina known as the Hijra occurred in 622",
+        "year": 622
+      },
+      {
+        "label": "711",
+        "prompt": "Muslim forces under Tariq ibn Ziyad invaded the Iberian Peninsula in 711",
+        "year": 711
+      },
+      {
+        "label": "800",
+        "prompt": "Charlemagne was crowned Holy Roman Emperor by Pope Leo III in 800",
+        "year": 800
+      },
+      {
+        "label": "1054",
+        "prompt": "The Great Schism permanently divided Christianity into Eastern and Western churches in 1054",
+        "year": 1054
+      },
+      {
+        "label": "1066",
+        "prompt": "The Norman Conquest of England occurred at the Battle of Hastings in 1066",
+        "year": 1066
+      },
+      {
+        "label": "1095",
+        "prompt": "Pope Urban II called the First Crusade to reclaim Jerusalem in 1095",
+        "year": 1095
+      },
+      {
+        "label": "1215",
+        "prompt": "King John of England sealed the Magna Carta at Runnymede in 1215",
+        "year": 1215
+      },
+      {
+        "label": "1347",
+        "prompt": "The Black Death arrived in Europe killing a third of the population in 1347",
+        "year": 1347
+      },
+      {
+        "label": "1453",
+        "prompt": "Constantinople fell to the Ottoman Turks ending the Byzantine Empire in 1453",
+        "year": 1453
+      },
+      {
+        "label": "1492",
+        "prompt": "Columbus reached the Americas in 1492",
+        "year": 1492
+      },
+      {
+        "label": "1517",
+        "prompt": "Martin Luther published his Ninety-Five Theses beginning the Reformation in 1517",
+        "year": 1517
+      },
+      {
+        "label": "1543",
+        "prompt": "Copernicus published his heliocentric model of the solar system in 1543",
+        "year": 1543
+      },
+      {
+        "label": "1588",
+        "prompt": "The Spanish Armada was defeated by the English fleet in 1588",
+        "year": 1588
+      },
+      {
+        "label": "1607",
+        "prompt": "The first permanent English settlement in America was founded at Jamestown in 1607",
+        "year": 1607
+      },
+      {
+        "label": "1618",
+        "prompt": "The Thirty Years War began tearing apart central Europe in 1618",
+        "year": 1618
+      },
+      {
+        "label": "1648",
+        "prompt": "The Peace of Westphalia ended the Thirty Years War in 1648",
+        "year": 1648
+      },
+      {
+        "label": "1687",
+        "prompt": "Newton published his Principia Mathematica establishing classical mechanics in 1687",
+        "year": 1687
+      },
+      {
+        "label": "1707",
+        "prompt": "The Act of Union united England and Scotland into Great Britain in 1707",
+        "year": 1707
+      },
+      {
+        "label": "1756",
+        "prompt": "The Seven Years War began as the first truly global conflict in 1756",
+        "year": 1756
+      },
+      {
+        "label": "1776",
+        "prompt": "The United States declared independence from Britain in 1776",
+        "year": 1776
+      },
+      {
+        "label": "1789",
+        "prompt": "The French Revolution began with the storming of the Bastille in 1789",
+        "year": 1789
+      },
+      {
+        "label": "1815",
+        "prompt": "Napoleon was finally defeated at the Battle of Waterloo in 1815",
+        "year": 1815
+      },
+      {
+        "label": "1848",
+        "prompt": "Revolutions swept across Europe in 1848",
+        "year": 1848
+      },
+      {
+        "label": "1865",
+        "prompt": "The American Civil War ended with the Union victory in 1865",
+        "year": 1865
+      },
+      {
+        "label": "1903",
+        "prompt": "The Wright Brothers achieved the first powered flight in 1903",
+        "year": 1903
+      },
+      {
+        "label": "1914",
+        "prompt": "World War I began with the assassination of Archduke Franz Ferdinand in 1914",
+        "year": 1914
+      },
+      {
+        "label": "1939",
+        "prompt": "World War II began when Germany invaded Poland in 1939",
+        "year": 1939
+      },
+      {
+        "label": "1969",
+        "prompt": "Humans landed on the Moon for the first time in 1969",
+        "year": 1969
+      },
+      {
+        "label": "1991",
+        "prompt": "The Soviet Union dissolved ending the Cold War in 1991",
+        "year": 1991
+      },
+      {
+        "label": "509BC",
+        "prompt": "The Roman Republic was founded after the expulsion of the last Roman king in 509",
+        "year": -509
+      },
+      {
+        "label": "480BC",
+        "prompt": "Xerxes led the Persian invasion of Greece and the defenders fell at Thermopylae in 480",
+        "year": -480
+      },
+      {
+        "label": "447BC",
+        "prompt": "Construction of the Parthenon began on the Acropolis of Athens in 447",
+        "year": -447
+      },
+      {
+        "label": "431BC",
+        "prompt": "The Peloponnesian War began between Athens and Sparta in 431",
+        "year": -431
+      },
+      {
+        "label": "356BC",
+        "prompt": "Alexander the Great was born in Pella Macedonia in 356",
+        "year": -356
+      },
+      {
+        "label": "323BC",
+        "prompt": "Alexander the Great died in Babylon ending his vast empire in 323",
+        "year": -323
+      },
+      {
+        "label": "272BC",
+        "prompt": "Rome completed its conquest of the Italian peninsula with the fall of Tarentum in 272",
+        "year": -272
+      },
+      {
+        "label": "88BC",
+        "prompt": "Sulla marched his legions on Rome beginning the era of Roman civil wars in 88",
+        "year": -88
+      },
+      {
+        "label": "63BC",
+        "prompt": "Pompey the Great captured Jerusalem bringing Judea under Roman control in 63",
+        "year": -63
+      },
+      {
+        "label": "44BC",
+        "prompt": "Julius Caesar was assassinated in the Roman Senate on the Ides of March in 44",
+        "year": -44
+      },
+      {
+        "label": "98AD",
+        "prompt": "Emperor Trajan succeeded Nerva and began the greatest expansion of Roman territory in 98",
+        "year": 98
+      },
+      {
+        "label": "161AD",
+        "prompt": "Marcus Aurelius became Roman emperor beginning his reign as philosopher king in 161",
+        "year": 161
+      },
+      {
+        "label": "180AD",
+        "prompt": "Marcus Aurelius died ending the era of the Five Good Emperors of Rome in 180",
+        "year": 180
+      },
+      {
+        "label": "301AD",
+        "prompt": "Armenia became the first nation to adopt Christianity as its official state religion in 301",
+        "year": 301
+      },
+      {
+        "label": "330AD",
+        "prompt": "Constantine the Great dedicated Constantinople as the new capital of the Roman Empire in 330",
+        "year": 330
+      },
+      {
+        "label": "370AD",
+        "prompt": "The Huns swept into Europe from Central Asia driving Germanic tribes into Roman territory in 370",
+        "year": 370
+      },
+      {
+        "label": "395AD",
+        "prompt": "Emperor Theodosius I died permanently dividing the Roman Empire into eastern and western halves in 395",
+        "year": 395
+      },
+      {
+        "label": "432AD",
+        "prompt": "Saint Patrick began his Christian mission to convert the people of Ireland in 432",
+        "year": 432
+      },
+      {
+        "label": "455AD",
+        "prompt": "The Vandals sacked Rome causing widespread destruction to the ancient city in 455",
+        "year": 455
+      },
+      {
+        "label": "493AD",
+        "prompt": "Theodoric the Great defeated Odoacer and established the Ostrogothic Kingdom in Italy in 493",
+        "year": 493
+      },
+      {
+        "label": "732",
+        "prompt": "Charles Martel defeated the Muslim forces at the Battle of Tours halting their advance into Europe in 732",
+        "year": 732
+      },
+      {
+        "label": "793",
+        "prompt": "Vikings raided the monastery at Lindisfarne marking the beginning of the Viking Age in 793",
+        "year": 793
+      },
+      {
+        "label": "1000",
+        "prompt": "Leif Erikson reached the shores of North America becoming the first European explorer in 1000",
+        "year": 1000
+      },
+      {
+        "label": "1099",
+        "prompt": "Crusaders captured Jerusalem during the First Crusade establishing the Kingdom of Jerusalem in 1099",
+        "year": 1099
+      },
+      {
+        "label": "1189",
+        "prompt": "The Third Crusade began after Saladin recaptured Jerusalem from the Christian forces in 1189",
+        "year": 1189
+      },
+      {
+        "label": "1206",
+        "prompt": "Genghis Khan united the Mongol tribes and founded the vast Mongol Empire in 1206",
+        "year": 1206
+      },
+      {
+        "label": "1271",
+        "prompt": "Marco Polo began his famous journey to China and the court of Kublai Khan in 1271",
+        "year": 1271
+      },
+      {
+        "label": "1337",
+        "prompt": "The Hundred Years War between England and France began over the French throne in 1337",
+        "year": 1337
+      },
+      {
+        "label": "1368",
+        "prompt": "The Ming Dynasty was founded in China after the overthrow of Mongol Yuan rule in 1368",
+        "year": 1368
+      },
+      {
+        "label": "1415",
+        "prompt": "Henry V of England defeated a much larger French army at the Battle of Agincourt in 1415",
+        "year": 1415
+      },
+      {
+        "label": "1494",
+        "prompt": "The Treaty of Tordesillas divided the New World between Spain and Portugal in 1494",
+        "year": 1494
+      },
+      {
+        "label": "1519",
+        "prompt": "Ferdinand Magellan departed Spain on the first circumnavigation of the globe in 1519",
+        "year": 1519
+      },
+      {
+        "label": "1521",
+        "prompt": "Hernan Cortes conquered the Aztec Empire and captured the city of Tenochtitlan in 1521",
+        "year": 1521
+      },
+      {
+        "label": "1534",
+        "prompt": "Henry VIII broke with Rome and established himself as head of the Church of England in 1534",
+        "year": 1534
+      },
+      {
+        "label": "1571",
+        "prompt": "The Battle of Lepanto halted Ottoman naval expansion in the Mediterranean in 1571",
+        "year": 1571
+      },
+      {
+        "label": "1600",
+        "prompt": "The British East India Company was founded in London beginning English colonial trade in 1600",
+        "year": 1600
+      },
+      {
+        "label": "1620",
+        "prompt": "The Pilgrims arrived at Plymouth Rock on the Mayflower establishing a colony in 1620",
+        "year": 1620
+      },
+      {
+        "label": "1665",
+        "prompt": "The Great Plague struck London killing tens of thousands of its inhabitants in 1665",
+        "year": 1665
+      },
+      {
+        "label": "1688",
+        "prompt": "The Glorious Revolution replaced King James II with William III and Mary II in England in 1688",
+        "year": 1688
+      },
+      {
+        "label": "1715",
+        "prompt": "Louis XIV died after a reign of seventy two years as the Sun King of France in 1715",
+        "year": 1715
+      },
+      {
+        "label": "1804",
+        "prompt": "Napoleon Bonaparte crowned himself Emperor of France in a ceremony at Notre Dame in 1804",
+        "year": 1804
+      },
+      {
+        "label": "1859",
+        "prompt": "Charles Darwin published On the Origin of Species revolutionizing our understanding of biology in 1859",
+        "year": 1859
+      },
+      {
+        "label": "1879",
+        "prompt": "Thomas Edison demonstrated the first practical incandescent light bulb in his laboratory in 1879",
+        "year": 1879
+      },
+      {
+        "label": "1917",
+        "prompt": "The Russian Revolution overthrew Tsar Nicholas II and brought the Bolsheviks to power in 1917",
+        "year": 1917
+      },
+      {
+        "label": "1928",
+        "prompt": "Alexander Fleming discovered penicillin in his laboratory transforming the treatment of infection in 1928",
+        "year": 1928
+      },
+      {
+        "label": "1945",
+        "prompt": "World War II ended with the surrender of Germany and Japan bringing peace to the world in 1945",
+        "year": 1945
+      },
+      {
+        "label": "1953",
+        "prompt": "Watson and Crick published their description of the double helix structure of DNA in 1953",
+        "year": 1953
+      },
+      {
+        "label": "1961",
+        "prompt": "Yuri Gagarin became the first human to travel into space orbiting the Earth in 1961",
+        "year": 1961
+      },
+      {
+        "label": "1989",
+        "prompt": "The Berlin Wall fell ending the division of Germany and symbolising the end of the Cold War in 1989",
+        "year": 1989
+      },
+      {
+        "label": "1994",
+        "prompt": "Nelson Mandela became the first democratically elected president of South Africa in 1994",
+        "year": 1994
+      }
+    ],
+    "year_categories": [
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_bc",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "ancient_ad",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "medieval",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "early_modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern",
+      "modern"
+    ]
+  },
+  "phase5": {
+    "days_of_week": [
+      {
+        "label": "Monday_1",
+        "prompt": "Today is Monday",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 1
+      },
+      {
+        "label": "Monday_2",
+        "prompt": "The day after Sunday is Monday",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 2
+      },
+      {
+        "label": "Monday_3",
+        "prompt": "Monday is the first day of the working week",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 3
+      },
+      {
+        "label": "Tuesday_1",
+        "prompt": "Today is Tuesday",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 1
+      },
+      {
+        "label": "Tuesday_2",
+        "prompt": "The day after Monday is Tuesday",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 2
+      },
+      {
+        "label": "Tuesday_3",
+        "prompt": "Tuesday is the second day of the working week",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 3
+      },
+      {
+        "label": "Wednesday_1",
+        "prompt": "Today is Wednesday",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 1
+      },
+      {
+        "label": "Wednesday_2",
+        "prompt": "The day after Tuesday is Wednesday",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 2
+      },
+      {
+        "label": "Wednesday_3",
+        "prompt": "Wednesday is the third day of the working week",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 3
+      },
+      {
+        "label": "Thursday_1",
+        "prompt": "Today is Thursday",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 1
+      },
+      {
+        "label": "Thursday_2",
+        "prompt": "The day after Wednesday is Thursday",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 2
+      },
+      {
+        "label": "Thursday_3",
+        "prompt": "Thursday is the fourth day of the working week",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 3
+      },
+      {
+        "label": "Friday_1",
+        "prompt": "Today is Friday",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 1
+      },
+      {
+        "label": "Friday_2",
+        "prompt": "The day after Thursday is Friday",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 2
+      },
+      {
+        "label": "Friday_3",
+        "prompt": "Friday is the fifth day of the working week",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 3
+      },
+      {
+        "label": "Saturday_1",
+        "prompt": "Today is Saturday",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 1
+      },
+      {
+        "label": "Saturday_2",
+        "prompt": "The day after Friday is Saturday",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 2
+      },
+      {
+        "label": "Saturday_3",
+        "prompt": "Saturday is the sixth day of the week",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 3
+      },
+      {
+        "label": "Sunday_1",
+        "prompt": "Today is Sunday",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 1
+      },
+      {
+        "label": "Sunday_2",
+        "prompt": "The day after Saturday is Sunday",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 2
+      },
+      {
+        "label": "Sunday_3",
+        "prompt": "Sunday is the seventh day of the week",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 3
+      }
+    ],
+    "days_of_week_labels": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7
+    ],
+    "months_of_year": [
+      {
+        "label": "January_1",
+        "prompt": "This month is January",
+        "month": 1,
+        "month_name": "January",
+        "frame": 1
+      },
+      {
+        "label": "January_2",
+        "prompt": "The month after December is January",
+        "month": 1,
+        "month_name": "January",
+        "frame": 2
+      },
+      {
+        "label": "January_3",
+        "prompt": "January is the first month of the year",
+        "month": 1,
+        "month_name": "January",
+        "frame": 3
+      },
+      {
+        "label": "February_1",
+        "prompt": "This month is February",
+        "month": 2,
+        "month_name": "February",
+        "frame": 1
+      },
+      {
+        "label": "February_2",
+        "prompt": "The month after January is February",
+        "month": 2,
+        "month_name": "February",
+        "frame": 2
+      },
+      {
+        "label": "February_3",
+        "prompt": "February is the second month of the year",
+        "month": 2,
+        "month_name": "February",
+        "frame": 3
+      },
+      {
+        "label": "March_1",
+        "prompt": "This month is March",
+        "month": 3,
+        "month_name": "March",
+        "frame": 1
+      },
+      {
+        "label": "March_2",
+        "prompt": "The month after February is March",
+        "month": 3,
+        "month_name": "March",
+        "frame": 2
+      },
+      {
+        "label": "March_3",
+        "prompt": "March is the third month of the year",
+        "month": 3,
+        "month_name": "March",
+        "frame": 3
+      },
+      {
+        "label": "April_1",
+        "prompt": "This month is April",
+        "month": 4,
+        "month_name": "April",
+        "frame": 1
+      },
+      {
+        "label": "April_2",
+        "prompt": "The month after March is April",
+        "month": 4,
+        "month_name": "April",
+        "frame": 2
+      },
+      {
+        "label": "April_3",
+        "prompt": "April is the fourth month of the year",
+        "month": 4,
+        "month_name": "April",
+        "frame": 3
+      },
+      {
+        "label": "May_1",
+        "prompt": "This month is May",
+        "month": 5,
+        "month_name": "May",
+        "frame": 1
+      },
+      {
+        "label": "May_2",
+        "prompt": "The month after April is May",
+        "month": 5,
+        "month_name": "May",
+        "frame": 2
+      },
+      {
+        "label": "May_3",
+        "prompt": "May is the fifth month of the year",
+        "month": 5,
+        "month_name": "May",
+        "frame": 3
+      },
+      {
+        "label": "June_1",
+        "prompt": "This month is June",
+        "month": 6,
+        "month_name": "June",
+        "frame": 1
+      },
+      {
+        "label": "June_2",
+        "prompt": "The month after May is June",
+        "month": 6,
+        "month_name": "June",
+        "frame": 2
+      },
+      {
+        "label": "June_3",
+        "prompt": "June is the sixth month of the year",
+        "month": 6,
+        "month_name": "June",
+        "frame": 3
+      },
+      {
+        "label": "July_1",
+        "prompt": "This month is July",
+        "month": 7,
+        "month_name": "July",
+        "frame": 1
+      },
+      {
+        "label": "July_2",
+        "prompt": "The month after June is July",
+        "month": 7,
+        "month_name": "July",
+        "frame": 2
+      },
+      {
+        "label": "July_3",
+        "prompt": "July is the seventh month of the year",
+        "month": 7,
+        "month_name": "July",
+        "frame": 3
+      },
+      {
+        "label": "August_1",
+        "prompt": "This month is August",
+        "month": 8,
+        "month_name": "August",
+        "frame": 1
+      },
+      {
+        "label": "August_2",
+        "prompt": "The month after July is August",
+        "month": 8,
+        "month_name": "August",
+        "frame": 2
+      },
+      {
+        "label": "August_3",
+        "prompt": "August is the eighth month of the year",
+        "month": 8,
+        "month_name": "August",
+        "frame": 3
+      },
+      {
+        "label": "September_1",
+        "prompt": "This month is September",
+        "month": 9,
+        "month_name": "September",
+        "frame": 1
+      },
+      {
+        "label": "September_2",
+        "prompt": "The month after August is September",
+        "month": 9,
+        "month_name": "September",
+        "frame": 2
+      },
+      {
+        "label": "September_3",
+        "prompt": "September is the ninth month of the year",
+        "month": 9,
+        "month_name": "September",
+        "frame": 3
+      },
+      {
+        "label": "October_1",
+        "prompt": "This month is October",
+        "month": 10,
+        "month_name": "October",
+        "frame": 1
+      },
+      {
+        "label": "October_2",
+        "prompt": "The month after September is October",
+        "month": 10,
+        "month_name": "October",
+        "frame": 2
+      },
+      {
+        "label": "October_3",
+        "prompt": "October is the tenth month of the year",
+        "month": 10,
+        "month_name": "October",
+        "frame": 3
+      },
+      {
+        "label": "November_1",
+        "prompt": "This month is November",
+        "month": 11,
+        "month_name": "November",
+        "frame": 1
+      },
+      {
+        "label": "November_2",
+        "prompt": "The month after October is November",
+        "month": 11,
+        "month_name": "November",
+        "frame": 2
+      },
+      {
+        "label": "November_3",
+        "prompt": "November is the eleventh month of the year",
+        "month": 11,
+        "month_name": "November",
+        "frame": 3
+      },
+      {
+        "label": "December_1",
+        "prompt": "This month is December",
+        "month": 12,
+        "month_name": "December",
+        "frame": 1
+      },
+      {
+        "label": "December_2",
+        "prompt": "The month after November is December",
+        "month": 12,
+        "month_name": "December",
+        "frame": 2
+      },
+      {
+        "label": "December_3",
+        "prompt": "December is the twelfth month of the year",
+        "month": 12,
+        "month_name": "December",
+        "frame": 3
+      }
+    ],
+    "months_of_year_labels": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7,
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10,
+      11,
+      11,
+      11,
+      12,
+      12,
+      12
+    ]
+  },
+  "phase6": {
+    "days_of_month": [
+      {
+        "label": "day1_frame1",
+        "prompt": "Today is the 1st of the month",
+        "day": 1,
+        "frame": 1
+      },
+      {
+        "label": "day1_frame2",
+        "prompt": "The day after the 31st is the 1st",
+        "day": 1,
+        "frame": 2
+      },
+      {
+        "label": "day1_frame3",
+        "prompt": "The 1st is the first day of the month",
+        "day": 1,
+        "frame": 3
+      },
+      {
+        "label": "day2_frame1",
+        "prompt": "Today is the 2nd of the month",
+        "day": 2,
+        "frame": 1
+      },
+      {
+        "label": "day2_frame2",
+        "prompt": "The day after the 1st is the 2nd",
+        "day": 2,
+        "frame": 2
+      },
+      {
+        "label": "day2_frame3",
+        "prompt": "The 2nd is the second day of the month",
+        "day": 2,
+        "frame": 3
+      },
+      {
+        "label": "day3_frame1",
+        "prompt": "Today is the 3rd of the month",
+        "day": 3,
+        "frame": 1
+      },
+      {
+        "label": "day3_frame2",
+        "prompt": "The day after the 2nd is the 3rd",
+        "day": 3,
+        "frame": 2
+      },
+      {
+        "label": "day3_frame3",
+        "prompt": "The 3rd is the third day of the month",
+        "day": 3,
+        "frame": 3
+      },
+      {
+        "label": "day4_frame1",
+        "prompt": "Today is the 4th of the month",
+        "day": 4,
+        "frame": 1
+      },
+      {
+        "label": "day4_frame2",
+        "prompt": "The day after the 3rd is the 4th",
+        "day": 4,
+        "frame": 2
+      },
+      {
+        "label": "day4_frame3",
+        "prompt": "The 4th is the fourth day of the month",
+        "day": 4,
+        "frame": 3
+      },
+      {
+        "label": "day5_frame1",
+        "prompt": "Today is the 5th of the month",
+        "day": 5,
+        "frame": 1
+      },
+      {
+        "label": "day5_frame2",
+        "prompt": "The day after the 4th is the 5th",
+        "day": 5,
+        "frame": 2
+      },
+      {
+        "label": "day5_frame3",
+        "prompt": "The 5th is the fifth day of the month",
+        "day": 5,
+        "frame": 3
+      },
+      {
+        "label": "day6_frame1",
+        "prompt": "Today is the 6th of the month",
+        "day": 6,
+        "frame": 1
+      },
+      {
+        "label": "day6_frame2",
+        "prompt": "The day after the 5th is the 6th",
+        "day": 6,
+        "frame": 2
+      },
+      {
+        "label": "day6_frame3",
+        "prompt": "The 6th is the sixth day of the month",
+        "day": 6,
+        "frame": 3
+      },
+      {
+        "label": "day7_frame1",
+        "prompt": "Today is the 7th of the month",
+        "day": 7,
+        "frame": 1
+      },
+      {
+        "label": "day7_frame2",
+        "prompt": "The day after the 6th is the 7th",
+        "day": 7,
+        "frame": 2
+      },
+      {
+        "label": "day7_frame3",
+        "prompt": "The 7th is the seventh day of the month",
+        "day": 7,
+        "frame": 3
+      },
+      {
+        "label": "day8_frame1",
+        "prompt": "Today is the 8th of the month",
+        "day": 8,
+        "frame": 1
+      },
+      {
+        "label": "day8_frame2",
+        "prompt": "The day after the 7th is the 8th",
+        "day": 8,
+        "frame": 2
+      },
+      {
+        "label": "day8_frame3",
+        "prompt": "The 8th is the eighth day of the month",
+        "day": 8,
+        "frame": 3
+      },
+      {
+        "label": "day9_frame1",
+        "prompt": "Today is the 9th of the month",
+        "day": 9,
+        "frame": 1
+      },
+      {
+        "label": "day9_frame2",
+        "prompt": "The day after the 8th is the 9th",
+        "day": 9,
+        "frame": 2
+      },
+      {
+        "label": "day9_frame3",
+        "prompt": "The 9th is the ninth day of the month",
+        "day": 9,
+        "frame": 3
+      },
+      {
+        "label": "day10_frame1",
+        "prompt": "Today is the 10th of the month",
+        "day": 10,
+        "frame": 1
+      },
+      {
+        "label": "day10_frame2",
+        "prompt": "The day after the 9th is the 10th",
+        "day": 10,
+        "frame": 2
+      },
+      {
+        "label": "day10_frame3",
+        "prompt": "The 10th is the tenth day of the month",
+        "day": 10,
+        "frame": 3
+      },
+      {
+        "label": "day11_frame1",
+        "prompt": "Today is the 11th of the month",
+        "day": 11,
+        "frame": 1
+      },
+      {
+        "label": "day11_frame2",
+        "prompt": "The day after the 10th is the 11th",
+        "day": 11,
+        "frame": 2
+      },
+      {
+        "label": "day11_frame3",
+        "prompt": "The 11th is the eleventh day of the month",
+        "day": 11,
+        "frame": 3
+      },
+      {
+        "label": "day12_frame1",
+        "prompt": "Today is the 12th of the month",
+        "day": 12,
+        "frame": 1
+      },
+      {
+        "label": "day12_frame2",
+        "prompt": "The day after the 11th is the 12th",
+        "day": 12,
+        "frame": 2
+      },
+      {
+        "label": "day12_frame3",
+        "prompt": "The 12th is the twelfth day of the month",
+        "day": 12,
+        "frame": 3
+      },
+      {
+        "label": "day13_frame1",
+        "prompt": "Today is the 13th of the month",
+        "day": 13,
+        "frame": 1
+      },
+      {
+        "label": "day13_frame2",
+        "prompt": "The day after the 12th is the 13th",
+        "day": 13,
+        "frame": 2
+      },
+      {
+        "label": "day13_frame3",
+        "prompt": "The 13th is the thirteenth day of the month",
+        "day": 13,
+        "frame": 3
+      },
+      {
+        "label": "day14_frame1",
+        "prompt": "Today is the 14th of the month",
+        "day": 14,
+        "frame": 1
+      },
+      {
+        "label": "day14_frame2",
+        "prompt": "The day after the 13th is the 14th",
+        "day": 14,
+        "frame": 2
+      },
+      {
+        "label": "day14_frame3",
+        "prompt": "The 14th is the fourteenth day of the month",
+        "day": 14,
+        "frame": 3
+      },
+      {
+        "label": "day15_frame1",
+        "prompt": "Today is the 15th of the month",
+        "day": 15,
+        "frame": 1
+      },
+      {
+        "label": "day15_frame2",
+        "prompt": "The day after the 14th is the 15th",
+        "day": 15,
+        "frame": 2
+      },
+      {
+        "label": "day15_frame3",
+        "prompt": "The 15th is the fifteenth day of the month",
+        "day": 15,
+        "frame": 3
+      },
+      {
+        "label": "day16_frame1",
+        "prompt": "Today is the 16th of the month",
+        "day": 16,
+        "frame": 1
+      },
+      {
+        "label": "day16_frame2",
+        "prompt": "The day after the 15th is the 16th",
+        "day": 16,
+        "frame": 2
+      },
+      {
+        "label": "day16_frame3",
+        "prompt": "The 16th is the sixteenth day of the month",
+        "day": 16,
+        "frame": 3
+      },
+      {
+        "label": "day17_frame1",
+        "prompt": "Today is the 17th of the month",
+        "day": 17,
+        "frame": 1
+      },
+      {
+        "label": "day17_frame2",
+        "prompt": "The day after the 16th is the 17th",
+        "day": 17,
+        "frame": 2
+      },
+      {
+        "label": "day17_frame3",
+        "prompt": "The 17th is the seventeenth day of the month",
+        "day": 17,
+        "frame": 3
+      },
+      {
+        "label": "day18_frame1",
+        "prompt": "Today is the 18th of the month",
+        "day": 18,
+        "frame": 1
+      },
+      {
+        "label": "day18_frame2",
+        "prompt": "The day after the 17th is the 18th",
+        "day": 18,
+        "frame": 2
+      },
+      {
+        "label": "day18_frame3",
+        "prompt": "The 18th is the eighteenth day of the month",
+        "day": 18,
+        "frame": 3
+      },
+      {
+        "label": "day19_frame1",
+        "prompt": "Today is the 19th of the month",
+        "day": 19,
+        "frame": 1
+      },
+      {
+        "label": "day19_frame2",
+        "prompt": "The day after the 18th is the 19th",
+        "day": 19,
+        "frame": 2
+      },
+      {
+        "label": "day19_frame3",
+        "prompt": "The 19th is the nineteenth day of the month",
+        "day": 19,
+        "frame": 3
+      },
+      {
+        "label": "day20_frame1",
+        "prompt": "Today is the 20th of the month",
+        "day": 20,
+        "frame": 1
+      },
+      {
+        "label": "day20_frame2",
+        "prompt": "The day after the 19th is the 20th",
+        "day": 20,
+        "frame": 2
+      },
+      {
+        "label": "day20_frame3",
+        "prompt": "The 20th is the twentieth day of the month",
+        "day": 20,
+        "frame": 3
+      },
+      {
+        "label": "day21_frame1",
+        "prompt": "Today is the 21st of the month",
+        "day": 21,
+        "frame": 1
+      },
+      {
+        "label": "day21_frame2",
+        "prompt": "The day after the 20th is the 21st",
+        "day": 21,
+        "frame": 2
+      },
+      {
+        "label": "day21_frame3",
+        "prompt": "The 21st is the twenty-first day of the month",
+        "day": 21,
+        "frame": 3
+      },
+      {
+        "label": "day22_frame1",
+        "prompt": "Today is the 22nd of the month",
+        "day": 22,
+        "frame": 1
+      },
+      {
+        "label": "day22_frame2",
+        "prompt": "The day after the 21st is the 22nd",
+        "day": 22,
+        "frame": 2
+      },
+      {
+        "label": "day22_frame3",
+        "prompt": "The 22nd is the twenty-second day of the month",
+        "day": 22,
+        "frame": 3
+      },
+      {
+        "label": "day23_frame1",
+        "prompt": "Today is the 23rd of the month",
+        "day": 23,
+        "frame": 1
+      },
+      {
+        "label": "day23_frame2",
+        "prompt": "The day after the 22nd is the 23rd",
+        "day": 23,
+        "frame": 2
+      },
+      {
+        "label": "day23_frame3",
+        "prompt": "The 23rd is the twenty-third day of the month",
+        "day": 23,
+        "frame": 3
+      },
+      {
+        "label": "day24_frame1",
+        "prompt": "Today is the 24th of the month",
+        "day": 24,
+        "frame": 1
+      },
+      {
+        "label": "day24_frame2",
+        "prompt": "The day after the 23rd is the 24th",
+        "day": 24,
+        "frame": 2
+      },
+      {
+        "label": "day24_frame3",
+        "prompt": "The 24th is the twenty-fourth day of the month",
+        "day": 24,
+        "frame": 3
+      },
+      {
+        "label": "day25_frame1",
+        "prompt": "Today is the 25th of the month",
+        "day": 25,
+        "frame": 1
+      },
+      {
+        "label": "day25_frame2",
+        "prompt": "The day after the 24th is the 25th",
+        "day": 25,
+        "frame": 2
+      },
+      {
+        "label": "day25_frame3",
+        "prompt": "The 25th is the twenty-fifth day of the month",
+        "day": 25,
+        "frame": 3
+      },
+      {
+        "label": "day26_frame1",
+        "prompt": "Today is the 26th of the month",
+        "day": 26,
+        "frame": 1
+      },
+      {
+        "label": "day26_frame2",
+        "prompt": "The day after the 25th is the 26th",
+        "day": 26,
+        "frame": 2
+      },
+      {
+        "label": "day26_frame3",
+        "prompt": "The 26th is the twenty-sixth day of the month",
+        "day": 26,
+        "frame": 3
+      },
+      {
+        "label": "day27_frame1",
+        "prompt": "Today is the 27th of the month",
+        "day": 27,
+        "frame": 1
+      },
+      {
+        "label": "day27_frame2",
+        "prompt": "The day after the 26th is the 27th",
+        "day": 27,
+        "frame": 2
+      },
+      {
+        "label": "day27_frame3",
+        "prompt": "The 27th is the twenty-seventh day of the month",
+        "day": 27,
+        "frame": 3
+      },
+      {
+        "label": "day28_frame1",
+        "prompt": "Today is the 28th of the month",
+        "day": 28,
+        "frame": 1
+      },
+      {
+        "label": "day28_frame2",
+        "prompt": "The day after the 27th is the 28th",
+        "day": 28,
+        "frame": 2
+      },
+      {
+        "label": "day28_frame3",
+        "prompt": "The 28th is the twenty-eighth day of the month",
+        "day": 28,
+        "frame": 3
+      },
+      {
+        "label": "day29_frame1",
+        "prompt": "Today is the 29th of the month",
+        "day": 29,
+        "frame": 1
+      },
+      {
+        "label": "day29_frame2",
+        "prompt": "The day after the 28th is the 29th",
+        "day": 29,
+        "frame": 2
+      },
+      {
+        "label": "day29_frame3",
+        "prompt": "The 29th is the twenty-ninth day of the month",
+        "day": 29,
+        "frame": 3
+      },
+      {
+        "label": "day30_frame1",
+        "prompt": "Today is the 30th of the month",
+        "day": 30,
+        "frame": 1
+      },
+      {
+        "label": "day30_frame2",
+        "prompt": "The day after the 29th is the 30th",
+        "day": 30,
+        "frame": 2
+      },
+      {
+        "label": "day30_frame3",
+        "prompt": "The 30th is the thirtieth day of the month",
+        "day": 30,
+        "frame": 3
+      },
+      {
+        "label": "day31_frame1",
+        "prompt": "Today is the 31st of the month",
+        "day": 31,
+        "frame": 1
+      },
+      {
+        "label": "day31_frame2",
+        "prompt": "The day after the 30th is the 31st",
+        "day": 31,
+        "frame": 2
+      },
+      {
+        "label": "day31_frame3",
+        "prompt": "The 31st is the thirty-first day of the month",
+        "day": 31,
+        "frame": 3
+      }
+    ],
+    "days_of_month_labels": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7,
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10,
+      11,
+      11,
+      11,
+      12,
+      12,
+      12,
+      13,
+      13,
+      13,
+      14,
+      14,
+      14,
+      15,
+      15,
+      15,
+      16,
+      16,
+      16,
+      17,
+      17,
+      17,
+      18,
+      18,
+      18,
+      19,
+      19,
+      19,
+      20,
+      20,
+      20,
+      21,
+      21,
+      21,
+      22,
+      22,
+      22,
+      23,
+      23,
+      23,
+      24,
+      24,
+      24,
+      25,
+      25,
+      25,
+      26,
+      26,
+      26,
+      27,
+      27,
+      27,
+      28,
+      28,
+      28,
+      29,
+      29,
+      29,
+      30,
+      30,
+      30,
+      31,
+      31,
+      31
+    ],
+    "days_of_week": [
+      {
+        "label": "Monday_1",
+        "prompt": "Today is Monday",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 1
+      },
+      {
+        "label": "Monday_2",
+        "prompt": "The day after Sunday is Monday",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 2
+      },
+      {
+        "label": "Monday_3",
+        "prompt": "Monday is the first day of the working week",
+        "day": 1,
+        "day_name": "Monday",
+        "frame": 3
+      },
+      {
+        "label": "Tuesday_1",
+        "prompt": "Today is Tuesday",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 1
+      },
+      {
+        "label": "Tuesday_2",
+        "prompt": "The day after Monday is Tuesday",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 2
+      },
+      {
+        "label": "Tuesday_3",
+        "prompt": "Tuesday is the second day of the working week",
+        "day": 2,
+        "day_name": "Tuesday",
+        "frame": 3
+      },
+      {
+        "label": "Wednesday_1",
+        "prompt": "Today is Wednesday",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 1
+      },
+      {
+        "label": "Wednesday_2",
+        "prompt": "The day after Tuesday is Wednesday",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 2
+      },
+      {
+        "label": "Wednesday_3",
+        "prompt": "Wednesday is the third day of the working week",
+        "day": 3,
+        "day_name": "Wednesday",
+        "frame": 3
+      },
+      {
+        "label": "Thursday_1",
+        "prompt": "Today is Thursday",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 1
+      },
+      {
+        "label": "Thursday_2",
+        "prompt": "The day after Wednesday is Thursday",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 2
+      },
+      {
+        "label": "Thursday_3",
+        "prompt": "Thursday is the fourth day of the working week",
+        "day": 4,
+        "day_name": "Thursday",
+        "frame": 3
+      },
+      {
+        "label": "Friday_1",
+        "prompt": "Today is Friday",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 1
+      },
+      {
+        "label": "Friday_2",
+        "prompt": "The day after Thursday is Friday",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 2
+      },
+      {
+        "label": "Friday_3",
+        "prompt": "Friday is the fifth day of the working week",
+        "day": 5,
+        "day_name": "Friday",
+        "frame": 3
+      },
+      {
+        "label": "Saturday_1",
+        "prompt": "Today is Saturday",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 1
+      },
+      {
+        "label": "Saturday_2",
+        "prompt": "The day after Friday is Saturday",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 2
+      },
+      {
+        "label": "Saturday_3",
+        "prompt": "Saturday is the sixth day of the week",
+        "day": 6,
+        "day_name": "Saturday",
+        "frame": 3
+      },
+      {
+        "label": "Sunday_1",
+        "prompt": "Today is Sunday",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 1
+      },
+      {
+        "label": "Sunday_2",
+        "prompt": "The day after Saturday is Sunday",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 2
+      },
+      {
+        "label": "Sunday_3",
+        "prompt": "Sunday is the seventh day of the week",
+        "day": 7,
+        "day_name": "Sunday",
+        "frame": 3
+      }
+    ],
+    "days_of_week_labels": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7
+    ],
+    "months_of_year": [
+      {
+        "label": "January_1",
+        "prompt": "This month is January",
+        "month": 1,
+        "month_name": "January",
+        "frame": 1
+      },
+      {
+        "label": "January_2",
+        "prompt": "The month after December is January",
+        "month": 1,
+        "month_name": "January",
+        "frame": 2
+      },
+      {
+        "label": "January_3",
+        "prompt": "January is the first month of the year",
+        "month": 1,
+        "month_name": "January",
+        "frame": 3
+      },
+      {
+        "label": "February_1",
+        "prompt": "This month is February",
+        "month": 2,
+        "month_name": "February",
+        "frame": 1
+      },
+      {
+        "label": "February_2",
+        "prompt": "The month after January is February",
+        "month": 2,
+        "month_name": "February",
+        "frame": 2
+      },
+      {
+        "label": "February_3",
+        "prompt": "February is the second month of the year",
+        "month": 2,
+        "month_name": "February",
+        "frame": 3
+      },
+      {
+        "label": "March_1",
+        "prompt": "This month is March",
+        "month": 3,
+        "month_name": "March",
+        "frame": 1
+      },
+      {
+        "label": "March_2",
+        "prompt": "The month after February is March",
+        "month": 3,
+        "month_name": "March",
+        "frame": 2
+      },
+      {
+        "label": "March_3",
+        "prompt": "March is the third month of the year",
+        "month": 3,
+        "month_name": "March",
+        "frame": 3
+      },
+      {
+        "label": "April_1",
+        "prompt": "This month is April",
+        "month": 4,
+        "month_name": "April",
+        "frame": 1
+      },
+      {
+        "label": "April_2",
+        "prompt": "The month after March is April",
+        "month": 4,
+        "month_name": "April",
+        "frame": 2
+      },
+      {
+        "label": "April_3",
+        "prompt": "April is the fourth month of the year",
+        "month": 4,
+        "month_name": "April",
+        "frame": 3
+      },
+      {
+        "label": "May_1",
+        "prompt": "This month is May",
+        "month": 5,
+        "month_name": "May",
+        "frame": 1
+      },
+      {
+        "label": "May_2",
+        "prompt": "The month after April is May",
+        "month": 5,
+        "month_name": "May",
+        "frame": 2
+      },
+      {
+        "label": "May_3",
+        "prompt": "May is the fifth month of the year",
+        "month": 5,
+        "month_name": "May",
+        "frame": 3
+      },
+      {
+        "label": "June_1",
+        "prompt": "This month is June",
+        "month": 6,
+        "month_name": "June",
+        "frame": 1
+      },
+      {
+        "label": "June_2",
+        "prompt": "The month after May is June",
+        "month": 6,
+        "month_name": "June",
+        "frame": 2
+      },
+      {
+        "label": "June_3",
+        "prompt": "June is the sixth month of the year",
+        "month": 6,
+        "month_name": "June",
+        "frame": 3
+      },
+      {
+        "label": "July_1",
+        "prompt": "This month is July",
+        "month": 7,
+        "month_name": "July",
+        "frame": 1
+      },
+      {
+        "label": "July_2",
+        "prompt": "The month after June is July",
+        "month": 7,
+        "month_name": "July",
+        "frame": 2
+      },
+      {
+        "label": "July_3",
+        "prompt": "July is the seventh month of the year",
+        "month": 7,
+        "month_name": "July",
+        "frame": 3
+      },
+      {
+        "label": "August_1",
+        "prompt": "This month is August",
+        "month": 8,
+        "month_name": "August",
+        "frame": 1
+      },
+      {
+        "label": "August_2",
+        "prompt": "The month after July is August",
+        "month": 8,
+        "month_name": "August",
+        "frame": 2
+      },
+      {
+        "label": "August_3",
+        "prompt": "August is the eighth month of the year",
+        "month": 8,
+        "month_name": "August",
+        "frame": 3
+      },
+      {
+        "label": "September_1",
+        "prompt": "This month is September",
+        "month": 9,
+        "month_name": "September",
+        "frame": 1
+      },
+      {
+        "label": "September_2",
+        "prompt": "The month after August is September",
+        "month": 9,
+        "month_name": "September",
+        "frame": 2
+      },
+      {
+        "label": "September_3",
+        "prompt": "September is the ninth month of the year",
+        "month": 9,
+        "month_name": "September",
+        "frame": 3
+      },
+      {
+        "label": "October_1",
+        "prompt": "This month is October",
+        "month": 10,
+        "month_name": "October",
+        "frame": 1
+      },
+      {
+        "label": "October_2",
+        "prompt": "The month after September is October",
+        "month": 10,
+        "month_name": "October",
+        "frame": 2
+      },
+      {
+        "label": "October_3",
+        "prompt": "October is the tenth month of the year",
+        "month": 10,
+        "month_name": "October",
+        "frame": 3
+      },
+      {
+        "label": "November_1",
+        "prompt": "This month is November",
+        "month": 11,
+        "month_name": "November",
+        "frame": 1
+      },
+      {
+        "label": "November_2",
+        "prompt": "The month after October is November",
+        "month": 11,
+        "month_name": "November",
+        "frame": 2
+      },
+      {
+        "label": "November_3",
+        "prompt": "November is the eleventh month of the year",
+        "month": 11,
+        "month_name": "November",
+        "frame": 3
+      },
+      {
+        "label": "December_1",
+        "prompt": "This month is December",
+        "month": 12,
+        "month_name": "December",
+        "frame": 1
+      },
+      {
+        "label": "December_2",
+        "prompt": "The month after November is December",
+        "month": 12,
+        "month_name": "December",
+        "frame": 2
+      },
+      {
+        "label": "December_3",
+        "prompt": "December is the twelfth month of the year",
+        "month": 12,
+        "month_name": "December",
+        "frame": 3
+      }
+    ],
+    "months_of_year_labels": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7,
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10,
+      11,
+      11,
+      11,
+      12,
+      12,
+      12
+    ]
+  }
 }

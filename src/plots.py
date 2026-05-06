@@ -13,14 +13,11 @@ from src.geometry import fit_circle_algebraic
 
 # Category -> plot colour (shared across all plots)
 CAT_COLORS = {
-    "ancient_bc":     "#6c3483",
-    "ancient_ad":     "#a569bd",
-    "medieval":       "#2980b9",
-    "early_modern":   "#27ae60",
-    "modern":         "#e74c3c",
-    "battle_europe":  "#e67e22",
-    "battle_america": "#c0392b",
-    "battle_east":    "#d4ac0d",
+    "ancient_bc":   "#6c3483",
+    "ancient_ad":   "#a569bd",
+    "medieval":     "#2980b9",
+    "early_modern": "#27ae60",
+    "modern":       "#e74c3c",
 }
 
 
@@ -60,8 +57,8 @@ def plot_pca_overview(
     ax.set_ylabel(f"PC2  ({var[1]:.1%})" if n_pc >= 2 else "")
     ax.set_title("PC1 vs PC2")
     ax.grid(alpha=0.3)
-    for cat, col in CAT_COLORS.items():
-        ax.scatter([], [], color=col, label=cat, s=60)
+    for cat in dict.fromkeys(categories):
+        ax.scatter([], [], color=CAT_COLORS.get(cat, "#7f8c8d"), label=cat, s=60)
     ax.legend(fontsize=7)
 
     # 3-D scatter
@@ -126,97 +123,66 @@ def plot_year_linearity(
 def _plot_geometric_analysis(
     coords: np.ndarray, var: np.ndarray,
     angles: np.ndarray,
-    bc_mask: list, ad_mask: list,
-    coords_d: np.ndarray, var_d: np.ndarray,
     year_nums: np.ndarray, year_labels: list,
     layer: int,
     year_categories: list,
     output_dir: Path,
 ) -> None:
-    """Four-panel geometric structure plot: PCA, circular, detrended, angular."""
+    """Two-plot geometric structure: PC2 vs PC3 with fitted circle, and angular position vs year."""
     cat_colors_pts = [CAT_COLORS.get(c, "#7f8c8d") for c in year_categories]
 
-    fig, axes = plt.subplots(1, 4, figsize=(22, 5))
-    fig.suptitle(
-        f"Phase 2 - Geometric Structure  (Layer {layer})",
-        fontsize=11,
-    )
+    # -- Plot 1: PC2 vs PC3 with fitted circle, all categories -----------------
+    fig, ax = plt.subplots(figsize=(7, 6))
+    fig.suptitle(f"Phase 2 - PC2 vs PC3  (Layer {layer})", fontsize=11)
 
-    # Panel 1: PC1 vs PC2, coloured by numeric year
-    ax1 = axes[0]
-    sc1 = ax1.scatter(coords[:, 0], coords[:, 1], c=year_nums,
-                      cmap="plasma", s=80, edgecolors="k", linewidths=0.5)
+    ax.scatter(coords[:, 1], coords[:, 2], c=cat_colors_pts,
+               s=80, edgecolors="k", linewidths=0.5, zorder=3)
     for i, lbl in enumerate(year_labels):
-        ax1.annotate(lbl, (coords[i, 0], coords[i, 1]), fontsize=6, alpha=0.8)
-    plt.colorbar(sc1, ax=ax1, label="Year")
-    ax1.set_xlabel(f"PC1 ({var[0]:.1%})")
-    ax1.set_ylabel(f"PC2 ({var[1]:.1%})")
-    ax1.set_title("Raw: PC1 vs PC2 (by year value)")
-    ax1.grid(alpha=0.3)
+        ax.annotate(lbl, (coords[i, 1], coords[i, 2]), fontsize=6, alpha=0.8)
 
-    # Panel 2: PC2 vs PC3 with fitted circle + BC/AD arcs
-    ax2 = axes[1]
-    ax2.scatter(coords[:, 1], coords[:, 2], c=cat_colors_pts,
-                s=80, edgecolors="k", linewidths=0.5)
-    for i, lbl in enumerate(year_labels):
-        ax2.annotate(lbl, (coords[i, 1], coords[i, 2]), fontsize=6, alpha=0.8)
     try:
         cx, cy, r, rmse = fit_circle_algebraic(coords[:, 1:3])
         th = np.linspace(-np.pi, np.pi, 300)
-        ax2.plot(cx + r * np.cos(th), cy + r * np.sin(th),
-                 "k--", alpha=0.45, linewidth=1.5, label=f"Circle (RMSE={rmse:.3f})")
-        ax2.scatter([cx], [cy], color="black", marker="+", s=120, zorder=6)
-        ax2.scatter(coords[bc_mask, 1], coords[bc_mask, 2],
-                    color="#6c3483", s=130, edgecolors="w", linewidths=1.2,
-                    zorder=7, label="BC")
-        ax2.scatter(coords[ad_mask, 1], coords[ad_mask, 2],
-                    color="#a569bd", s=130, marker="^", edgecolors="w",
-                    linewidths=1.2, zorder=7, label="AD")
+        ax.plot(cx + r * np.cos(th), cy + r * np.sin(th),
+                "k--", alpha=0.45, linewidth=1.5, label=f"Circle (RMSE={rmse:.3f})")
+        ax.scatter([cx], [cy], color="black", marker="+", s=120, zorder=6)
     except Exception:
         pass
-    ax2.set_xlabel(f"PC2 ({var[1]:.1%})")
-    ax2.set_ylabel(f"PC3 ({var[2]:.1%})")
-    ax2.set_title("PC2 vs PC3 + fitted circle")
-    ax2.legend(fontsize=7)
-    ax2.grid(alpha=0.3)
 
-    # Panel 3: Detrended (PC1 removed)
-    ax3 = axes[2]
-    sc3 = ax3.scatter(coords_d[:, 0], coords_d[:, 1], c=year_nums,
-                      cmap="plasma", s=80, edgecolors="k", linewidths=0.5)
-    for i, lbl in enumerate(year_labels):
-        ax3.annotate(lbl, (coords_d[i, 0], coords_d[i, 1]), fontsize=6, alpha=0.8)
-    try:
-        cx_d, cy_d, r_d, rmse_d = fit_circle_algebraic(coords_d[:, :2])
-        th = np.linspace(-np.pi, np.pi, 300)
-        ax3.plot(cx_d + r_d * np.cos(th), cy_d + r_d * np.sin(th),
-                 "k--", alpha=0.45, linewidth=1.5,
-                 label=f"Circle (RMSE={rmse_d:.3f})")
-        ax3.legend(fontsize=7)
-    except Exception:
-        pass
-    plt.colorbar(sc3, ax=ax3, label="Year")
-    ax3.set_xlabel(f"Detr-PC1 ({var_d[0]:.1%})")
-    ax3.set_ylabel(f"Detr-PC2 ({var_d[1]:.1%})")
-    ax3.set_title("Detrended (dominant axis removed)")
-    ax3.grid(alpha=0.3)
-
-    # Panel 4: Angle around fitted circle vs year
-    ax4 = axes[3]
-    deg = np.degrees(angles)
-    sc4 = ax4.scatter(year_nums, deg, c=year_nums,
-                      cmap="plasma", s=80, edgecolors="k", linewidths=0.5)
-    for i, lbl in enumerate(year_labels):
-        ax4.annotate(lbl, (year_nums[i], deg[i]), fontsize=6, alpha=0.8)
-    r_ang = float(np.corrcoef(year_nums, deg)[0, 1])
-    ax4.set_xlabel("Year (numeric)")
-    ax4.set_ylabel("Angle on fitted circle (deg)")
-    ax4.set_title(f"Angular position vs year  (r = {r_ang:+.3f})")
-    ax4.grid(alpha=0.3)
-    plt.colorbar(sc4, ax=ax4, label="Year")
+    for cat in dict.fromkeys(year_categories):
+        ax.scatter([], [], color=CAT_COLORS.get(cat, "#7f8c8d"), label=cat, s=60)
+    ax.legend(fontsize=7)
+    ax.set_xlabel(f"PC2 ({var[1]:.1%})")
+    ax.set_ylabel(f"PC3 ({var[2]:.1%})")
+    ax.set_title("PC2 vs PC3 + fitted circle")
+    ax.grid(alpha=0.3)
 
     plt.tight_layout()
-    p = output_dir / f"phase2_geometric_layer{layer}.png"
-    plt.savefig(p, dpi=150, bbox_inches="tight")
+    p1 = output_dir / f"phase2_pc2pc3_layer{layer}.png"
+    plt.savefig(p1, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"  Saved -> {p.name}")
+    print(f"  Saved -> {p1.name}")
+
+    # -- Plot 2: Angular position on fitted circle vs year ----------------------
+    fig, ax = plt.subplots(figsize=(7, 5))
+    deg = np.degrees(angles)
+    ax.scatter(year_nums, deg, c=cat_colors_pts,
+               s=80, edgecolors="k", linewidths=0.5, zorder=3)
+    for i, lbl in enumerate(year_labels):
+        ax.annotate(lbl, (year_nums[i], deg[i]), fontsize=6, alpha=0.8)
+    r_ang = float(np.corrcoef(year_nums, deg)[0, 1])
+
+    for cat in dict.fromkeys(year_categories):
+        ax.scatter([], [], color=CAT_COLORS.get(cat, "#7f8c8d"), label=cat, s=60)
+    ax.legend(fontsize=7)
+    ax.set_xlabel("Year (numeric)")
+    ax.set_ylabel("Angle on fitted circle (deg)")
+    ax.set_title(f"Angular position vs year  (r = {r_ang:+.3f})")
+    ax.grid(alpha=0.3)
+
+    fig.suptitle(f"Phase 2 - Angular Position  (Layer {layer})", fontsize=11)
+    plt.tight_layout()
+    p2 = output_dir / f"phase2_angular_layer{layer}.png"
+    plt.savefig(p2, dpi=150, bbox_inches="tight")
+    plt.close()
+    print(f"  Saved -> {p2.name}")

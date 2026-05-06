@@ -1,20 +1,17 @@
 import csv
-import json
 import numpy as np
 import torch
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from pathlib import Path
 from sklearn.decomposition import PCA
 
 from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, CORR_THRESHOLD, PHASE4_LAYERS
 from src.model import load_model, extract_activations
 from src.plots import plot_year_linearity
+from src.data_loading import MATCHED_CLEAN_ITEMS, MATCHED_CLEAN_CATEGORIES
 import phases.phase3 as _phase3_mod
 from phases.phase3 import _ablation_scan_at_layer
-
-_DATA_PATH = Path(__file__).parent.parent / "data" / "prompts.json"
 
 COMPARE_LAYERS = [0, 1, 4, 8, 11]
 
@@ -29,30 +26,20 @@ def run_phase4() -> None:
     phase_dir = OUTPUT_DIR / "phase4"
     phase_dir.mkdir(parents=True, exist_ok=True)
 
-    # -- 1. Load clean dataset -------------------------------------------------
-    with open(_DATA_PATH) as f:
-        data = json.load(f)
-
-    CLEAN_YEAR_ITEMS = [
-        (e["label"], e["prompt"], e["year"])
-        for e in data["clean_year_items"]
-    ]
-    CLEAN_YEAR_CATEGORIES = data["clean_year_categories"]
-    print(f"  Loaded {len(CLEAN_YEAR_ITEMS)} clean prompts")
-
-    # -- 2. Load model ---------------------------------------------------------
+    # -- 1. Load model ---------------------------------------------------------
+    print(f"  Using {len(MATCHED_CLEAN_ITEMS)} matched clean prompts")
     model = load_model()
 
-    # -- 3. Phase 1 linearity check on clean data at layer 4 ------------------
+    # -- 2. Linearity check on clean data at layer 4 --------------------------
     print("\n[Linearity]  Extracting activations at layer 4 (clean) ...")
-    acts_l4, _ = extract_activations(model, CLEAN_YEAR_ITEMS)
+    acts_l4, _ = extract_activations(model, MATCHED_CLEAN_ITEMS)
     plot_year_linearity(
-        acts_l4, CLEAN_YEAR_ITEMS,
+        acts_l4, MATCHED_CLEAN_ITEMS,
         path=phase_dir / "phase4_clean_year_linearity.png",
         layer=4,
     )
     acts_np = acts_l4.numpy()
-    numeric = np.array([it[2] for it in CLEAN_YEAR_ITEMS], dtype=float)
+    numeric = np.array([it[2] for it in MATCHED_CLEAN_ITEMS], dtype=float)
     n_pc = min(3, acts_np.shape[0] - 1, acts_np.shape[1])
     coords = PCA(n_components=n_pc).fit_transform(acts_np)
     for pc in range(n_pc):
@@ -61,12 +48,10 @@ def run_phase4() -> None:
 
     # -- 4. Monkey-patch phase3 module globals to use clean data ---------------
     _orig_year_items = _phase3_mod.YEAR_ITEMS
-    _orig_all_items  = _phase3_mod.ALL_ITEMS
     _orig_all_cats   = _phase3_mod.ALL_CATS
 
-    _phase3_mod.YEAR_ITEMS = CLEAN_YEAR_ITEMS
-    _phase3_mod.ALL_ITEMS  = CLEAN_YEAR_ITEMS
-    _phase3_mod.ALL_CATS   = CLEAN_YEAR_CATEGORIES
+    _phase3_mod.YEAR_ITEMS = MATCHED_CLEAN_ITEMS
+    _phase3_mod.ALL_CATS   = MATCHED_CLEAN_CATEGORIES
 
     # -- 5. Run superposition depth scan on clean data -------------------------
     clean_results = []
@@ -76,7 +61,6 @@ def run_phase4() -> None:
 
     # -- 6. Restore originals and run comparison layers for original data ------
     _phase3_mod.YEAR_ITEMS = _orig_year_items
-    _phase3_mod.ALL_ITEMS  = _orig_all_items
     _phase3_mod.ALL_CATS   = _orig_all_cats
 
     print("\n" + "=" * 65)
