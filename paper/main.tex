@@ -18,7 +18,7 @@
 % TITLE
 % -------------------------------------------------------
 \title{\textbf{Temporal Superposition in GPT-2: \\
-How Temporal Time is Encoded and \\
+How Time is Encoded and \\
 Distributed Across Layers}}
 
 \author{
@@ -229,8 +229,8 @@ zero even for a geometrically well-structured representation. We therefore adopt
 \\
 \\
 We retain five PCA components from the SAE reconstruction and fit an algebraic circle to the PC2/PC3 plane using the Coope(1993) least squares
-method \cite{coope1993}. PC1 is deliberately excluded as it captures non-cyclic variance. PC1 captures whether the text refers to a weekday or month and the
-PC2/PC3 captures the circular structure. For each prompt we compute its angular position relative to the fitted circle center $(c_x, c_y)$:
+method \cite{coope1993}. PC1 is deliberately excluded as it captures non-cyclic variance (e.g. whether the text refers to a weekday versus a month);
+the circular structure of interest emerges in PC2 and PC3. For each prompt we compute its angular position relative to the fitted circle center $(c_x, c_y)$:
 $$\theta_i = \arctan2\left(\text{PC3}_i - c_y,\ \text{PC2}_i - c_x\right)$$
 We then compute the Fisher circular-linear correlation between angular position and the integer label $\mathbf{y}$. A standard Pearson correlation 
 is inappropriate here because $\theta_i$ is a circular variable — day 7 and day 1 are adjacent in the cyclic ordering but nearly $\pi$ apart in angle, 
@@ -549,7 +549,7 @@ include them.
 
 Days of the month extend the circular encoding analysis to a concept with 31 labels, substantially more than days of the week (7)
 or months of the year (12), and one that appears less frequently in natural text in explicitly cyclic contexts. Despite this,
-the model encodes a detectable circular geometry at layer 7 ($r_{\text{angular}} = 0.495$, $\text{RMSE} = 0.51$), suggesting the
+the model encodes a detectable circular geometry at layer 4 ($r_{\text{angular}} = 0.495$, $\text{RMSE} = 2.651$), suggesting the
 circular encoding mechanism is not limited to well-studied, high-frequency cyclic concepts. The weaker signal relative to days of
 the week and months of the year is consistent with sparser training signal, though we cannot rule out that 31 labels simply produce
 a noisier circular fit given our dataset size.
@@ -606,6 +606,14 @@ depth trajectories for days of the week and months of the year. Alternative feat
 sparse regression, or activation patching --- should also be explored, as ANOVA F-score selects for features that discriminate
 between predefined group labels and may miss features that encode temporal structure in other ways.
 
+
+% -------------------------------------------------------
+% AUTHOR CONTRIBUTIONS
+% -------------------------------------------------------
+\section*{Author Contributions}
+Sam Brown designed and implemented the experimental pipeline, including the SAE feature ablation scan, cyclic concept datasets,
+and all six analysis phases. Peyton Calvert contributed to prompt design, result interpretation, and writeup.
+Both authors contributed to the overall project direction and final paper.
 
 % -------------------------------------------------------
 % BIBLIOGRAPHY

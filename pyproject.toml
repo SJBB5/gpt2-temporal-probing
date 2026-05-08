@@ -1,0 +1,14 @@
+[project]
+name = "gpt2-temporal-probing"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "transformer-lens",
+    "sae-lens",
+    "scikit-learn",
+    "scipy",
+    "matplotlib",
+    "numpy",
+    "tqdm",
+]

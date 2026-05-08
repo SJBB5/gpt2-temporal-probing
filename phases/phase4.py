@@ -151,29 +151,32 @@ def run_phase4() -> None:
     # -- CSV output: comparison -----------------------------------------------
     p3_csv = OUTPUT_DIR / "phase3" / "phase3_layer_summary.csv"
     p_cmp  = phase_dir / "phase3_vs_phase4_comparison.csv"
-    with open(p3_csv, newline="") as f3, open(p4_csv, newline="") as f4:
-        p3_rows = {int(r["layer"]): r for r in csv.DictReader(f3)}
-        p4_rows = {int(r["layer"]): r for r in csv.DictReader(f4)}
-    with open(p_cmp, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=[
-            "layer", "orig_base_r", "clean_base_r",
-            "orig_max_drop", "clean_max_drop",
-            "orig_top_feature", "clean_top_feature",
-        ])
-        writer.writeheader()
-        for layer in sorted(p4_rows):
-            p3 = p3_rows.get(layer, {})
-            p4 = p4_rows[layer]
-            writer.writerow({
-                "layer":             layer,
-                "orig_base_r":       p3.get("base_r", ""),
-                "clean_base_r":      p4["base_r"],
-                "orig_max_drop":     p3.get("max_drop", ""),
-                "clean_max_drop":    p4["max_drop"],
-                "orig_top_feature":  p3.get("top_feature_index", ""),
-                "clean_top_feature": p4["top_feature_index"],
-            })
-    print(f"  Saved -> phase3_vs_phase4_comparison.csv")
+    try:
+        with open(p3_csv, newline="") as f3, open(p4_csv, newline="") as f4:
+            p3_rows = {int(r["layer"]): r for r in csv.DictReader(f3)}
+            p4_rows = {int(r["layer"]): r for r in csv.DictReader(f4)}
+        with open(p_cmp, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=[
+                "layer", "orig_base_r", "clean_base_r",
+                "orig_max_drop", "clean_max_drop",
+                "orig_top_feature", "clean_top_feature",
+            ])
+            writer.writeheader()
+            for layer in sorted(p4_rows):
+                p3 = p3_rows.get(layer, {})
+                p4 = p4_rows[layer]
+                writer.writerow({
+                    "layer":             layer,
+                    "orig_base_r":       p3.get("base_r", ""),
+                    "clean_base_r":      p4["base_r"],
+                    "orig_max_drop":     p3.get("max_drop", ""),
+                    "clean_max_drop":    p4["max_drop"],
+                    "orig_top_feature":  p3.get("top_feature_index", ""),
+                    "clean_top_feature": p4["top_feature_index"],
+                })
+        print(f"  Saved -> phase3_vs_phase4_comparison.csv")
+    except FileNotFoundError:
+        print("  Skipping comparison CSV — phase3_layer_summary.csv not found (run phase 3 first).")
 
     print("\n" + "=" * 65)
     print("PHASE 4  COMPLETE")
