@@ -11,10 +11,11 @@ from scipy.stats import f_oneway
 from tqdm import tqdm
 from sae_lens import SAE
 
-from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, N_DISC
+from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, N_DISC, PHASE5_LAYERS
+
+GEOMETRY_LAYER = 7   # layer used for geometry visualisation and cluster quality check
 from src.model import load_model
 from src.metrics import fit_and_score_circle, cluster_quality_check
-from src.geometry import fit_circle_algebraic  # noqa: F401 — imported per spec
 
 _DATA_PATH = Path(__file__).parent.parent / "data" / "prompts.json"
 
@@ -162,9 +163,12 @@ def _geometry_plot(
     ax.plot(cx + radius * np.cos(theta), cy + radius * np.sin(theta),
             "--", color="gray", linewidth=1.5, label=f"circle r={radius:.2f}")
 
-    for i, lbl in enumerate(item_labels_list):
-        ax.annotate(lbl, (coords[i, 1], coords[i, 2]),
-                    fontsize=5, ha="center", va="bottom", alpha=0.75)
+    seen = {}
+    for i, lbl in enumerate(labels):
+        if lbl not in seen:
+            seen[lbl] = (coords[i, 1], coords[i, 2])
+    for lbl, (x, y) in seen.items():
+        ax.annotate(str(lbl), (x, y), fontsize=7, ha="center", va="bottom", alpha=0.85)
 
     ax.set_xlabel("PC2")
     ax.set_ylabel("PC3")
@@ -224,7 +228,7 @@ def run_phase5() -> None:
         ("Days",   days_items,   days_labels,   3),
         ("Months", months_items, months_labels, 3),
     ]:
-        acts = _extract_acts_at_layer(model, 7, items)
+        acts = _extract_acts_at_layer(model, GEOMETRY_LAYER, items)
         n_c = min(3, len(labels) - 1, acts.shape[1])
         coords = PCA(n_components=n_c).fit_transform(acts.numpy())
         ratio = cluster_quality_check(coords, labels, n_per)
@@ -234,15 +238,15 @@ def run_phase5() -> None:
 
     # -- 4. Geometry visualization at layer 7 ----------------------------------
     print("\n[Geometry visualization at layer 7]")
-    _geometry_plot(model, 7, days_items,   days_labels,   "Days of Week",   days_item_labels,   "days",   output_dir=phase_dir)
-    _geometry_plot(model, 7, months_items, months_labels, "Months of Year", months_item_labels, "months", output_dir=phase_dir)
+    _geometry_plot(model, GEOMETRY_LAYER, days_items,   days_labels,   "Days of Week",   days_item_labels,   "days",   output_dir=phase_dir)
+    _geometry_plot(model, GEOMETRY_LAYER, months_items, months_labels, "Months of Year", months_item_labels, "months", output_dir=phase_dir)
 
     # -- 5. Circular superposition depth scan ----------------------------------
     print("\n[Circular superposition depth scan]")
 
     days_results = []
     print("\n--- Days of Week ---")
-    for layer in range(12):
+    for layer in PHASE5_LAYERS:
         print(f"\n--- Layer {layer} (days) ---")
         days_results.append(
             _circular_ablation_scan_at_layer(model, layer, days_items, days_labels)
@@ -250,7 +254,7 @@ def run_phase5() -> None:
 
     months_results = []
     print("\n--- Months of Year ---")
-    for layer in range(12):
+    for layer in PHASE5_LAYERS:
         print(f"\n--- Layer {layer} (months) ---")
         months_results.append(
             _circular_ablation_scan_at_layer(model, layer, months_items, months_labels)
@@ -284,7 +288,7 @@ def run_phase5() -> None:
         print(f"  Saved -> {fname}")
 
     # -- 7. Depth scan plot ----------------------------------------------------
-    layers = list(range(12))
+    layers = list(PHASE5_LAYERS)
 
     def _safe(results, key):
         return [r[key] if not (isinstance(r[key], float) and np.isnan(r[key]))

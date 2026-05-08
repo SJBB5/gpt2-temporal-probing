@@ -5,17 +5,17 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+from scipy.stats import f_oneway
 from sklearn.decomposition import PCA
 from sae_lens import SAE
 from transformer_lens import HookedTransformer
 
-from config import DEVICE, OUTPUT_DIR, SAE_RELEASE, CORR_THRESHOLD, PHASE3_LAYERS
+from config import DEVICE, OUTPUT_DIR, SAE_RELEASE, N_DISC, PHASE3_LAYERS
 from src.data_loading import (
     PHASE3_YEAR_ITEMS      as YEAR_ITEMS,
     PHASE3_YEAR_CATEGORIES as ALL_CATS,
 )
 from src.model import load_model
-from src.clustering import find_clusters
 
 
 def _ablation_scan_at_layer(
@@ -52,17 +52,36 @@ def _ablation_scan_at_layer(
     with torch.no_grad():
         feat_acts_year = sae.encode(acts.to(DEVICE)).cpu()
 
-    # Find clusters — clustering and ablation use the same pool
-    clusters, _ = find_clusters(feat_acts_year, ALL_CATS, corr_threshold=CORR_THRESHOLD)
-    if not clusters:
-        clusters, _ = find_clusters(feat_acts_year, ALL_CATS, corr_threshold=0.3)
-    if not clusters:
-        print(f"    No clusters found at layer {layer} — skipping.")
+    # Active features
+    freq       = (feat_acts_year > 0).float().sum(0)
+    active_idx = freq.ge(2).nonzero(as_tuple=True)[0].tolist()
+    print(f"    Active features (fire on >= 2 tokens): {len(active_idx)}")
+
+    if not active_idx:
+        print(f"    No active features at layer {layer} — skipping.")
         return dict(layer=layer, baseline_r=float("nan"), max_drop=float("nan"),
                     top_feature=-1, n_load=0, n_moderate=0, n_negligible=0,
                     all_drops=np.array([]))
 
-    cluster_feats = clusters[0]
+    # ANOVA F-score per active feature
+    cats    = sorted(set(ALL_CATS))
+    cat_idx = {c: [i for i, cat in enumerate(ALL_CATS) if cat == c] for c in cats}
+    f_scores = np.zeros(len(active_idx))
+    for k, fi in enumerate(active_idx):
+        groups = [feat_acts_year[cat_idx[c], fi].numpy()
+                  for c in cats if len(cat_idx[c]) > 0]
+        if len(groups) >= 2:
+            try:
+                F, _ = f_oneway(*groups)
+                f_scores[k] = float(F) if np.isfinite(F) else 0.0
+            except Exception:
+                pass
+
+    # Select top-N_DISC by F-score
+    n_keep      = min(N_DISC, len(active_idx))
+    top_local   = np.argsort(f_scores)[-n_keep:][::-1]
+    top_feats   = [active_idx[i] for i in top_local]
+    print(f"    Top-{n_keep} features by ANOVA F-score  (max F = {f_scores[top_local[0]]:.2f})")
     W_dec        = sae.W_dec.detach().cpu()
     year_numeric = np.array([it[2] for it in YEAR_ITEMS], dtype=float)
 
@@ -74,7 +93,7 @@ def _ablation_scan_at_layer(
     baseline_r = _absr(feat_acts_year)
 
     scan = []
-    for fi in tqdm(cluster_feats, desc=f"  L{layer} scan", leave=False):
+    for fi in tqdm(top_feats, desc=f"  L{layer} scan", leave=False):
         fa_abl = feat_acts_year.clone()
         fa_abl[:, fi] = 0.0
         drop = baseline_r - _absr(fa_abl)

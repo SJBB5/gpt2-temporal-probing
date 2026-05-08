@@ -1,7 +1,6 @@
 import torch
 from tqdm import tqdm
 from transformer_lens import HookedTransformer
-from sae_lens import SAE
 
 from config import DEVICE, MODEL_NAME, HOOK_NAME, SAE_RELEASE, SAE_ID
 
@@ -12,18 +11,6 @@ def load_model() -> HookedTransformer:
     model.eval()
     print(f"  {model.cfg.n_layers} layers, d_model={model.cfg.d_model}")
     return model
-
-
-def load_sae():
-    print(f"Loading SAE  ({SAE_RELEASE}  /  {SAE_ID}) ...")
-    sae, _cfg, _sparsity = SAE.from_pretrained(
-        release=SAE_RELEASE,
-        sae_id=SAE_ID,
-        device=DEVICE,
-    )
-    sae.eval()
-    print(f"  d_in={sae.cfg.d_in},  d_sae={sae.cfg.d_sae}")
-    return sae
 
 
 def extract_activations(
@@ -51,8 +38,3 @@ def extract_activations(
     return torch.stack(activations), labels
 
 
-def get_feature_acts(sae, activations: torch.Tensor) -> torch.Tensor:
-    """Run the SAE encoder; returns (N, d_sae) sparse feature activations."""
-    with torch.no_grad():
-        feat_acts = sae.encode(activations.to(DEVICE))
-    return feat_acts.cpu()

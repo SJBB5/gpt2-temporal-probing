@@ -1,69 +1,7 @@
 import numpy as np
-import torch
 from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import LabelEncoder
 
 from src.geometry import fit_circle_algebraic
-
-
-def separability_index(recon: torch.Tensor, category_labels: list[str]) -> float:
-    """
-    S(f): leave-one-out accuracy of a linear probe predicting historical
-    category from the cluster's reconstructed activations, normalised to
-    [0, 1] above chance.
-
-    High S(f) -> the cluster strongly separates different historical categories.
-    """
-    cats = list(set(category_labels))
-    if len(cats) < 2 or len(category_labels) < 4:
-        return 0.0
-
-    X = recon.numpy()
-    y = LabelEncoder().fit_transform(category_labels)
-
-    n_pc = min(10, X.shape[0] - 1, X.shape[1])
-    if n_pc < 1:
-        return 0.0
-    X_pc = PCA(n_components=n_pc).fit_transform(X)
-
-    correct = 0
-    for i in range(len(y)):
-        train = [j for j in range(len(y)) if j != i]
-        if len(set(y[train])) < 2:
-            continue
-        try:
-            clf = LogisticRegression(max_iter=300, random_state=0)
-            clf.fit(X_pc[train], y[train])
-            correct += int(clf.predict(X_pc[[i]])[0] == y[i])
-        except Exception:
-            pass
-
-    chance = 1.0 / len(cats)
-    acc    = correct / len(y)
-    return float(np.clip((acc - chance) / (1.0 - chance + 1e-8), 0.0, 1.0))
-
-
-def epsilon_mixture_index(recon: torch.Tensor) -> float:
-    """
-    M_eps(f): fraction of variance explained by the first principal component.
-
-    High M_eps -> nearly 1-D structure -> reducible.
-    Low  M_eps -> variance spread across multiple components -> irreducible
-                  (consistent with a circular or helical encoding).
-    """
-    X    = recon.numpy()
-    N, d = X.shape
-    if N < 4 or d < 2:
-        return 1.0
-
-    n_pcs = min(N - 1, d, 10)
-    try:
-        pca   = PCA(n_components=n_pcs)
-        pca.fit(X)
-        return float(pca.explained_variance_ratio_[0])
-    except Exception:
-        return 1.0
 
 
 def fit_and_score_circle(coords: np.ndarray, labels: list) -> dict:
@@ -84,8 +22,6 @@ def fit_and_score_circle(coords: np.ndarray, labels: list) -> dict:
 
     angles = np.arctan2(coords[:, 2] - cy, coords[:, 1] - cx)
 
-    n_categories = max(labels)
-    labels_norm = 2 * np.pi * (np.array(labels) - 1) / n_categories  # noqa: F841
     labels_arr = np.array(labels)
 
     rxs = float(np.corrcoef(np.sin(angles), labels_arr)[0, 1])

@@ -9,7 +9,7 @@ from src.plots import plot_pca_overview, plot_year_linearity
 
 def run_phase1() -> None:
     print("=" * 65)
-    print("PHASE 1  -  Feature Clustering & Irreducibility Scoring")
+    print("PHASE 1  -  PCA Overview & Linear Decodability")
     print(f"  model=gpt2   layer={LAYER}   device={DEVICE}")
     print("=" * 65)
 

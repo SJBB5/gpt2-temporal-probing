@@ -6,7 +6,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
-from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, CORR_THRESHOLD, PHASE4_LAYERS
+from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, PHASE4_LAYERS
 from src.model import load_model, extract_activations
 from src.plots import plot_year_linearity
 from src.data_loading import MATCHED_CLEAN_ITEMS, MATCHED_CLEAN_CATEGORIES

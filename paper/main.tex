@@ -37,33 +37,33 @@ Distributed Across Layers}}
 
 % -------------------------------------------------------
 \begin{abstract}
-We investigate how GPT-2 Small encodes temporal concepts in its residual
-stream, combining principal component analysis of raw activations with a
-layer-wise sparse autoencoder (SAE) ablation scan across all 12 layers.
-Using a 100-prompt historical year corpus spanning roughly 2{,}800 years
-and three cyclic concept datasets (days of the week, months of the year,
-and days of the month), we characterise both linear and circular temporal
-representations and track how they evolve with depth.
+We investigate how GPT-2 Small encodes temporal concepts in its residual stream,
+combining PCA of raw activations with a layer-wise sparse autoencoder (SAE)
+ablation scan across all 12 layers. We study both linear temporal representations
+using a 100-prompt historical year corpus and circular representations using
+three cyclic concept datasets: days of the week, months of the year, and days
+of the month.
 
 For linear historical time, the temporal axis is strongly present
-($|r|_{\text{base}} \approx 0.85$--$0.92$) from early layers onward, but
-the representation transitions from concentrated to distributed: at layers
-0--1 a single SAE feature accounts for a drop of $\approx 0.43$ in
-temporal correlation when ablated, whereas by layer 7 no individual feature
-is load-bearing. We show this early concentration is partly an artifact of
-BC/AD surface tokens, whose removal collapses the layer-1 signal entirely
-and shifts peak concentration to layers 4--5, after which both corpora
-converge to the same fully distributed superposition regime.
+($|r|_{\text{base}} \approx 0.85$--$0.92$) throughout the network, but transitions
+from concentrated to distributed with depth: at layers 0--1 a single SAE feature
+accounts for a drop of $\approx 0.43$ in temporal correlation when ablated, whereas
+by layer 7 no individual feature is load-bearing. Removing BC/AD surface tokens
+collapses the layer-1 signal to near zero and shifts peak concentration to layers
+4--5, after which both corpora converge to the same distributed superposition regime
+--- demonstrating that surface token identity can dominate early-layer probing signals
+in ways that obscure genuine semantic encoding.
 
-For cyclic concepts, we replicate the circular PC2/PC3 geometry reported
-by prior work for days of the week ($r_{\text{angular}} = 0.662$) and
-months of the year ($r_{\text{angular}} = 0.748$), and extend the analysis
-to days of the month, finding a weaker but present circular structure
-($r_{\text{angular}} = 0.495$) whose strength is highly prompt-frame
-dependent. Together, these results suggest that GPT-2 Small encodes linear
-and cyclic temporal structure through fundamentally different geometric
-mechanisms, and that surface token identity can dominate early-layer probing
-signals in ways that obscure genuine semantic encoding.
+For cyclic concepts, we replicate the circular PC2/PC3 geometry of prior work for
+days of the week and months of the year, and extend it to days of the month
+($r_{\text{angular}} = 0.495$), a 31-label concept not previously studied in this
+context. A layer-wise ablation scan of circular signal strength reveals that the two
+well-established cyclic concepts follow opposite depth trajectories: days of the week
+are encoded strongly from early layers but collapse at layer 11
+($r_{\text{angular}} = 0.266$), while months of the year build progressively and
+peak at layer 11 ($r_{\text{angular}} = 0.793$). Neither concept shows the monotonic
+decline in feature concentration seen for linear time, suggesting cyclic representations
+require active, layer-by-layer maintenance rather than a single construction phase.
 \end{abstract}
 
 % -------------------------------------------------------
@@ -207,7 +207,7 @@ We refer to this quantity as the baseline temporal correlation $|r|_{\text{base}
 feature ablation as the primary signal in our superposition analysis. described in Section 4.5.
 
 
-\subsection{Temporal Axis Measurement: Cyclic Concepts **NOTE** May not use this}
+\subsection{Temporal Axis Measurement: Cyclic Concepts}
 
 For cyclic concepts -- days of the week, months of the year, and days of the month -- a linear correlation metric is inappropriate.
 Day 7 and day 1 are adjacent in the cyclic ordering but greatly separated under any linear projection, meaning Pearson $r$ will be near 
@@ -229,25 +229,19 @@ periodic, with $r_{\text{angular}} = 1$ indicating that the label perfectly pred
 drops in $r_{\text{angular}}$ under single-feature ablation replace drops in $|r|$ as the signal metric, with all other aspects of the pipeline held 
 constant.
 
-\subsection{Feature Clustering}
+\subsection{Feature Selection for Ablation}
+\label{sec:feature-selection}
 % prereq to understanding the following section
-Given the high dimensionality of the SAE feature space ($d_\text{SAE} = 49,152$), directly ablating all features is computationally unmanageable and 
-statistically uninformative. We therefore apply a two stage filtering procedure to identify a coherent subset of features likley to be encoding temporal 
-structure, which then forms the canidate set for the ablation scan. 
+Given the high dimensionality of the SAE feature space ($d_\text{SAE} = 49,152$), directly ablating all features is computationally unmanageable and
+statistically uninformative. We therefore apply a filtering procedure to identify a focused subset of features likely to be encoding temporal
+structure, which then forms the candidate set for the ablation scan.
 \\
 \\
-We First filter to \textit{active} features, those that fire on at least two prompts in the input set. For each active feature
-$f_i$ we compute a one-way ANOVA F-score across epoch category groups, where each group contains the feature activations for all prompts belonging to that epoch.
-We retain the top $N_{\text{disc}} = 100$ features by F-score as the discriminative candidate set. However, since two features can both score 
-highly on ANOVA while activating in entirely different patterns across epochs, we apply a second stage to enforce coherence. For each 
-candiate feature we compute its epoch-mean activation profile $\mathbf{p}_i \in \mathbb{R}^K$, z scored across the K epoch categories. 
-Features whose profiles correlate above $|\rho| > 0.5$ are connected in a graph, and connected components of size $\geq 2$ are taken as 
-clusters. If no clusters are found at this threshold we fall back to $|\rho| > 0.3$. We select the cluster containing the single most discriminative
-feature by ANOVA F-score as the candidate set for ablation, with each feature in the cluster ablated individually and independently. 
-\\
-\\
-For the cyclic concepts the graph clustering step is omitted and the top 100 features by ANOVA F-score are used directly as the candidate set,
-with integer cycle labels replacing epoch categories as the grouping variable. 
+We first filter to \textit{active} features --- those that fire on at least two prompts in the input set. For each active feature
+$f_i$ we compute a one-way ANOVA F-score across grouping labels, where each group contains the feature activations for all prompts belonging to that
+group. For linear temporal concepts, groups correspond to historical epoch categories (ancient BC, ancient AD, medieval, early modern, modern);
+for cyclic concepts, groups correspond to the integer cycle labels (day-of-week 1--7, month 1--12, day-of-month 1--31).
+We retain the top $N_{\text{disc}} = 100$ features by F-score as the candidate set. This procedure is applied uniformly across all phases.
 
 
 \subsection{Superposition Depth Scan}
@@ -255,25 +249,26 @@ with integer cycle labels replacing epoch categories as the grouping variable.
 % Max single-feature drop as the concentration metric.
 % Why declining max drop with flat |r| indicates superposition.
 
-To examine how the temporal representation evolves across the network, we run a layer-wise ablation scan across all 12 layers of GPT2-Small. At each 
-layer $l$ we load the corresponding pretrained SAE, extract residual stream activations at \texttt{hook\_resid\_pre}, and apply the feature clustering 
-procedure described in SECTION REF to identify the candidate feature set. We then establish a baseline temporal correlation $|r|_{\text{base}}$ by encoding 
-the year prompts through the SAE, reconstructing via the decoder, and computing the abolsute Peasron correlation between PC1 and numeric year
-values as described in SECTION REF. 
+To examine how temporal representations evolve across depth, we run a layer-wise ablation scan across all 12 layers of GPT-2 Small. At each
+layer $l$ we load the corresponding pretrained SAE, extract residual stream activations at \texttt{hook\_resid\_pre}, and apply the feature selection
+procedure described in Section~\ref{sec:feature-selection} to obtain the candidate feature set. We then establish a baseline temporal correlation
+$|r|_{\text{base}}$ by encoding the prompts through the SAE, reconstructing via the decoder, and computing the absolute Pearson correlation between
+PC1 and the numeric year values.
 \\
 \\
-For each feature $f_i$ in the candidate set, we zero its activation across all year prompts simultaneously, setting column $i$ of the ($N_{\text{years}} \times 49{,}152$)
-feature activation matrix to zero in SAE space, and recompute the $|r|$ on the modified reconstruction. The drop is:
+For each feature $f_i$ in the candidate set, we zero its activation across all prompts simultaneously --- setting column $i$ of the
+($N \times 49{,}152$) feature activation matrix to zero --- and recompute $|r|$ on the modified reconstruction. The drop is:
 $$\Delta_i = \lvert r \rvert_{\text{base}} - \lvert r \rvert_{\text{abl}, i}$$
-A large $\Delta_i$ indicates that feature $f_i$ is individually load-bearing for the temporal axis. A near-zero or negative $\Delta_i$ indicates negligible contribution or a suppressive feature 
-whose removal improves temporal linearity. PCA is re-fit from scratch on each ablated reconstruction rather than projecting onto a 
-fixed baseline direction, meaning $\Delta_i$ measures whether a temporal axis still 
-exists after ablation, not merely whether the ablated reconstruction aligns with the original one. 
-The test is therefore conservative --- a feature only registers as load-bearing if the remaining features cannot reorganise to compensate.
+A large $\Delta_i$ indicates that feature $f_i$ is individually load-bearing for the temporal axis. A near-zero or negative $\Delta_i$ indicates
+negligible contribution or a suppressive effect whose removal improves temporal linearity. PCA is re-fit from scratch on each ablated reconstruction
+rather than projecting onto a fixed baseline direction, so $\Delta_i$ measures whether a temporal axis still exists after ablation, not merely
+whether the ablated reconstruction aligns with the original. The test is therefore conservative: a feature only registers as load-bearing if the
+remaining features cannot reorganise to compensate.
 \\
 \\
-TODO: Talk about the classes created for the plots \newline
-Discuss the creation and use of the numerical data without BC/AD
+For the clean-prompt scan (Phase 4), BC/AD surface tokens are removed from all prompts, yielding a matched corpus of the same 100 historical years
+expressed without explicit era markers. The same feature selection and ablation procedure is applied, enabling a direct comparison of superposition
+depth under contaminated versus uncontaminated input conditions.
 
 
 % -------------------------------------------------------
@@ -474,9 +469,38 @@ prompt framings engage different representational structures.
     \label{fig:phase6_by_frame}
 \end{figure}
 
-\subsection{Superposition of Circular ideas}
+\subsection{Superposition of Circular Representations Across Depth}
 
-TODO (maybe)
+To examine whether the circular representations identified in Section~\ref{sec:cyclic} are concentrated in individual SAE features or distributed
+across many, we repeat the layer-wise ablation scan of Section~\ref{sec:superposition} for days of the week and months of the year, replacing the
+linear $|r|_{\text{base}}$ metric with $r_{\text{angular}}$ throughout.
+\noindent \\
+\\
+Figure~\ref{fig:phase5_depth} shows the results across all 12 layers. The two concepts exhibit strikingly different depth trajectories.
+Days of the week begin with a moderate circular signal at layer 0 ($r_{\text{angular}} = 0.768$) that persists through layers 1--10 before
+collapsing entirely at layer 11 ($r_{\text{angular}} = 0.266$). Months of the year follow the opposite pattern: the circular signal starts
+weaker ($r_{\text{angular}} = 0.534$ at layer 0), builds gradually through the network, and peaks at layer 11 ($r_{\text{angular}} = 0.793$).
+This crossover suggests the two concepts are built at different stages of processing --- days of the week are encoded early and partially dismantled
+in the final layer, while months of the year are constructed progressively and reach peak clarity only at the output.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase5_circular_superposition_depth.png}
+    \caption{Layer-wise circular superposition scan for days of the week (left) and months of the year (right).
+    Top row: maximum single-feature ablation drop in $r_{\text{angular}}$ per layer.
+    Bottom row: baseline $r_{\text{angular}}$ per layer.}
+    \label{fig:phase5_depth}
+\end{figure}
+
+\noindent
+The concentration profiles (top row) contrast equally sharply with the linear temporal case. For linear time, max single-feature drop
+declines monotonically from $\approx 0.43$ to near zero, indicating a clean transition to distributed superposition. For cyclic concepts,
+the drop oscillates irregularly throughout the network with no stable convergence. Days of the week show spikes at layers 4 (0.47), 6 (0.59),
+and 8 (0.60), interspersed with lower-concentration layers --- suggesting the circular signal is repeatedly re-concentrated into individual
+features and then dispersed, rather than handed off cleanly. Months of the year show a high spike at layer 0 (0.42) followed by a broadly
+lower profile, with no layer crossing the load-bearing threshold of 0.10 between layers 4 and 9, before reconcentrating at layers 10--11.
+These oscillating patterns are inconsistent with the monotonic superposition lifecycle observed for linear time and suggest that
+cyclic representations require active, layer-by-layer maintenance rather than a single construction phase followed by passive distribution.
 % -------------------------------------------------------
 \section{Discussion}
 % -------------------------------------------------------
@@ -501,20 +525,34 @@ TODO
 TODO
 
 \subsection{Limitations}
-% Small prompt set (63 prompts for temporal).
-% Single model (GPT-2-small).
-% SAE reconstruction error (~7% of variance).
-% Clustering algorithm optimized for temporal, less suited 
-% for geographic/numeric concepts.
-% Only one load-bearing feature identified via Neuronpedia.
 
-Need to think about clustering criteria for which cluster to take for ablating.
+\textbf{Small corpus.} The historical year corpus contains only 100 prompts across five epoch categories, giving 20 prompts per group for ANOVA-based
+feature selection. This is underpowered and may allow noise features to enter the top-100 candidate set at layers where the temporal signal is weak.
+\noindent
 \\
-Current: Take the cluster that contains the single most discriminative features by ANOVA F-score
+\textbf{Single model.} All experiments are conducted on GPT-2 Small. Whether the monotonic superposition lifecycle, BC/AD surface token contamination,
+or the contrasting cyclic depth trajectories generalise to larger or differently trained models is unknown.
+\noindent
 \\
-Could also try taking the largest cluster.
+\textbf{SAE reconstruction loss.} The SAEs do not perfectly reconstruct the residual stream. All metrics reflect temporal structure as expressible
+through the SAE's feature basis; temporal information not captured by the SAE is invisible to our analysis.
+\noindent
 \\
-Need to include cluster sizes for ablation scans
+\textbf{Top-100 feature cap.} With 49,152 SAE features per layer, restricting ablation to the top-100 by ANOVA F-score means load-bearing features
+that fire broadly across categories --- and thus score low on ANOVA --- would be missed entirely.
+\noindent
+\\
+\textbf{PC1 assumption.} The linear temporal metric assumes the temporal axis is the dominant source of variance and therefore aligns with PC1.
+At layers where other signals dominate PC1, the metric may understate true temporal encoding strength.
+\noindent
+\\
+\textbf{PC2/PC3 assumption.} Circular structure is assumed to live in the PC2/PC3 plane. If the circular encoding occupies a different pair of
+components at some layers, the geometry analysis would miss it.
+\noindent
+\\
+\textbf{Layer 7 for cyclic replication.} The geometry comparison for days of the week and months of the year uses layer 7 to match prior work
+\citep{engels2024}. The phase 5 depth scan shows the circular signal peaks at layer 8 for days ($r_{\text{angular}} = 0.789$) and layer 11 for
+months ($r_{\text{angular}} = 0.793$), meaning the replication figures do not show either concept at its strongest.
 
 % -------------------------------------------------------
 \section{Conclusion}

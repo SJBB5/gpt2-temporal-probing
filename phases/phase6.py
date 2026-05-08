@@ -1,7 +1,7 @@
+import torch
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 import numpy as np
 from pathlib import Path
 from sklearn.decomposition import PCA
@@ -10,8 +10,10 @@ import csv
 from tqdm import tqdm
 
 from sae_lens import SAE
-from config import OUTPUT_DIR, DEVICE, SAE_RELEASE
-from src.model import load_model, extract_activations
+from config import OUTPUT_DIR, DEVICE, SAE_RELEASE, PHASE6_LAYERS
+
+GEOMETRY_LAYER = 7   # layer used for cluster quality check and cyclic concept comparison
+from src.model import load_model
 from src.metrics import fit_and_score_circle, cluster_quality_check
 from src.geometry import fit_circle_algebraic
 
@@ -33,12 +35,10 @@ def _get_sae_reconstruction(model, prompts, layer, device):
     rows = []
     for _, prompt, *_ in tqdm(prompts, desc=f"  L{layer} acts", leave=False):
         tokens = model.to_tokens(prompt, prepend_bos=True)
-        import torch
         with torch.no_grad():
             _, cache = model.run_with_cache(tokens, names_filter=hook, device=device)
         rows.append(cache[hook][0, -1, :].cpu())
 
-    import torch
     acts = torch.stack(rows)
     with torch.no_grad():
         feat_acts = sae.encode(acts.to(device)).cpu()
@@ -131,7 +131,7 @@ def run_phase6() -> None:
 
     # -- 3. Cluster quality check at layer 7 -----------------------------------
     print("\n[Cluster quality check at layer 7]")
-    reconstruction = _get_sae_reconstruction(model, dom_prompts, 7, DEVICE)
+    reconstruction = _get_sae_reconstruction(model, dom_prompts, GEOMETRY_LAYER, DEVICE)
     pca = PCA(n_components=3)
     coords = pca.fit_transform(reconstruction)
     ratio = cluster_quality_check(coords, days_of_month_labels, n_per_cluster=3)
@@ -147,7 +147,7 @@ def run_phase6() -> None:
 
     # -- 4. Geometry analysis across target layers -----------------------------
     print("\n[Geometry analysis across target layers]")
-    TARGET_LAYERS = [4, 6, 7, 8, 10]
+    TARGET_LAYERS = PHASE6_LAYERS
 
     results = {}
     for layer in TARGET_LAYERS:
@@ -355,7 +355,7 @@ def run_phase6() -> None:
     print("\n[Saving cyclic concepts comparison plot]")
 
     # Get days of week at layer 7
-    dow_recon = _get_sae_reconstruction(model, dow_prompts, 7, DEVICE)
+    dow_recon = _get_sae_reconstruction(model, dow_prompts, GEOMETRY_LAYER, DEVICE)
     dow_pca = PCA(n_components=5)
     dow_coords = dow_pca.fit_transform(dow_recon)
     try:
@@ -365,7 +365,7 @@ def run_phase6() -> None:
         dow_r = 0.0
 
     # Get months of year at layer 7
-    moy_recon = _get_sae_reconstruction(model, moy_prompts, 7, DEVICE)
+    moy_recon = _get_sae_reconstruction(model, moy_prompts, GEOMETRY_LAYER, DEVICE)
     moy_pca = PCA(n_components=5)
     moy_coords = moy_pca.fit_transform(moy_recon)
     try:

@@ -4,14 +4,15 @@
 #   data/prompts.json           — all prompt datasets
 #   src/data_loading.py         — parses prompts.json into typed tuples
 #   src/model.py                — GPT-2 + SAE loading and activation extraction
-#   src/clustering.py           — discriminative SAE feature clustering
-#   src/metrics.py              — separability and mixture scoring
+#   src/metrics.py              — circle fitting and cluster quality scoring
 #   src/geometry.py             — algebraic circle fitting
 #   src/plots.py                — all matplotlib output functions
-#   phases/phase1.py            — feature clustering + irreducibility at layer 4
+#   phases/phase1.py            — PCA overview and linear decodability
 #   phases/phase2.py            — geometric structure (circular encoding)
 #   phases/phase3.py            — superposition depth scan, original dataset
 #   phases/phase4.py            — superposition depth scan, clean dataset
+#   phases/phase5.py            — circular superposition scan, days/months
+#   phases/phase6.py            — days of the month geometry analysis
 
 import argparse
 from phases.phase1 import run_phase1
