@@ -155,7 +155,7 @@ def _geometry_plot(
     # Left: PC2 vs PC3 scatter with fitted circle
     ax = axes[0]
     sc = ax.scatter(coords[:, 1], coords[:, 2],
-                    c=labels, cmap="hsv", vmin=0.5, vmax=label_max + 0.5,
+                    c=labels, cmap="plasma", vmin=0.5, vmax=label_max + 0.5,
                     s=60, zorder=3)
     plt.colorbar(sc, ax=ax, label=f"{concept_name.split()[0]} number")
 
@@ -178,7 +178,7 @@ def _geometry_plot(
 
     # Right: angular position vs label number
     ax = axes[1]
-    ax.scatter(labels, angles, c=labels, cmap="hsv",
+    ax.scatter(labels, angles, c=labels, cmap="plasma",
                vmin=0.5, vmax=label_max + 0.5, s=60)
     ax.set_xlabel(f"{concept_name.split()[0]} number")
     ax.set_ylabel("Angle (radians)")

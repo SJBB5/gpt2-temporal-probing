@@ -68,15 +68,19 @@ require active, layer-by-layer maintenance rather than a single construction pha
 
 % -------------------------------------------------------
 \section{Introduction}
-% -------------------------------------------------------
-% ~1 page.
-% - Motivate the question: why does it matter how LLMs encode time?
-% - Brief summary of what you did and what you found
-% - Roadmap of the paper ("The rest of this paper is structured as follows...")
 
-Large language models have demonstrated their ability to "know" historical facts, but we have limited understanding of how that
-knowledge is stored internally. Understanding the geometric structure of factual knowledge in LLMs is a foundational
-question for mechanistic interpretability. 
+Large language models encode rich temporal knowledge, yet how that knowledge is geometrically organised inside the residual stream
+remains a topic of research. Temporal concepts are an appealing target for mechanistic interpretability because they carry verifiable
+ground-truth structure --- linear ordering for historical time, circular ordering for cyclic concepts such as days and months ---
+enabling precise geometric tests rather than purely behavioural probes.
+\\
+\\
+We apply PCA and a layer-wise SAE feature ablation scan to GPT-2 Small's residual stream across all 12 layers, studying both a
+100-prompt historical year corpus and three cyclic concept datasets (days of the week, months of the year, days of the month).
+The ablation scan zeros individual SAE features and measures the drop in temporal signal, distinguishing \textit{concentrated}
+representations (one feature is load-bearing) from \textit{distributed superposition} (signal is spread across many features).
+Our results reveal a clean concentrated-to-distributed transition for linear time, a surface-token confound that masks genuine
+semantic encoding in early layers, and contrasting depth trajectories for the two well-studied cyclic concepts.
 
 % -------------------------------------------------------
 \section{Related Work}
@@ -107,7 +111,7 @@ Transformer models process tokens by passing representations through a sequence 
 These layers write incremental updates into a shared vector called the residual stream. Formally if $\mathbf{x}^{(\ell)} \in \mathbb{R}^d$
 denotes the residual stream at layer $\ell$, each layer computes $\mathbf{x}^{(\ell+1)} = \mathbf{x}^{(\ell)} + f^{(\ell)}$, where 
 $f^{(\ell)}$ is the combined attention and MLP transformation. This additive structure means the residual stream accumulates information 
-across depth, and that respresentations at any layer can be read as a type of superposition of all contributions made so far.
+across depth, and that representations at any layer can be read as a type of superposition of all contributions made so far.
 In this work we probe the residual stream of GPT-2 Small \cite{radford2019}, a 117 million parameter transformer with a hidden dimension of d = 768. 
 \subsection{Superposition}
 A naive expectation is that each dimension of the residual stream encodes one interpretable feature. In practice, the number of concepts
@@ -115,13 +119,23 @@ a model must represent exceeds its hidden dimension $d$ ($\mathbb{R}^{768}$ in t
 dimensional spaces can accommodate many nearly-orthogonal directions. This phenomenon is called superposition and it allows a model to 
 store a large amount of features at the same time. Features in superposition are distributed across many neurons. 
 
+\subsection{Principal Component Analysis}
+Principal Component Analysis (PCA) finds a set of orthogonal directions, called principal components, that capture the maximum
+variance in a dataset. Given a centred data matrix $\mathbf{X} \in \mathbb{R}^{N \times d}$, PCA computes the eigendecomposition
+of the covariance matrix $\mathbf{C} = \frac{1}{N}\mathbf{X}^\top\mathbf{X}$. The eigenvectors of $\mathbf{C}$ define the principal
+component directions, and the corresponding eigenvalues quantify the variance explained along each direction. The first principal
+component (PC1) is the eigenvector with the largest eigenvalue --- the direction of greatest variance in the data. If a model
+encodes a concept as a linear axis in activation space, that axis should dominate the variance structure and align with PC1.
+Secondary structure, such as the circular geometry of cyclic concepts, tends to emerge in PC2 and PC3 once the dominant
+linear source of variance has been accounted for by PC1.
+
 \subsection{Sparse Autoencoders}
 Sparse autoencoders (SAEs) offer a way to recover the underlying precise features from an ambiguous residual stream \cite{cunningham2024}.
-An SAE consists of an encoder that projects the d-dimensional activation into a much large latent space $\mathbb{R}^{d_{\text{SAE}}}$
+An SAE consists of an encoder that projects the d-dimensional activation into a much larger latent space $\mathbb{R}^{d_{\text{SAE}}}$
 with $d_{\text{SAE}} \gg d$, followed by a ReLU that enforces sparsity and a linear decoder that reconstructs the original activation. 
 Training minimises reconstruction error subject to an $L_1$ penalty on the latent activations, encouraging each input to be explained by 
 only a small number of active features at a time. The resulting latent dimensions have been shown to correspond to interpretable, monosemantic concepts
-\cite{cunningham2024, bloom2024}. In this work we use the SAE of \citet{bloom2024} trained on GPT-2 Small's residual stream. 
+\cite{cunningham2024, bloom2024}. 
 % -------------------------------------------------------
 \section{Method}
 % -------------------------------------------------------
@@ -134,7 +148,7 @@ only a small number of active features at a time. The resulting latent dimension
 % Hook point: blocks.{layer}.hook_resid_pre
 
 We do all experiments on GPT-2 Small \cite{radford2019}, a decoder-only transformer with 12 layers, 12 attention heads, and a residual 
-stream dimension of d = 768, totalling approximately 117 million paramters. GPT-2 Small is a well-studied model in the context of mechanistic
+stream dimension of d = 768, totalling approximately 117 million parameters. GPT-2 Small is a well-studied model in the context of mechanistic
 interpretability, making it a good model for probing internal representations. 
 \\
 \\
@@ -170,7 +184,7 @@ representation across epochs for ANOVA-based feature selection. BC and AD year r
 and AD items span $79$ to $529$ --- avoiding any ambiguity in numeric year assignment.
 \\
 \\
-\textbf{Surface token comparison.} The superposition depth scan is run twice on the same 50 events to isolate the effect of BC/AD surface tokens. In the 
+\textbf{Surface token comparison.} The superposition depth scan is run twice on the same 100 prompts to isolate the effect of BC/AD surface tokens. In the 
 first scan, the 40 ancient prompts carry explicit era markers (e.g. \textit{``...in 776 BC''}, \textit{``...in 79 AD''}). In the second scan, 
 era markers are stripped from all ancient prompts, leaving bare year numbers (e.g. \textit{``...in 776''}). Medieval through modern prompts are 
 word-for-word identical across both scans. This design ensures the only variable between the two conditions is the presence or absence of the tokens 
@@ -193,7 +207,7 @@ To quantify how strongly a layer encodes temporal order for historical year prom
 between the model's internal representations and chronological position. For each layer $l$, we pass the year prompt activations
 through the pretrained SAE encoder and reconstruct them via the decoder:
 $$\hat{x}_i = \mathbf{W}_{\text{dec}}\mathbf{a}_i \in \mathbb{R}^{768}$$
-where $\mathbf{a}_i \in \mathbb{R}^{49152}$ is the sparse feature activation vector for prompt $i$. This reconstruction discard variance
+where $\mathbf{a}_i \in \mathbb{R}^{49152}$ is the sparse feature activation vector for prompt $i$. This reconstruction discards variance
 not captured by the SAE, meaning our metric reflects temporal structure as expressed through the SAE's feature basis specifically.
 \\
 \\
@@ -202,16 +216,16 @@ the absolute Pearson correlation between PC1 scores and numeric year values:
 $$|r| = \left| \text{corr}\left(\text{PC1}(\hat{\mathbf{X}}),\ \mathbf{y}\right) \right|$$
 where $y \in \mathbb{R}^N$ contains the numeric year for each prompt, with pre-common-era dates represented as negative integers.
 We use PC1 because it captures the direction of maximum variance in the reconstruction. If the model encodes temporal position as a linear axis,
-that axis should dominate the variance structure and align with PC1. The absolute value discards PCA's arbritrary sign convention. 
+that axis should dominate the variance structure and align with PC1. The absolute value discards PCA's arbitrary sign convention. 
 We refer to this quantity as the baseline temporal correlation $|r|_{\text{base}}$ at a given layer, and use drops in $|r|$ under
-feature ablation as the primary signal in our superposition analysis. described in Section 4.5.
+feature ablation as the primary signal in our superposition analysis, described in Section~\ref{sec:superposition}.
 
 
 \subsection{Temporal Axis Measurement: Cyclic Concepts}
 
 For cyclic concepts -- days of the week, months of the year, and days of the month -- a linear correlation metric is inappropriate.
 Day 7 and day 1 are adjacent in the cyclic ordering but greatly separated under any linear projection, meaning Pearson $r$ will be near 
-zero even for a geometrically well-structured representatiion. We therefore adopt a circular measurement pipeline. 
+zero even for a geometrically well-structured representation. We therefore adopt a circular measurement pipeline. 
 \\
 \\
 We retain five PCA components from the SAE reconstruction and fit an algebraic circle to the PC2/PC3 plane using the Coope(1993) least squares
@@ -280,8 +294,8 @@ depth under contaminated versus uncontaminated input conditions.
 
 
 PCA of the raw residual stream at layer 4 reveals that GPT-2 Small organises historical prompts into three distinct clusters in the PC1/PC2 plane and
-four clusters in three dimensions (Figure~\ref{fig:phase1_all_pca}): BC-eraprompts, ancient AD-era prompts, medieval and early modern prompts, and
-modern prompts, accounting for 73.4\% of variance across the top threeprincipal components. PC1 (41.9\%) separates ancient from modern prompts
+four clusters in three dimensions (Figure~\ref{fig:phase1_all_pca}): BC-era prompts, ancient AD-era prompts, medieval and early modern prompts, and
+modern prompts, accounting for 73.4\% of variance across the top three principal components. PC1 (41.9\%) separates ancient from modern prompts
 while PC2 (20.9\%) separates BC from AD within the ancient period.
 
 \begin{figure}[H]
@@ -320,6 +334,7 @@ than a continuous encoding of chronological position.
 \end{figure}
 
 \subsection{Superposition of Temporal Representations Across Depth}
+\label{sec:superposition}
 
 The superposition argument rests on reading $|r|_{\text{base}}$ and $\max_i \Delta_i$ together. A high $|r|_{\text{base}}$ with low 
 $\max_i \Delta_i$ is the fingerprint of distributed superposition --- the temporal signal is present and SAE-recoverable, but cannot be attributed 
@@ -344,25 +359,16 @@ impossible to attribute to any individual SAE feature.
     \label{fig:phase3_depth}
 \end{figure}
 \noindent
-The full distribution of ablation drops at each layer is shown in 
-Figure~\ref{fig:phase3_violin}. At every layer the vast majority of features 
-have negligible drops --- the violin bodies are compressed near zero 
-throughout. The upper tails at layers 0--6 represent single outlier 
-load-bearing features, confirming the pattern of one dominant feature with 
-all others negligible rather than a uniform distribution of contributions. 
-From layer 7 onward the tails shrink below the load-bearing threshold, 
-marking the transition to fully distributed superposition.
+The full distribution of ablation drops at each layer is shown in Figure~\ref{fig:phase3_violin}. At every layer the vast majority of features 
+have negligible drops --- the violin bodies are compressed near zero throughout. The upper tails at layers 0--6 represent single outlier 
+load-bearing features, confirming the pattern of one dominant feature with all others negligible rather than a uniform distribution of contributions. 
+From layer 7 onward the tails shrink below the load-bearing threshold, marking the transition to fully distributed superposition.
 \\
 \\
-Two anomalies are worth noting. At layer 10 $\max_i \Delta_i$ spikes back 
-up to $\approx 0.23$ after falling near zero at layers 7--9, suggesting a 
-single feature temporarily concentrates the temporal signal during output 
-preparation. At layer 11 $|r|_{\text{base}}$ drops sharply to $\approx 0.58$ 
-and the violin shows a wide body of large negative drops --- features whose 
-removal improves temporal linearity. Both anomalies are consistent with the 
-model reorganising its residual stream for next-token prediction at the 
-final layers, partially overwriting the stable temporal representation 
-maintained through layers 0--9.
+Two anomalies are worth noting. At layer 10 $\max_i \Delta_i$ spikes back to $\approx 0.23$ after falling near zero at layers 7--9; at layer 11
+$|r|_{\text{base}}$ drops sharply to $\approx 0.58$ and the violin shows a wide body of large negative drops --- features whose removal
+\textit{improves} temporal linearity. Both anomalies occur in the final two layers, consistent with --- though not directly evidencing --- a
+reorganisation of residual stream content prior to unembedding.
 
 \begin{figure}[H]
     \centering
@@ -393,7 +399,7 @@ components when surface token identity is unavailable.
     \label{fig:phase4_linearity}
 \end{figure}
 \noindent
-The most striking result is the collapse of $|r|_{\text{base}}$ to near zero at layer 1 (Figure~\ref{fig:phase4_depth}, right panel), confirming 
+An interesting result is the collapse of $|r|_{\text{base}}$ to near zero at layer 1 (Figure~\ref{fig:phase4_depth}, right panel), confirming 
 that the original corpus's strong early-layer signal was driven by surface token detectors rather than semantic content. Genuine temporal encoding 
 builds monotonically from layer 2, reaching $\approx 0.90$ by layers 9--11 and remaining stable through the final layer --- unlike the original 
 corpus which degraded at layers 10--11. The concentration profile (left panel) peaks at layers 4--5 rather than layer 0, showing that 
@@ -411,6 +417,7 @@ regime.
 \end{figure}
 
 \subsection{Cyclical Concepts: Days of Week and Months of Year}
+\label{sec:cyclic}
 % Phase 5 results.
 % Different pattern from linear time — oscillating concentration.
 % Days of week collapse at layers 10-11.
@@ -447,13 +454,13 @@ month is consistent with the increased difficulty of encoding 31 distinct labels
 
 
 Figure~\ref{fig:phase6_by_frame} shows the PC2/PC3 geometry for days of the month across five layers and three prompt frames. The all-frames rows 
-reveal that the circular structure is weak and frame-dependent --- no layer produces a clean circular arrangement when all three frames are combined.
+reveal that the circular structure is weak and prompt-dependent --- no layer produces a clean circular arrangement when all three frames are combined.
 \\
 \\
 Examining frames individually tells a clearer story. Frame 1 (simple statement: \textit{``Today is the Nth of the month''}) collapses to a 
 tight cluster near the origin at all layers, carrying almost no day-number information in the PC2/PC3 plane. Frame 2 (wraparound sequential: 
 \textit{``The day after the Nth is the (N+1)th''}) produces the strongest circular structure, with points arranged along a partial arc that becomes 
-more pronounced at layers 6--8. Frame 3 (positional: \textit{``The Nth is the Nth day of the month''}) shows linear rather than circular organisation, 
+more linear at layers 6--8. Frame 3 (positional: \textit{``The Nth is the Nth day of the month''}) shows linear rather than circular organisation, 
 with day number varying along a single axis rather than wrapping around a circle.
 \\
 \\
@@ -476,7 +483,7 @@ across many, we repeat the layer-wise ablation scan of Section~\ref{sec:superpos
 linear $|r|_{\text{base}}$ metric with $r_{\text{angular}}$ throughout.
 \noindent \\
 \\
-Figure~\ref{fig:phase5_depth} shows the results across all 12 layers. The two concepts exhibit strikingly different depth trajectories.
+Figure~\ref{fig:phase5_depth} shows the results across all 12 layers. The two concepts exhibit different depth trajectories.
 Days of the week begin with a moderate circular signal at layer 0 ($r_{\text{angular}} = 0.768$) that persists through layers 1--10 before
 collapsing entirely at layer 11 ($r_{\text{angular}} = 0.266$). Months of the year follow the opposite pattern: the circular signal starts
 weaker ($r_{\text{angular}} = 0.534$ at layer 0), builds gradually through the network, and peaks at layer 11 ($r_{\text{angular}} = 0.793$).
@@ -508,51 +515,64 @@ cyclic representations require active, layer-by-layer maintenance rather than a 
 % Interpret your findings. What do they mean?
 
 \subsection{Linear vs Circular Temporal Encoding}
-% Why does linear time show monotonic superposition but 
-% circular time shows oscillation?
-% Hypothesis: circular encoding requires coordinated multi-layer 
-% activity, linear encoding can be handed off between layers.
 
-TODO
+The most striking contrast between linear and cyclic temporal concepts is the shape of their concentration profiles across depth.
+For historical time, max single-feature drop declines monotonically from $\approx 0.43$ at layer 0 to near zero by layer 7, indicating
+a clean hand-off from concentrated to distributed encoding. For days of the week and months of the year, the concentration profile
+oscillates with no stable convergence --- individual features become load-bearing at some layers and not others, repeatedly across depth.
+\\
+\\
+One possible interpretation is that maintaining a circular geometric constraint is more demanding than maintaining a linear axis.
+A linear temporal representation can be encoded as a single direction and passively preserved by residual connections; a circular
+representation requires equidistant angular spacing across all labels simultaneously, which may need to be actively re-imposed at
+multiple layers as other computations modify the residual stream. We offer this as a hypothesis rather than a conclusion, as directly
+testing it would require intervention experiments beyond the scope of this work.
+\\
+\\
+The contrast between days of the week and months of the year is also notable. Days are encoded strongly from layer 0 and collapse
+at layer 11; months build gradually and peak at layer 11. Whether this reflects differences in training data frequency, the complexity
+of the underlying concept, or the degree to which each concept is compositionally derived from other representations is an open question.
 
 \subsection{The BC/AD Contamination Finding}
-% Methodological contribution.
-% Surface tokens can dominate early-layer representations.
-% Implication for probing studies generally.
-% The shortcut hypothesis — does surface token presence 
-% delay genuine semantic encoding?
 
-TODO
+The collapse of $|r|_{\text{base}}$ to near zero at layer 1 when era markers are removed is a methodological finding with implications
+beyond this paper. The original corpus's strong layer-0 and layer-1 signal was not evidence of early semantic temporal encoding ---
+it reflected surface token detectors firing on ``BC'' and ``AD''. Any probing study on a concept with strong surface-level cues
+risks the same confound: early-layer probe accuracy can be driven by token identity rather than semantic content.
+\\
+\\
+The clean-corpus results show that genuine semantic encoding of temporal order builds from layer 2 onward, reaching comparable
+strength to the original corpus by layer 6 and remaining stable through layer 11. This suggests the model does eventually construct
+a robust temporal representation independent of surface markers, but that construction is masked by the shortcut in corpora that
+include them. 
+\subsection{Days of the Month}
+
+Days of the month extend the circular encoding analysis to a concept with 31 labels, substantially more than days of the week (7)
+or months of the year (12), and one that appears less frequently in natural text in explicitly cyclic contexts. Despite this,
+the model encodes a detectable circular geometry at layer 7 ($r_{\text{angular}} = 0.495$, $\text{RMSE} = 0.51$), suggesting the
+circular encoding mechanism is not limited to well-studied, high-frequency cyclic concepts. The weaker signal relative to days of
+the week and months of the year is consistent with sparser training signal, though we cannot rule out that 31 labels simply produce
+a noisier circular fit given our dataset size.
 
 \subsection{Limitations}
 
-\textbf{Small corpus.} The historical year corpus contains only 100 prompts across five epoch categories, giving 20 prompts per group for ANOVA-based
-feature selection. This is underpowered and may allow noise features to enter the top-100 candidate set at layers where the temporal signal is weak.
-\noindent
+The historical year corpus contains only 100 prompts across five epoch categories (20 per group), which is underpowered for ANOVA-based
+feature selection and may allow noise features into the candidate set at layers where temporal signal is weak. All experiments are conducted
+on GPT-2 Small; whether the superposition lifecycle, BC/AD contamination effect, or contrasting cyclic depth trajectories generalise to
+larger or differently trained models is unknown.
 \\
-\textbf{Single model.} All experiments are conducted on GPT-2 Small. Whether the monotonic superposition lifecycle, BC/AD surface token contamination,
-or the contrasting cyclic depth trajectories generalise to larger or differently trained models is unknown.
-\noindent
 \\
-\textbf{SAE reconstruction loss.} The SAEs do not perfectly reconstruct the residual stream. All metrics reflect temporal structure as expressible
-through the SAE's feature basis; temporal information not captured by the SAE is invisible to our analysis.
-\noindent
+Our metrics rest on several geometric assumptions. The linear temporal metric assumes the temporal axis is the dominant source of variance
+and therefore aligns with PC1; at layers where other signals dominate, this may understate true temporal encoding strength. Circular
+structure is assumed to occupy the PC2/PC3 plane, so encodings that live in a different component pair at some layers would be missed.
+Restricting ablation to the top-100 features by ANOVA F-score means broadly-firing load-bearing features --- those that score low on
+ANOVA despite being causally relevant --- could be excluded from the candidate set entirely.
 \\
-\textbf{Top-100 feature cap.} With 49,152 SAE features per layer, restricting ablation to the top-100 by ANOVA F-score means load-bearing features
-that fire broadly across categories --- and thus score low on ANOVA --- would be missed entirely.
-\noindent
 \\
-\textbf{PC1 assumption.} The linear temporal metric assumes the temporal axis is the dominant source of variance and therefore aligns with PC1.
-At layers where other signals dominate PC1, the metric may understate true temporal encoding strength.
-\noindent
-\\
-\textbf{PC2/PC3 assumption.} Circular structure is assumed to live in the PC2/PC3 plane. If the circular encoding occupies a different pair of
-components at some layers, the geometry analysis would miss it.
-\noindent
-\\
-\textbf{Layer 7 for cyclic replication.} The geometry comparison for days of the week and months of the year uses layer 7 to match prior work
-\citep{engels2024}. The phase 5 depth scan shows the circular signal peaks at layer 8 for days ($r_{\text{angular}} = 0.789$) and layer 11 for
-months ($r_{\text{angular}} = 0.793$), meaning the replication figures do not show either concept at its strongest.
+All metrics are measured in SAE reconstruction space rather than the true residual stream. SAEs do not perfectly reconstruct their input,
+so temporal structure not captured by the feature basis is invisible to our analysis. Additionally, late-layer metric degradation at
+layers 10--11 may partly reflect higher SAE reconstruction error at those layers rather than a genuine weakening of the temporal
+representation; we do not report per-layer reconstruction error.
 
 % -------------------------------------------------------
 \section{Conclusion}
@@ -564,7 +584,27 @@ months ($r_{\text{angular}} = 0.793$), meaning the replication figures do not sh
 % 2. Linear vs circular encoding behave fundamentally differently
 % State what future work should do next.
 
-TODO
+We investigated how GPT-2 Small encodes temporal concepts in its residual stream using PCA and a layer-wise SAE feature ablation scan.
+For linear historical time, the temporal axis is consistently decodable across all 12 layers, but transitions from concentrated to
+distributed superposition with depth: a single SAE feature is load-bearing at early layers, while no individual feature is
+load-bearing by layer 7. Removing BC/AD surface tokens collapses the early-layer signal to near zero, revealing that the strong
+layer-0--1 signal in the original corpus reflects surface token detection rather than semantic temporal encoding. Genuine temporal
+encoding builds from layer 2 onward and converges to the same distributed regime regardless of whether era markers are present.
+\\
+\\
+For cyclic concepts, we replicate circular PC2/PC3 geometry for days of the week and months of the year, and extend the analysis
+to days of the month, a 31-label concept not previously studied in this context. A layer-wise ablation scan reveals that the two
+well-established cyclic concepts follow opposite depth trajectories --- days of the week encoded strongly from early layers and
+collapsing at layer 11, months building progressively to peak at layer 11 --- and that neither undergoes the monotonic superposition
+lifecycle observed for linear time. The oscillating concentration profiles suggest cyclic representations require active maintenance
+across layers rather than a single construction phase.
+\\
+\\
+Future work should examine whether these patterns generalise across model scales and architectures, test whether causal interventions
+on individual SAE features can manipulate temporal behaviour in model outputs, and investigate the mechanism behind the contrasting
+depth trajectories for days of the week and months of the year. Alternative feature selection methods --- such as mutual information,
+sparse regression, or activation patching --- should also be explored, as ANOVA F-score selects for features that discriminate
+between predefined group labels and may miss features that encode temporal structure in other ways.
 
 
 % -------------------------------------------------------
@@ -579,6 +619,53 @@ TODO
 \section{Additional Figures}
 % -------------------------------------------------------
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase1_year_linearity.png}
+    \caption{Linear decodability of year value at layer 4 for the original BC/AD corpus.
+    PC scores plotted against numeric year for the top three principal components.}
+    \label{fig:phase1_linearity}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase5_days_geometry_layer7.png}
+    \caption{PC2/PC3 circular geometry for days of the week at layer 7
+    ($r_{\text{angular}} = 0.662$). Left: PC2 vs PC3 scatter with fitted circle.
+    Right: angular position vs day label.}
+    \label{fig:phase5_days_geometry}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase5_months_geometry_layer7.png}
+    \caption{PC2/PC3 circular geometry for months of the year at layer 7
+    ($r_{\text{angular}} = 0.748$). Left: PC2 vs PC3 scatter with fitted circle.
+    Right: angular position vs month label.}
+    \label{fig:phase5_months_geometry}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase5_all_concepts_comparison.png}
+    \caption{PC2/PC3 geometry comparison across all three cyclic concepts at layer 7.}
+    \label{fig:phase5_all_concepts}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase6_days_of_month_geometry.png}
+    \caption{PC2/PC3 circular geometry for days of the month (all frames combined)
+    across selected layers.}
+    \label{fig:phase6_dom_geometry}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{phase6_days_of_month_best_layer.png}
+    \caption{PC2/PC3 geometry for days of the month at the best-performing layer
+    ($r_{\text{angular}} = 0.495$, layer 4).}
+    \label{fig:phase6_dom_best}
+\end{figure}
 
 \end{document}

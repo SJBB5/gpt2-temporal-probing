@@ -2,7 +2,7 @@ import torch
 from tqdm import tqdm
 from transformer_lens import HookedTransformer
 
-from config import DEVICE, MODEL_NAME, HOOK_NAME, SAE_RELEASE, SAE_ID
+from config import DEVICE, MODEL_NAME, HOOK_NAME, SAE_RELEASE
 
 
 def load_model() -> HookedTransformer:

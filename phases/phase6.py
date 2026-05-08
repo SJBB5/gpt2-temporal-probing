@@ -187,7 +187,7 @@ def run_phase6() -> None:
         # Row 1 — PC1 vs PC2
         ax = axes[0, col]
         sc = ax.scatter(coords[:, 0], coords[:, 1],
-                        c=days_of_month_labels, cmap="hsv",
+                        c=days_of_month_labels, cmap="plasma",
                         vmin=0.5, vmax=31.5, s=40, zorder=3)
         plt.colorbar(sc, ax=ax, label="Day")
         ax.set_xlabel(f"PC1 ({var[0]:.1%})")
@@ -312,7 +312,7 @@ def run_phase6() -> None:
     fig, ax = plt.subplots(figsize=(8, 7))
 
     sc = ax.scatter(best_coords[:, 1], best_coords[:, 2],
-                    c=days_of_month_labels, cmap="hsv",
+                    c=days_of_month_labels, cmap="plasma",
                     vmin=0.5, vmax=31.5, s=120,
                     edgecolors="k", linewidths=0.5, zorder=3)
     plt.colorbar(sc, ax=ax, label="Day of Month")
