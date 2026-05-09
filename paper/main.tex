@@ -24,7 +24,7 @@ Distributed Across Layers}}
 \author{
   Sam Brown \quad Peyton Calvert \\[0.5em]
   \textit{Your Institution} \\
-  \texttt{\{sbrown, pcalvert\}@yourinstitution.edu}
+  \texttt{\{sbrown, pcalvert\}@mines.edu}
 }
 
 \date{}
@@ -94,7 +94,24 @@ semantic encoding in early layers, and contrasting depth trajectories for the tw
 % - Lei & Cooper 2025 (layerwise knowledge geometry)
 % - Calendar feature geometry post (Leask et al.)
 
-TODO
+\paragraph{Linear temporal representations.}
+Gurnee and Tegmark \cite{gurnee2023language} demonstrated that large language models encode space and time as linear representations in their residual streams, showing that a single linear probe can recover calendar dates and geographic coordinates from intermediate activations with high fidelity. Our work builds directly on this finding, extending it with a layer-wise ablation scan that tracks \emph{how} the temporal axis transitions from concentrated to distributed encoding with depth.
+
+\paragraph{Circular and non-linear feature geometry.}
+Engels et al.\ \cite{engels2024notlinear} showed that not all language model features are linear, identifying days of the week and months of the year as canonical examples of concepts encoded with circular geometry in the PC2/PC3 plane of GPT-2 Small's residual stream. We replicate their circular geometry findings and extend the analysis to days of the month, a 31-label concept not previously studied in this context, while additionally characterizing how circular signal strength evolves across all 12 layers via feature ablation.
+
+\paragraph{Superposition hypothesis.}
+Elhage et al.\ \cite{elhage2022superposition} introduced the superposition hypothesis: that neural networks represent more features than they have dimensions by encoding features as nearly-orthogonal directions in a shared vector space, with interference managed by sparsity. Our layer-wise ablation scan operationalises this hypothesis for temporal concepts, distinguishing \emph{concentrated} representations (one SAE feature is load-bearing) from \emph{distributed} superposition (signal is spread across many features) and tracking the transition between these regimes with depth.
+
+\paragraph{Sparse autoencoders for feature recovery.}
+Cunningham et al.\ \cite{cunningham2024sparse} demonstrated that sparse autoencoders trained on transformer residual streams recover highly interpretable, monosemantic features, providing a practical tool for decomposing superposed representations. We use the GPT-2 Small SAE suite released by Bloom \cite{bloom2024gpt2saes} to ground our ablation scan in an interpretable feature basis, measuring drops in temporal correlation when individual SAE features are zeroed.
+
+\paragraph{Layer-wise knowledge geometry.}
+Lei and Cooper \cite{lei2025layerwise} examined how factual and relational knowledge is geometrically organised across transformer layers, finding that different knowledge types localise at different depths. Our results complement this picture for temporal knowledge specifically: linear historical time undergoes a clean concentrated-to-distributed transition by layer 7, while cyclic concepts exhibit oscillating concentration profiles suggesting active layer-by-layer maintenance rather than a single construction phase.
+
+\paragraph{Calendar feature geometry.}
+Leask et al.\ \cite{leask2024calendar} investigated the internal geometry of calendar-related features in language models, characterising how date and time concepts are spatially arranged in activation space. Our work extends this line of inquiry by pairing geometric analysis with a causal ablation scan, allowing us to distinguish surface token confounds from genuine semantic encoding.
+
 
 % -------------------------------------------------------
 \section{Background}
