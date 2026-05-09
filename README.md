@@ -45,7 +45,7 @@ All outputs are in `outputs/`, organised by phase:
 | `outputs/phase5/` | Cyclic concept circular superposition depth scan |
 | `outputs/phase6/` | Days-of-month geometry analysis |
 
-Each phase also saves a CSV summary of numerical results alongside the figures.
+Phases 3–6 also save a CSV summary of numerical results alongside the figures. Phases 1 and 2 produce figures only.
 
 ---
 

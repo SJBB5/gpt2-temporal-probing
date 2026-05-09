@@ -23,8 +23,8 @@ Distributed Across Layers}}
 
 \author{
   Sam Brown \quad Peyton Calvert \\[0.5em]
-  \textit{Your Institution} \\
-  \texttt{\{sbrown, pcalvert\}@mines.edu}
+  \textit{Colorado School of Mines} \\
+  \texttt{sam\_brown@mines.edu, pcalvert@mines.edu}
 }
 
 \date{}
@@ -85,29 +85,18 @@ semantic encoding in early layers, and contrasting depth trajectories for the tw
 % -------------------------------------------------------
 \section{Related Work}
 % -------------------------------------------------------
-% ~1 page.
-% Cover these papers and how your work relates to each:
-% - Gurnee & Tegmark 2023 (linear temporal axis)
-% - Engels et al. 2024 (circular features, days/months)
-% - Elhage et al. 2022 (superposition hypothesis)
-% - Cunningham et al. / Bloom SAEs (SAE methodology)
-% - Lei & Cooper 2025 (layerwise knowledge geometry)
-% - Calendar feature geometry post (Leask et al.)
 
 \paragraph{Linear temporal representations.}
 Gurnee and Tegmark \cite{gurnee2023language} demonstrated that large language models encode space and time as linear representations in their residual streams, showing that a single linear probe can recover calendar dates and geographic coordinates from intermediate activations with high fidelity. Our work builds directly on this finding, extending it with a layer-wise ablation scan that tracks \emph{how} the temporal axis transitions from concentrated to distributed encoding with depth.
 
 \paragraph{Circular and non-linear feature geometry.}
-Engels et al.\ \cite{engels2024notlinear} showed that not all language model features are linear, identifying days of the week and months of the year as canonical examples of concepts encoded with circular geometry in the PC2/PC3 plane of GPT-2 Small's residual stream. We replicate their circular geometry findings and extend the analysis to days of the month, a 31-label concept not previously studied in this context, while additionally characterizing how circular signal strength evolves across all 12 layers via feature ablation.
+Engels et al.\ \cite{engels2024} showed that not all language model features are linear, identifying days of the week and months of the year as canonical examples of concepts encoded with circular geometry in the PC2/PC3 plane of GPT-2 Small's residual stream. We replicate their circular geometry findings and extend the analysis to days of the month, a 31-label concept not previously studied in this context, while additionally characterizing how circular signal strength evolves across all 12 layers via feature ablation.
 
 \paragraph{Superposition hypothesis.}
 Elhage et al.\ \cite{elhage2022superposition} introduced the superposition hypothesis: that neural networks represent more features than they have dimensions by encoding features as nearly-orthogonal directions in a shared vector space, with interference managed by sparsity. Our layer-wise ablation scan operationalises this hypothesis for temporal concepts, distinguishing \emph{concentrated} representations (one SAE feature is load-bearing) from \emph{distributed} superposition (signal is spread across many features) and tracking the transition between these regimes with depth.
 
 \paragraph{Sparse autoencoders for feature recovery.}
 Cunningham et al.\ \cite{cunningham2024sparse} demonstrated that sparse autoencoders trained on transformer residual streams recover highly interpretable, monosemantic features, providing a practical tool for decomposing superposed representations. We use the GPT-2 Small SAE suite released by Bloom \cite{bloom2024gpt2saes} to ground our ablation scan in an interpretable feature basis, measuring drops in temporal correlation when individual SAE features are zeroed.
-
-\paragraph{Layer-wise knowledge geometry.}
-Lei and Cooper \cite{lei2025layerwise} examined how factual and relational knowledge is geometrically organised across transformer layers, finding that different knowledge types localise at different depths. Our results complement this picture for temporal knowledge specifically: linear historical time undergoes a clean concentrated-to-distributed transition by layer 7, while cyclic concepts exhibit oscillating concentration profiles suggesting active layer-by-layer maintenance rather than a single construction phase.
 
 \paragraph{Calendar feature geometry.}
 Leask et al.\ \cite{leask2024calendar} investigated the internal geometry of calendar-related features in language models, characterising how date and time concepts are spatially arranged in activation space. Our work extends this line of inquiry by pairing geometric analysis with a causal ablation scan, allowing us to distinguish surface token confounds from genuine semantic encoding.
@@ -116,12 +105,7 @@ Leask et al.\ \cite{leask2024calendar} investigated the internal geometry of cal
 % -------------------------------------------------------
 \section{Background}
 % -------------------------------------------------------
-% ~0.5 page.
-% Brief technical background a reader needs before the methods:
-% - What is the residual stream in a transformer?
-% - What are sparse autoencoders and what do they decompose?
-% - What is superposition?
-% Keep this concise — assume ML-literate reader.
+
 
 \subsection{Residual Stream}
 Transformer models process tokens by passing representations through a sequence of attention and MLP layers. 
@@ -147,29 +131,27 @@ Secondary structure, such as the circular geometry of cyclic concepts, tends to 
 linear source of variance has been accounted for by PC1.
 
 \subsection{Sparse Autoencoders}
-Sparse autoencoders (SAEs) offer a way to recover the underlying precise features from an ambiguous residual stream \cite{cunningham2024}.
+Sparse autoencoders (SAEs) offer a way to recover the underlying precise features from an ambiguous residual stream \cite{cunningham2024sparse}.
 An SAE consists of an encoder that projects the d-dimensional activation into a much larger latent space $\mathbb{R}^{d_{\text{SAE}}}$
-with $d_{\text{SAE}} \gg d$, followed by a ReLU that enforces sparsity and a linear decoder that reconstructs the original activation. 
-Training minimises reconstruction error subject to an $L_1$ penalty on the latent activations, encouraging each input to be explained by 
+with $d_{\text{SAE}} \gg d$, followed by a ReLU that enforces sparsity and a linear decoder that reconstructs the original activation.
+Training minimises reconstruction error subject to an $L_1$ penalty on the latent activations, encouraging each input to be explained by
 only a small number of active features at a time. The resulting latent dimensions have been shown to correspond to interpretable, monosemantic concepts
-\cite{cunningham2024, bloom2024}. 
+\cite{cunningham2024sparse, bloom2024gpt2saes}.
 % -------------------------------------------------------
 \section{Method}
 % -------------------------------------------------------
 % ~1.5 pages.
-% Describe your pipeline clearly enough that someone could reproduce it.
+
 
 \subsection{Model and SAE}
-% GPT-2-small, 12 layers, 768-dim residual stream.
-% Joseph Bloom SAEs (gpt2-small-res-jb), 49152 features.
-% Hook point: blocks.{layer}.hook_resid_pre
+
 
 We do all experiments on GPT-2 Small \cite{radford2019}, a decoder-only transformer with 12 layers, 12 attention heads, and a residual 
 stream dimension of d = 768, totalling approximately 117 million parameters. GPT-2 Small is a well-studied model in the context of mechanistic
 interpretability, making it a good model for probing internal representations. 
 \\
 \\
-To decompose residual stream activations, we use the suite of SAEs released by \citet{bloom2024}, trained on GPT-2 Small's residual stream
+To decompose residual stream activations, we use the suite of SAEs released by \citet{bloom2024gpt2saes}, trained on GPT-2 Small's residual stream
 under the release identifier \texttt{gpt2-small-res-jb}. Each SAE is trained on the \texttt{hook\_resid\_pre} activation at its corresponding
 layer --  that is, the residual stream state \textit{before} the attention and MLP transformations of that layer have been applied.
 The SAE architecture uses a linear encoder with ReLU activation followed by a linear decoder, with an expansion factor of $64\times$, giving a latent dimension 
@@ -182,9 +164,6 @@ is the position at which the model has processed the full input and is most like
 to have integrated contextual information into a coherent representation.
 
 \subsection{Prompt Design}
-% Describe clean_year_items — why no BC/AD tokens.
-% Explain the contamination discovery and why you switched.
-% Briefly describe the days/months prompts for phase 5.
 
 All prompts are short declarative sentences placing the concept of interest 
 in natural linguistic context. The model processes each prompt without 
@@ -216,9 +195,7 @@ ensures geometric structure in the representations reflects the underlying conce
 
 
 \subsection{Temporal Axis Measurement: Linear Concepts}
-% PCA on SAE reconstruction.
-% PC1-year Pearson correlation |r| as the metric.
-% Why PC1 captures temporal ordering.
+
 
 To quantify how strongly a layer encodes temporal order for historical year prompts, we measure the alignment 
 between the model's internal representations and chronological position. For each layer $l$, we pass the year prompt activations
@@ -276,9 +253,6 @@ We retain the top $N_{\text{disc}} = 100$ features by F-score as the candidate s
 
 
 \subsection{Superposition Depth Scan}
-% The ablation loop — zeroing one SAE feature at a time.
-% Max single-feature drop as the concentration metric.
-% Why declining max drop with flat |r| indicates superposition.
 
 To examine how temporal representations evolve across depth, we run a layer-wise ablation scan across all 12 layers of GPT-2 Small. At each
 layer $l$ we load the corresponding pretrained SAE, extract residual stream activations at \texttt{hook\_resid\_pre}, and apply the feature selection
@@ -305,7 +279,6 @@ depth under contaminated versus uncontaminated input conditions.
 % -------------------------------------------------------
 \section{Experiments and Results}
 % -------------------------------------------------------
-% This is the core of the paper. ~3-4 pages including figures.
 
 \subsection{Temporal Structure in the Residual Stream}
 
@@ -435,10 +408,6 @@ regime.
 
 \subsection{Cyclical Concepts: Days of Week and Months of Year}
 \label{sec:cyclic}
-% Phase 5 results.
-% Different pattern from linear time — oscillating concentration.
-% Days of week collapse at layers 10-11.
-% Comparison plot of all four concepts.
 
 
 Prior work by \citet{engels2024} demonstrated that GPT-2 Small encodes days of the week and months of the year as circular representations in the 
@@ -528,8 +497,6 @@ cyclic representations require active, layer-by-layer maintenance rather than a 
 % -------------------------------------------------------
 \section{Discussion}
 % -------------------------------------------------------
-% ~1 page.
-% Interpret your findings. What do they mean?
 
 \subsection{Linear vs Circular Temporal Encoding}
 
@@ -594,12 +561,7 @@ representation; we do not report per-layer reconstruction error.
 % -------------------------------------------------------
 \section{Conclusion}
 % -------------------------------------------------------
-% ~0.5 page.
-% Summarize your two main findings:
-% 1. Temporal axis lifecycle: construction (layers 0-4), 
-%    peak concentration (layer 3), superposition (layers 4-9)
-% 2. Linear vs circular encoding behave fundamentally differently
-% State what future work should do next.
+
 
 We investigated how GPT-2 Small encodes temporal concepts in its residual stream using PCA and a layer-wise SAE feature ablation scan.
 For linear historical time, the temporal axis is consistently decodable across all 12 layers, but transitions from concentrated to
@@ -673,7 +635,7 @@ Both authors contributed to the overall project direction and final paper.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{phase5_all_concepts_comparison.png}
-    \caption{PC2/PC3 geometry comparison across all three cyclic concepts at layer 7.}
+    \caption{Layer-wise superposition comparison across all four temporal concepts. Left: maximum single-feature ablation drop per layer. Right: baseline signal strength per layer. Temporal (original) and temporal (clean) use $|r|$; days of the week and months of the year use $r_{\text{angular}}$.}
     \label{fig:phase5_all_concepts}
 \end{figure}
 
