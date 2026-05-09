@@ -271,7 +271,7 @@ whether the ablated reconstruction aligns with the original. The test is therefo
 remaining features cannot reorganise to compensate.
 \\
 \\
-For the clean-prompt scan (Phase 4), BC/AD surface tokens are removed from all prompts, yielding a matched corpus of the same 100 historical years
+For the clean-prompt scan, BC/AD surface tokens are removed from all prompts, yielding a matched corpus of the same 100 historical years
 expressed without explicit era markers. The same feature selection and ablation procedure is applied, enabling a direct comparison of superposition
 depth under contaminated versus uncontaminated input conditions.
 
@@ -285,8 +285,8 @@ depth under contaminated versus uncontaminated input conditions.
 
 PCA of the raw residual stream at layer 4 reveals that GPT-2 Small organises historical prompts into three distinct clusters in the PC1/PC2 plane and
 four clusters in three dimensions (Figure~\ref{fig:phase1_all_pca}): BC-era prompts, ancient AD-era prompts, medieval and early modern prompts, and
-modern prompts, accounting for 73.4\% of variance across the top three principal components. PC1 (41.9\%) separates ancient from modern prompts
-while PC2 (20.9\%) separates BC from AD within the ancient period.
+modern prompts, accounting for 64.3\% of variance across the top three principal components. PC1 (39.6\%) separates ancient from modern prompts
+while PC2 (15.4\%) separates BC from AD within the ancient period.
 
 \begin{figure}[H]
     \centering
@@ -297,29 +297,29 @@ while PC2 (20.9\%) separates BC from AD within the ancient period.
 \end{figure}
 
 \noindent
-The PC2/PC3 plane reveals a somewhat circular organisation of epoch categories (Figure~\ref{fig:phase2_pc2pc3}). An algebraic circle fit (RMSE $= 5.616$) 
-shows the four epoch groups occupying distinct arcs: BC-era prompts cluster on the left arc, ancient AD-era prompts on the right, modern prompts at the 
-top, and medieval through early modern prompts at the bottom. This suggests the PC2/PC3 plane encodes additional temporal structure 
-beyond the PC1 axis, with epoch categories occupying geometrically distinct regions, though the high circle fit error (RMSE $= 5.616$) 
+The PC2/PC3 plane reveals a somewhat circular organisation of epoch categories (Figure~\ref{fig:phase2_pc2pc3}). An algebraic circle fit (RMSE $= 5.340$)
+shows the four epoch groups occupying distinct arcs: BC-era prompts cluster on the left arc, ancient AD-era prompts on the right, modern prompts at the
+top, and medieval through early modern prompts at the bottom. This suggests the PC2/PC3 plane encodes additional temporal structure
+beyond the PC1 axis, with epoch categories occupying geometrically distinct regions, though the high circle fit error (RMSE $= 5.340$)
 indicates the circular structure is approximate rather than precise.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{phase2_pc2pc3_layer4.png}
-    \caption{PC2 vs PC3 at layer 4 with algebraic circle fit 
-    (RMSE $= 5.616$).}
+    \caption{PC2 vs PC3 at layer 4 with algebraic circle fit
+    (RMSE $= 5.340$).}
     \label{fig:phase2_pc2pc3}
 \end{figure}
 \noindent
-Angular position on the fitted circle correlates moderately with numeric year ($r = +0.511$, Figure~\ref{fig:phase2_angular}), with epoch categories 
+Angular position on the fitted circle correlates moderately with numeric year ($r = +0.534$, Figure~\ref{fig:phase2_angular}), with epoch categories 
 occupying discrete angular bands rather than a smooth progression, confirming the circular structure reflects epoch-level separation rather 
 than a continuous encoding of chronological position.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{phase2_angular_layer4.png}
-    \caption{Angular position on fitted circle vs numeric year at layer 4 
-    ($r = +0.511$). Points coloured by epoch category.}
+    \caption{Angular position on fitted circle vs numeric year at layer 4
+    ($r = +0.534$). Points coloured by epoch category.}
     \label{fig:phase2_angular}
 \end{figure}
 
@@ -334,8 +334,8 @@ high $\max_i \Delta_i$ indicates a concentrated representation where one or a fe
 \\
 Figure~\ref{fig:phase3_depth} shows the layer-wise depth scan for the original BC/AD corpus. The right panel shows $|r|_{\text{base}}$ remaining 
 stable around $0.85$--$0.92$ across layers 0--9, confirming the temporal signal is consistently present throughout the network. The left panel 
-shows that the $\max_i \Delta_i$ starts high at layers 0--1 ($\approx 0.43$, well above the load-bearing threshold of $0.10$), then 
-declines monotonically through layers 2--9, falling below the load-bearing threshold by layer 7. This divergence between flat $|r|_{\text{base}}$ and 
+shows that the $\max_i \Delta_i$ starts high at layers 0--1, then 
+declines monotonically through layers 2--9, falling below the load-bearing threshold ($\Delta > 0.10$, an arbitrary cutoff used for comparison) by layer 7. This divergence between flat $|r|_{\text{base}}$ and 
 declining $\max_i \Delta_i$ is the superposition signature: the temporal signal is maintained at constant strength but becomes progressively 
 impossible to attribute to any individual SAE feature.
 
@@ -377,7 +377,7 @@ reorganisation of residual stream content prior to unembedding.
 \subsection{Surface Token Contamination}
 
 Repeating the depth scan on the clean corpus reveals that BC/AD tokens substantially inflate early-layer signals in the original corpus. 
-Figure~\ref{fig:phase4_linearity} shows that without BC/AD tokens, PC1 correlation at layer 4 drops from $r = -0.893$ to $r = 0.723$, with PC2 
+Figure~\ref{fig:phase4_linearity} shows that without BC/AD tokens, PC1 correlation at layer 4 drops to $r = 0.723$, with PC2 
 now carrying more temporal information ($r = 0.525$) than before, indicating the temporal signal is more distributed across principal 
 components when surface token identity is unavailable.
 
@@ -393,7 +393,7 @@ An interesting result is the collapse of $|r|_{\text{base}}$ to near zero at lay
 that the original corpus's strong early-layer signal was driven by surface token detectors rather than semantic content. Genuine temporal encoding 
 builds monotonically from layer 2, reaching $\approx 0.90$ by layers 9--11 and remaining stable through the final layer --- unlike the original 
 corpus which degraded at layers 10--11. The concentration profile (left panel) peaks at layers 4--5 rather than layer 0, showing that 
-genuinely load-bearing temporal features emerge at mid-layers. From layer 6 onward both corpora converge to the same fully distributed superposition 
+genuinely load-bearing temporal features emerge at mid-layers. From layer 7 onward both corpora converge to the same fully distributed superposition
 regime.
 
 \begin{figure}[H]
@@ -487,11 +487,11 @@ in the final layer, while months of the year are constructed progressively and r
 
 \noindent
 The concentration profiles (top row) contrast equally sharply with the linear temporal case. For linear time, max single-feature drop
-declines monotonically from $\approx 0.43$ to near zero, indicating a clean transition to distributed superposition. For cyclic concepts,
+declines monotonically from $\approx 0.43$ to near zero, indicating a transition to distributed superposition. For cyclic concepts,
 the drop oscillates irregularly throughout the network with no stable convergence. Days of the week show spikes at layers 4 (0.47), 6 (0.59),
 and 8 (0.60), interspersed with lower-concentration layers --- suggesting the circular signal is repeatedly re-concentrated into individual
 features and then dispersed, rather than handed off cleanly. Months of the year show a high spike at layer 0 (0.42) followed by a broadly
-lower profile, with no layer crossing the load-bearing threshold of 0.10 between layers 4 and 9, before reconcentrating at layers 10--11.
+lower profile through layers 1--9, with spikes at layers 5 (0.16), 6 (0.25), and 8 (0.17) still crossing the load-bearing threshold, before reconcentrating at layers 10--11.
 These oscillating patterns are inconsistent with the monotonic superposition lifecycle observed for linear time and suggest that
 cyclic representations require active, layer-by-layer maintenance rather than a single construction phase followed by passive distribution.
 % -------------------------------------------------------
